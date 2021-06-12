@@ -3,6 +3,7 @@ import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Layout, Text, Toggle } from '@ui-kitten/components';
 import { ThemeContext } from './src/constant/ThemeContext';
 import HomeScreen from './src/screens/Home';
+import * as theme  from './theme.json';
 
 export default () => {
 
@@ -14,12 +15,14 @@ export default () => {
   };
 
   return (
-    <>
-      <ThemeContext.Provider value={{ theme, toggleTheme }}>
-        <ApplicationProvider {...eva} theme={eva[theme]}>
+    // <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    //   <ApplicationProvider {...eva} theme={eva[theme]}>
+    //     <HomeScreen/>
+    //   </ApplicationProvider>
+    // </ThemeContext.Provider>
+      <ApplicationProvider {...eva} theme={{ ...eva.light, ...theme.light }}>
         <HomeScreen/>
-        </ApplicationProvider>
-      </ThemeContext.Provider>
-    </>
+      </ApplicationProvider>
+      
   );
 };

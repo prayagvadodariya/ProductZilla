@@ -1,10 +1,13 @@
 import React from 'react';
-import { Layout, Text, Button, Toggle } from '@ui-kitten/components';
+import { Layout, Text, Button, Toggle, useTheme } from '@ui-kitten/components';
 import { ThemeContext } from '../constant/ThemeContext';
 
 const Home = () => {
     const [checked, setChecked] = React.useState(false);
     const themeContext = React.useContext(ThemeContext);
+    const theme = useTheme();
+
+    console.log('checkthem',theme);
   
     const onCheckedChange = (isChecked) => {
       themeContext.toggleTheme()
