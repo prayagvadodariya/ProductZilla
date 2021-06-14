@@ -16,10 +16,10 @@ const Home = () => {
   
      return(
      <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text category='h1'>HOME</Text>
+      <Text category='h1'>Home screen </Text>
       <Toggle checked={checked} onChange={onCheckedChange}></Toggle>
     </Layout>
      )
   }
 
-export default Home  
+export default Home;
