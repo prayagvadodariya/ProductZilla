@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Image, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { useTheme } from '@ui-kitten/components';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -21,6 +22,7 @@ const Tab = createBottomTabNavigator();
 
 const NavigationDrawerStructure = (props) => {
     //Structure for the navigatin Drawer
+    const theme = useTheme();
     const toggleDrawer = () => {
       //Props to open/close the drawer
       props.navigationProps.toggleDrawer();
@@ -30,7 +32,7 @@ const NavigationDrawerStructure = (props) => {
     return (
       <View style={{flexDirection: 'row'}}>
         <TouchableOpacity onPress={() => toggleDrawer()}>
-          <Entypo name="menu" color='#3b2322' size={26} style={{ marginLeft: 15}} />
+          <Entypo name="menu" color={theme['text-basic-color']} size={26} style={{ marginLeft: 15}} />
         </TouchableOpacity>
       </View>
     );
@@ -38,14 +40,15 @@ const NavigationDrawerStructure = (props) => {
 
 
   const BottomTabStack = () => {
+    const theme = useTheme();
     return (
       <Tab.Navigator
         initialRouteName="Home"
         tabBarOptions={{
-          activeTintColor:"#3b2322",
-          inactiveTintColor: 'gray',
+          activeTintColor: theme['text-basic-color'],
           style: {
-            backgroundColor: '#ffffff',
+            backgroundColor: theme['background-basic-color-1'],
+            borderTopWidth: 0
           },
           labelStyle: {
             textAlign: 'center',
@@ -84,14 +87,22 @@ const NavigationDrawerStructure = (props) => {
   };
   
   const HomeScreenStack = ({navigation}) => {
+    const theme = useTheme();
   
     return (
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="BottomTabtack"
           component={BottomTabStack}
-          options={({route, navigation}) => ({
+          options={({route, navigation,}) => ({
             headerTitle: 'Product Zilla',
+            headerTitleStyle: {
+              color: theme['text-basic-color']
+            },
+            headerStyle: {
+              backgroundColor: theme['background-basic-color-1'], 
+            },
+            
             headerLeft: () => (
               <NavigationDrawerStructure
                 navigationProps={navigation}
@@ -100,10 +111,10 @@ const NavigationDrawerStructure = (props) => {
             headerRight: () => (
               <View style={{flexDirection: 'row'}}> 
                 <TouchableOpacity style={{paddingRight:18}}>
-                    <AntDesign name="user" color='#3b2322' size={26}/>
+                    <AntDesign name="user" color={theme['text-basic-color']} size={26}/>
                 </TouchableOpacity>
                 <TouchableOpacity style={{paddingRight:10}}>
-                  <AntDesign name="shoppingcart" color='#3b2322' size={26}/>
+                  <AntDesign name="shoppingcart" color={theme['text-basic-color']} size={26}/>
                 </TouchableOpacity>
               
               </View>  
