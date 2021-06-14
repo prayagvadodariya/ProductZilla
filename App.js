@@ -24,15 +24,11 @@ export default () => {
   };
 
   return (
-    // <ThemeContext.Provider value={{ theme, toggleTheme }}>
-    //   <ApplicationProvider {...eva} theme={{ ...eva[theme], ...iscustomTheme }}>
-    //     <HomeScreen/>
-    //   </ApplicationProvider>
-    // </ThemeContext.Provider>  
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <ApplicationProvider {...eva} theme={eva[theme]}>
+      <ApplicationProvider {...eva} theme={{ ...eva[theme], ...iscustomTheme }}>
         <HomeScreen/>
-       </ApplicationProvider>
-   </ThemeContext.Provider> 
+      </ApplicationProvider>
+    </ThemeContext.Provider>  
+    
   );
 };
