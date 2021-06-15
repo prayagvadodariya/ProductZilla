@@ -1,11 +1,12 @@
 import React, {useState, Component} from 'react';
-import { View, StyleSheet } from 'react-native';
-import { IndexPath, Menu, MenuItem, Toggle, useTheme } from '@ui-kitten/components';
+import { View, StyleSheet, Text } from 'react-native';
+import { Toggle, useTheme , Drawer, DrawerGroup, DrawerItem, IndexPath, Icon  } from '@ui-kitten/components';
 import { ThemeContext } from '../constant/ThemeContext';
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 const Sidemenu = () => {
-  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
   const [checked, setChecked] = React.useState(false);
+  const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
   const themeContext = React.useContext(ThemeContext);
   const theme = useTheme();
 
@@ -13,36 +14,39 @@ const Sidemenu = () => {
 
   const onCheckedChange = (isChecked) => {
     themeContext.toggleTheme()
-    setChecked(isChecked);
+    setChecked(isChecked); 
   };
   
+  const renderToggle = () => {
+    return(
+      <Toggle checked={checked} size="small"  onChange={onCheckedChange}></Toggle>
+    )
+  }
+
     return (
       <View style={[styles.drawerContent, { backgroundColor: theme['background-basic-color-1'] }]}>
-        {/* <View>
+        <View>
           <Text style={styles.sectionHeadingStyle1}>Test Dev</Text>
           <Text style={styles.sectionHeadingStyle2}>testdev301@gmail.com</Text>
-        </View> */}
-        <Menu
+        </View> 
+
+        <Drawer style={{paddingLeft:10, paddingRight:10}}
           selectedIndex={selectedIndex}
           onSelect={index => setSelectedIndex(index)}>
-          <MenuItem title='Users'/>
-          <MenuItem title='Orders'/>
-          <MenuItem title='Transactions'/>
-          <MenuItem title='Settings'/>
-        </Menu>
-        {/* <Layout style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text category='h1'>HOME</Text>
-        <Toggle checked={checked} onChange={onCheckedChange}></Toggle>
-      </Layout> */}
+            <DrawerItem title='Home' accessoryLeft={props => <Icon {...props} name='home-outline'/>}/>
+            <DrawerItem title='Search' accessoryLeft={props => <Icon {...props} name='search-outline'/>}/>
+            <DrawerItem title='Wishlist' accessoryLeft={props => <Icon {...props} name='heart-outline'/>}/>
+            <DrawerItem title='Theme' accessoryLeft={props => <Icon {...props} name='color-palette-outline'/>} accessoryRight={renderToggle}/>
+        </Drawer>
       </View>
-    );
+    )
   }
 
 
 const styles = StyleSheet.create({
   drawerContent: {
     flex: 1,
-    paddingTop: Platform.OS === 'android' ? 25 : 22,
+    paddingTop: Platform.OS === 'android' ? 8 : 5,
   },
   sectionHeadingStyle1: {
     marginTop:3,
