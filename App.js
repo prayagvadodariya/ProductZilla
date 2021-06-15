@@ -12,8 +12,6 @@ export default () => {
   const [theme, setTheme] = React.useState('light');
   const [iscustomTheme,setCustomeTheme] = React.useState(lightTheme);
  
-  
-
   const toggleTheme = () => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(nextTheme);
