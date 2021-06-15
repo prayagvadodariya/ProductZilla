@@ -1,6 +1,7 @@
 import React, {useState, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
 import { Text, View, StyleSheet } from 'react-native';
+import Maincontent from '../component/Maincontent';
 
 const Home = () => {
 
@@ -8,9 +9,7 @@ const Home = () => {
    
     return (
       <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
-        <View style={styles.contenar}>
-          <Text style={{color: theme['text-basic-color']}}>Home</Text>
-        </View>  
+        <Maincontent/>
       </View>
     );
   }

@@ -10,8 +10,6 @@ const Sidemenu = () => {
   const themeContext = React.useContext(ThemeContext);
   const theme = useTheme();
 
-  console.log('checkthem',theme);
-
   const onCheckedChange = (isChecked) => {
     themeContext.toggleTheme()
     setChecked(isChecked); 

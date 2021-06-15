@@ -95,7 +95,7 @@ const NavigationDrawerStructure = (props) => {
           name="BottomTabtack"
           component={BottomTabStack}
           options={({route, navigation,}) => ({
-            headerTitle: 'Product Zilla',
+            headerTitle: 'CapacityX',
             headerTitleStyle: {
               color: theme['text-basic-color']
             },
