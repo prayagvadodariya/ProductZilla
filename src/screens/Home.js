@@ -7,6 +7,7 @@ import Htext from '../component/Htext';
 import Ntext from '../component/Ntext';
 import Cbutton from '../component/Cbutton';
 import Product_Content from '../component/Product_Content';
+import Image_Content from '../component/Image_Content';
 
 const Home = () => {
 
@@ -35,6 +36,8 @@ const Home = () => {
         <View style={{alignSelf:'flex-start', marginLeft:20, marginBottom:15}}>
          <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwith={180} bheight={42} bordercolor={Colors.mainText}>LEARN MORE</Cbutton>
         </View>
+
+        <Image_Content/>
 
       </ScrollView>
     );
