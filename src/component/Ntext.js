@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
      
   return (
     <View>
-      <Text style={{ fontSize: props.fontsize, color: props.color }}>{props.children}</Text> 
+      <Text style={{ fontSize: props.fontsize, color: props.color, fontFamily: props.fontfamily }}>{props.children}</Text> 
     </View>
   );
 }

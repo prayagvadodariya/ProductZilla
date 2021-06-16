@@ -12,16 +12,16 @@ const Maincontent = () => {
           <View>
               <View style={{ alignSelf:'flex-start',marginLeft:15, marginTop:20 }}>
                 <View>
-                    <Htext color={Colors.mainText} fontsize={25}>REACH YOUR</Htext>
+                    <Htext color={Colors.mainText} fontsize={27} fontfamily='CHESTER-Basic'>REACH YOUR</Htext>
                 </View>
-                <View style={{marginRight:26, marginTop:-10}}>
-                    <Htext color={Colors.mainText} fontsize={25}>MAXIMUM</Htext>
+                <View style={{marginRight:33, marginTop:-5}}>
+                    <Htext color={Colors.mainText} fontsize={27} fontfamily='CHESTER-Basic'>MAXIMUM</Htext>
                 </View>
-                <View style={{marginRight:26, marginTop:-10}}>
-                    <Htext color={Colors.mainText} fontsize={25}>CAPACITY</Htext></View>
+                <View style={{marginRight:34, marginTop:-5}}>
+                    <Htext color={Colors.mainText} fontsize={27} fontfamily='CHESTER-Basic'>CAPACITY</Htext></View>
                 </View>
-                <View style={{width:"40%", marginLeft:15, marginTop:25}}>
-                    <Ntext color={Colors.normaltext} fontsize={15}>Go further than you thought with CapacityX supplements.</Ntext>
+                <View style={{width:"40%", marginLeft:20, marginTop:25}}>
+                    <Ntext color={Colors.normaltext} fontsize={15} fontfamily='PTSans-Regular'>Go further than you thought with CapacityX supplements.</Ntext>
                 </View>
               <View>
                 <Image resizeMode="contain" style={{height:230, width:250, marginTop:-130, marginRight:-20, alignSelf:'flex-end'}} source={{ uri: 'https://static.wixstatic.com/media/913019_562ad9addc3e4706b470c099e1fdc2d6~mv2_d_2324_2699_s_2.png/v1/fill/w_344,h_400,al_c,q_85,usm_0.66_1.00_0.01/pouch-headera.webp' }}/>
