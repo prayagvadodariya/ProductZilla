@@ -12,6 +12,8 @@ export default () => {
   const [theme, setTheme] = React.useState('light');
   const [iscustomTheme,setCustomeTheme] = React.useState(lightTheme);
  
+  
+
   const toggleTheme = () => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(nextTheme);
@@ -23,13 +25,11 @@ export default () => {
   };
 
   return (
-    <>
-      <IconRegistry icons={EvaIconsPack} />
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <ApplicationProvider {...eva} theme={{ ...eva[theme], ...iscustomTheme }}>
+          <IconRegistry icons={EvaIconsPack} />
           <Router/>
         </ApplicationProvider>
       </ThemeContext.Provider>  
-    </>
   );
 };
