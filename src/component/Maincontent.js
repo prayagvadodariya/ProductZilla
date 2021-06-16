@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, ImageBackground, Image } from 'react-native';
 import Colors from '../constant/Colors';
 import Htext from './Htext';
 import Ntext from './Ntext';
+import Cbutton from './Cbutton';
 
 const Maincontent = () => {
   
@@ -27,6 +28,9 @@ const Maincontent = () => {
                 <Image resizeMode="contain" style={{height:230, width:250, marginTop:-130, marginRight:-20, alignSelf:'flex-end'}} source={{ uri: 'https://static.wixstatic.com/media/913019_562ad9addc3e4706b470c099e1fdc2d6~mv2_d_2324_2699_s_2.png/v1/fill/w_344,h_400,al_c,q_85,usm_0.66_1.00_0.01/pouch-headera.webp' }}/>
               </View>
           </View> 
+          <View style={{ marginTop:15 }}>
+            <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwith={120} bheight={42} bordercolor={Colors.mainText}>Shop Now</Cbutton>
+          </View>
         </ImageBackground> 
       </View>
     );
