@@ -32,3 +32,30 @@ export const Product_one=[
       title: 'The Best Time to Drink Your Protein and Why',
     },
   ]
+
+  export const Product_List=[
+    {
+      id: 1,
+      url: 'https://static.wixstatic.com/media/913019_9d1fd39fbb214170b53f802f384e3733~mv2_d_3227_3116_s_4_2.jpg/v1/fill/w_552,h_552,al_c,q_80,usm_0.66_1.00_0.01/913019_9d1fd39fbb214170b53f802f384e3733~mv2_d_3227_3116_s_4_2.webp', 
+      title: 'BCAA Capsules',
+      amount: "$19.00"
+    },
+    {
+      id: 2,
+      url: 'https://static.wixstatic.com/media/913019_e041a68b0e62406184655aea26d07e1b~mv2_d_3227_3116_s_4_2.jpg/v1/fill/w_552,h_552,al_c,q_80,usm_0.66_1.00_0.01/913019_e041a68b0e62406184655aea26d07e1b~mv2_d_3227_3116_s_4_2.webp', 
+      title: 'BCAA Capsules Package Deal',
+      amount: "$185.00"
+    },
+    {
+      id: 3,
+      url: 'https://static.wixstatic.com/media/913019_732a14d0a59742478bb9fce81d52a474~mv2_d_3227_3116_s_4_2.jpg/v1/fill/w_552,h_552,al_c,q_80,usm_0.66_1.00_0.01/913019_732a14d0a59742478bb9fce81d52a474~mv2_d_3227_3116_s_4_2.webp', 
+      title: 'Protein Powder Vanilla',
+      amount: "$25.00"
+    },
+    {
+      id: 4,
+      url: 'https://static.wixstatic.com/media/913019_7b08f144bceb4847889419703882bc08~mv2_d_3227_3116_s_4_2.jpg/v1/fill/w_552,h_552,al_c,q_80,usm_0.66_1.00_0.01/913019_7b08f144bceb4847889419703882bc08~mv2_d_3227_3116_s_4_2.webp', 
+      title: 'Pre Workout Raspberry',
+      amount: "$19.00"
+    },
+  ] 
