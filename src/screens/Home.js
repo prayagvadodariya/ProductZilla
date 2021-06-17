@@ -1,6 +1,6 @@
 import React, {useState, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
-import { Text, View, StyleSheet, ScrollView, FlatList } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import Maincontent from '../component/Maincontent';
 import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
@@ -76,8 +76,9 @@ const Home = () => {
         </View>
 
         <View>
-          <Background_Image height={1352} url='https://static.wixstatic.com/media/913019_f56865726c2e4dedb42e6c4e1f15474e~mv2.jpg/v1/fill/w_256,h_1080,al_tr,q_80/913019_f56865726c2e4dedb42e6c4e1f15474e~mv2.webp'>
+          <Background_Image height={1300} url='https://static.wixstatic.com/media/913019_f56865726c2e4dedb42e6c4e1f15474e~mv2.jpg/v1/fill/w_256,h_1080,al_tr,q_80/913019_f56865726c2e4dedb42e6c4e1f15474e~mv2.webp'>
             {
+            <>  
             <FlatList
             data={StaticData.Fitness} 
             style={{flex:1}} 
@@ -102,9 +103,18 @@ const Home = () => {
                 </Show_Image>
               </View>
             )}}
-            />    
+            /> 
+            <View style={{marginBottom:20}}>
+              <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwith={170} bheight={42} bordercolor={Colors.mainText}>READ MORE</Cbutton>
+            </View> 
+            </>
             }
           </Background_Image>
+
+          {/* <View style={{alignSelf:'flex-end'}}>
+            <TouchableOpacity style={styles.sidebutton}>
+            </TouchableOpacity>
+          </View> */}
         </View>
         
 
@@ -117,7 +127,17 @@ const styles = StyleSheet.create({
  contenar: {
   flex:1, 
   justifyContent:'center',
-   alignItems:'center',
+  alignItems:'center',
+ },
+ sidebutton: {
+  marginRight:10,
+  width: 50,
+  height: 50,
+  backgroundColor:'transparent',
+  borderColor: Colors.mainText,
+  borderRadius:25,
+  marginTop:-80,
+  borderWidth:1
  }
 });
 
