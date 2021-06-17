@@ -8,6 +8,7 @@ import Ntext from '../component/Ntext';
 import Cbutton from '../component/Cbutton';
 import Product_Content from '../component/Product_Content';
 import Image_Content from '../component/Image_Content';
+import Show_Image from '../component/Show_Image';
 
 const Home = () => {
 
@@ -37,7 +38,41 @@ const Home = () => {
          <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwith={180} bheight={42} bordercolor={Colors.mainText}>LEARN MORE</Cbutton>
         </View>
 
-        <Image_Content/>
+        <View style={{marginTop:45, marginBottom: 35}}>
+         <Image_Content/>
+        </View>
+
+        <View style={{ marginTop:0, marginBottom:15, marginLeft:5, marginRight:5 }}>
+          <Htext color={Colors.mainText} fontsize={35} fontfamily='CHESTER-Basic' lineheight={30} textalign='center'>WHAT’S YOUR PURPOSE?</Htext>
+        </View>
+
+        <View>
+         <Show_Image url='https://static.wixstatic.com/media/913019_c320c0ab23b1448788d28ccdc2caf717~mv2_d_4502_3000_s_4_2.jpg/v1/fill/w_640,h_638,al_c,q_85,usm_0.66_1.00_0.01/913019_c320c0ab23b1448788d28ccdc2caf717~mv2_d_4502_3000_s_4_2.webp'/>
+        </View>
+
+        <View style={{marginTop:15, marginBottom: 15}}>
+         <Show_Image url='https://static.wixstatic.com/media/913019_8f603dfde7054663a40189f5bb7bcafa~mv2_d_3000_3000_s_4_2.jpg/v1/fill/w_640,h_580,al_c,q_85,usm_0.66_1.00_0.01/913019_8f603dfde7054663a40189f5bb7bcafa~mv2_d_3000_3000_s_4_2.webp'>
+          {
+          <View>
+            <View style={{ marginTop: 25, marginBottom:15, marginLeft:5, marginRight:5 }}>
+              <Htext color={Colors.normaltext} fontsize={35} fontfamily='DustWest' textalign='center'>MUSCLE & STRENGTH</Htext>
+            </View>
+            <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwith={180} bheight={42} bordercolor={Colors.mainText}>SELECT</Cbutton>
+          
+            <View style={{ marginTop: 85, marginBottom:15, marginLeft:5, marginRight:5 }}>
+              <Htext color={Colors.normaltext} fontsize={35} fontfamily='DustWest' textalign='center'>PERFORMANCE & FOCUS</Htext>
+            </View>
+            <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwith={180} bheight={42} bordercolor={Colors.mainText}>SELECT</Cbutton>
+          
+          </View>
+          }
+        </Show_Image>  
+        </View>
+
+        <View style={{ marginTop:5, marginBottom:15, marginLeft:5, marginRight:5 }}>
+          <Htext color={Colors.mainText} fontsize={35} fontfamily='CHESTER-Basic' lineheight={30} textalign='center'>CAPACITYX FITNESS BLOG</Htext>
+        </View>
+        
 
       </ScrollView>
     );
