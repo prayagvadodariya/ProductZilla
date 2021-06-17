@@ -10,6 +10,7 @@ import Product_Content from '../component/Product_Content';
 import Image_Content from '../component/Image_Content';
 import Show_Image from '../component/Show_Image';
 import Background_Image from '../component/Background_Image';
+import * as StaticData from '../constant/StaticData';
 
 const Home = () => {
 
