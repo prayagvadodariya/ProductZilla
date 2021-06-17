@@ -1,6 +1,6 @@
 import React, {useState, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, FlatList } from 'react-native';
 import Maincontent from '../component/Maincontent';
 import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
@@ -78,20 +78,31 @@ const Home = () => {
         <View>
           <Background_Image height={1352} url='https://static.wixstatic.com/media/913019_f56865726c2e4dedb42e6c4e1f15474e~mv2.jpg/v1/fill/w_256,h_1080,al_tr,q_80/913019_f56865726c2e4dedb42e6c4e1f15474e~mv2.webp'>
             {
-            <View style={{margin:20}}>
-              <Show_Image url='https://static.wixstatic.com/media/913019_5fe0355f2d9047bf998f391e23f14faa~mv2_d_4933_3289_s_4_2.jpg/v1/fill/w_560,h_560,fp_0.50_0.50,q_90/913019_5fe0355f2d9047bf998f391e23f14faa~mv2_d_4933_3289_s_4_2.webp'>
-                <View>
-                <View style={{ marginTop: 25, marginLeft:20, marginRight:20, marginBottom: 25}}>
-                  <Htext color={Colors.normaltext} fontsize={15} fontfamily='PTSans-Regular'>Prayag Vadodariya</Htext>
-                  <Htext color={Colors.normaltext} fontsize={15} fontfamily='PTSans-Regular'>6 days ago - 2 min</Htext>
+            <FlatList
+            data={StaticData.Fitness} 
+            style={{flex:1}} 
+            keyExtractor={(item, index) => String(index)}
+            renderItem={({item, index}) => 
+            { 
+            return (
+              <View style={{margin:20}}>
+                <Show_Image url={item.url}>
+                  {
+                  <View>
+                  <View style={{ marginTop: 25, marginLeft:20, marginRight:20, marginBottom: 25}}>
+                    <Htext color={Colors.normaltext} fontsize={15} fontfamily='PTSans-Regular'>{item.userName}</Htext>
+                    <Htext color={Colors.normaltext} fontsize={15} fontfamily='PTSans-Regular'>{item.fue_day}</Htext>
 
-                  <View style={{ marginTop:195}}>
-                   <Htext color={Colors.mainText} fontsize={35} fontfamily='DustWest'>3 Ways to Build Bigger Arms, Faster</Htext>
+                    <View style={{ marginTop:195}}>
+                    <Htext color={Colors.mainText} fontsize={35} fontfamily='DustWest'>{item.title}</Htext>
+                    </View>
                   </View>
-                </View>
-                </View>
-              </Show_Image>
-            </View>
+                  </View>
+                  }
+                </Show_Image>
+              </View>
+            )}}
+            />    
             }
           </Background_Image>
         </View>
