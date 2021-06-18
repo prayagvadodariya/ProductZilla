@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
 
- const Background_Image = (props) => {  
+ const BackgroundImage = (props) => {  
      
   return (
     <ImageBackground style={{ height: props.height}} source={{ uri: props.url }}>
@@ -10,4 +10,4 @@ import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react
   );
 }
 
-export default Background_Image;
+export default BackgroundImage;

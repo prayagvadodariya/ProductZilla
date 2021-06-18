@@ -5,11 +5,12 @@ import Maincontent from '../component/Maincontent';
 import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
 import Ntext from '../component/Ntext';
+import Addtocart from '../component/Addtocart';
 import Cbutton from '../component/Cbutton';
 import Product_Content from '../component/Product_Content';
-import Image_Content from '../component/Image_Content';
-import Show_Image from '../component/Show_Image';
-import Background_Image from '../component/Background_Image';
+import ImageContent from '../component/ImageContent';
+import ShowImage from '../component/ShowImage';
+import BackgroundImage from '../component/BackgroundImage';
 import * as StaticData from '../constant/StaticData';
 
 const Home = (props) => {
@@ -21,15 +22,39 @@ const Home = (props) => {
         <Maincontent onPress={() => props.navigation.navigate("ProductStack",{ screen: 'ProductList'})}/>
 
         <View style={{ alignSelf:'center', marginTop:25, marginBottom:25 }}>
-          <Htext color={Colors.mainText} fontsize={35} fontfamily='CHESTER-Basic'>FEATURED PRODUCTS</Htext>
+          <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic'>FEATURED PRODUCTS</Htext>
         </View>
 
-        <View style={{marginTop:-15}}>
+        <FlatList
+          data={StaticData.Product_one} 
+          style={{flex:1, marginTop:-15}} 
+          keyExtractor={(item, index) => String(index)}
+          renderItem={({item, index}) => 
+          { 
+          return (
+            <View style={styles.product}>
+              <ShowImage url={item.url}>
+              {item?.seller!=null && item?.seller!='' ?
+                <View style={{width:100, height:35, backgroundColor: Colors.sellcolor}}>
+                    <View style={{flex:1, justifyContent:'center', alignItems:'center'}}> 
+                      <Text>Best Seller</Text>
+                    </View>
+                </View>
+              :null}
+              </ShowImage>
+              <View style={{flex:1,backgroundColor: Colors.gray, marginLeft:1, marginBottom:1, marginRight:1,}}>
+                <Addtocart  bcolor={Colors.mainText} bwith='100%' bheight='100%'/>
+              </View>
+            </View>
+        )}}  
+        />
+
+        {/* <View style={{marginTop:-15}}>
           <Product_Content/>
-        </View>
+        </View> */}
 
         <View style={{ margin:20 }}>
-          <Htext color={Colors.mainText} fontsize={35} fontfamily='DustWest'>WE CREATE PRODUCTS TO HELP YOU REACH THE FITNESS GOALS YOU NEVER KNEW YOU HAD</Htext>
+          <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='DustWest'>WE CREATE PRODUCTS TO HELP YOU REACH THE FITNESS GOALS YOU NEVER KNEW YOU HAD</Htext>
         </View>
 
         <View style={{ marginLeft:20, marginRight:20, marginBottom:20}}>
@@ -41,19 +66,19 @@ const Home = (props) => {
         </View>
 
         <View style={{marginTop:45, marginBottom: 35}}>
-         <Image_Content/>
+         <ImageContent/>
         </View>
 
         <View style={{ marginTop:0, marginBottom:15, marginLeft:5, marginRight:5 }}>
-          <Htext color={Colors.mainText} fontsize={35} fontfamily='CHESTER-Basic' lineheight={30} textalign='center'>WHAT’S YOUR PURPOSE?</Htext>
+          <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic' lineheight={30} textalign='center'>WHAT’S YOUR PURPOSE?</Htext>
         </View>
 
         <View>
-         <Show_Image url='https://static.wixstatic.com/media/913019_c320c0ab23b1448788d28ccdc2caf717~mv2_d_4502_3000_s_4_2.jpg/v1/fill/w_640,h_638,al_c,q_85,usm_0.66_1.00_0.01/913019_c320c0ab23b1448788d28ccdc2caf717~mv2_d_4502_3000_s_4_2.webp'/>
+         <ShowImage url='https://static.wixstatic.com/media/913019_c320c0ab23b1448788d28ccdc2caf717~mv2_d_4502_3000_s_4_2.jpg/v1/fill/w_640,h_638,al_c,q_85,usm_0.66_1.00_0.01/913019_c320c0ab23b1448788d28ccdc2caf717~mv2_d_4502_3000_s_4_2.webp'/>
         </View>
 
         <View style={{marginTop:15, marginBottom: 15}}>
-         <Show_Image url='https://static.wixstatic.com/media/913019_8f603dfde7054663a40189f5bb7bcafa~mv2_d_3000_3000_s_4_2.jpg/v1/fill/w_640,h_580,al_c,q_85,usm_0.66_1.00_0.01/913019_8f603dfde7054663a40189f5bb7bcafa~mv2_d_3000_3000_s_4_2.webp'>
+         <ShowImage url='https://static.wixstatic.com/media/913019_8f603dfde7054663a40189f5bb7bcafa~mv2_d_3000_3000_s_4_2.jpg/v1/fill/w_640,h_580,al_c,q_85,usm_0.66_1.00_0.01/913019_8f603dfde7054663a40189f5bb7bcafa~mv2_d_3000_3000_s_4_2.webp'>
           {
           <View>
             <View style={{ marginTop: 25, marginBottom:15, marginLeft:5, marginRight:5 }}>
@@ -68,15 +93,15 @@ const Home = (props) => {
           
           </View>
           }
-        </Show_Image>  
+        </ShowImage>  
         </View>
 
         <View style={{ marginTop:5, marginBottom:15, marginLeft:5, marginRight:5 }}>
-          <Htext color={Colors.mainText} fontsize={35} fontfamily='CHESTER-Basic' lineheight={30} textalign='center'>CAPACITYX FITNESS BLOG</Htext>
+          <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic' lineheight={30} textalign='center'>CAPACITYX FITNESS BLOG</Htext>
         </View>
 
         <View>
-          <Background_Image height={1300} url='https://static.wixstatic.com/media/913019_f56865726c2e4dedb42e6c4e1f15474e~mv2.jpg/v1/fill/w_256,h_1080,al_tr,q_80/913019_f56865726c2e4dedb42e6c4e1f15474e~mv2.webp'>
+          <BackgroundImage height={1300} url='https://static.wixstatic.com/media/913019_f56865726c2e4dedb42e6c4e1f15474e~mv2.jpg/v1/fill/w_256,h_1080,al_tr,q_80/913019_f56865726c2e4dedb42e6c4e1f15474e~mv2.webp'>
             {
             <>  
             <FlatList
@@ -87,7 +112,7 @@ const Home = (props) => {
             { 
             return (
               <View style={{margin:20}}>
-                <Show_Image url={item.url}>
+                <ShowImage url={item.url}>
                   {
                   <View>
                   <View style={{ marginTop: 25, marginLeft:20, marginRight:20, marginBottom: 25}}>
@@ -100,7 +125,7 @@ const Home = (props) => {
                   </View>
                   </View>
                   }
-                </Show_Image>
+                </ShowImage>
               </View>
             )}}
             /> 
@@ -109,7 +134,7 @@ const Home = (props) => {
             </View> 
             </>
             }
-          </Background_Image>
+          </BackgroundImage>
 
           {/* <View style={{alignSelf:'flex-end'}}>
             <TouchableOpacity style={styles.sidebutton}>
@@ -128,6 +153,12 @@ const styles = StyleSheet.create({
   flex:1, 
   justifyContent:'center',
   alignItems:'center',
+ },
+ product: {
+  borderColor: Colors.mainText,
+  borderWidth:3,
+  margin:15,
+  height:430
  },
  sidebutton: {
   marginRight:10,

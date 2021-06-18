@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
 import Colors from '../constant/Colors';
 
- const Show_Image = (props) => {  
+ const ShowImage = (props) => {  
      
   return (
     <TouchableOpacity style={styles.imglayout}>
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
  }
 });
 
-export default Show_Image;
+export default ShowImage;
