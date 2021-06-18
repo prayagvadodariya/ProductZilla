@@ -96,13 +96,6 @@ const NavigationDrawerStructure = (props) => {
           component={BottomTabStack}
           options={({route, navigation,}) => ({
             headerTitle: 'CapacityX',
-            headerTitleStyle: {
-              color: theme['text-basic-color']
-            },
-            headerStyle: {
-              backgroundColor: theme['background-basic-color-1'], 
-            },
-            
             headerLeft: () => (
               <NavigationDrawerStructure
                 navigationProps={navigation}
@@ -116,16 +109,16 @@ const NavigationDrawerStructure = (props) => {
                 <TouchableOpacity style={{paddingRight:10}}>
                   <AntDesign name="shoppingcart" color={theme['text-basic-color']} size={26}/>
                 </TouchableOpacity>
-              
               </View>  
             ),
             headerStyle: {
-              backgroundColor: '#ffffff', //Set Header color
+              backgroundColor: theme['background-basic-color-1'], //Set Header color
             },
-            headerTintColor: '#fff', //Set Header text color
             headerTitleStyle: {
-              fontWeight: 'bold',
-              color: "#3b2322",
+              color: theme['text-basic-color'],
+              fontFamily:'CHESTER-Basic',
+              fontSize:25,
+              textTransform: 'lowercase',
               textAlign:"center" //Set Header text style
             },
           })}

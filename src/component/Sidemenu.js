@@ -4,7 +4,7 @@ import { Toggle, useTheme , Drawer, DrawerGroup, DrawerItem, IndexPath, Icon  } 
 import { ThemeContext } from '../constant/ThemeContext';
 import AntDesign from "react-native-vector-icons/AntDesign";
 
-const Sidemenu = () => {
+const Sidemenu = (props) => {
   const [checked, setChecked] = React.useState(false);
   const [selectedIndex, setSelectedIndex] = React.useState(new IndexPath(0));
   const themeContext = React.useContext(ThemeContext);
@@ -21,6 +21,20 @@ const Sidemenu = () => {
     )
   }
 
+  const onSelect = (index) =>{
+    setSelectedIndex(index)
+    if(index.row===0){
+      props.navigation.navigate("Home")
+
+    }else if(index.row===1){
+      props.navigation.navigate("Search")
+     
+    }else if(index.row===2){
+      props.navigation.navigate("Wishlist")
+    }  
+    console.log('drawer select', index);
+  }
+
     return (
       <View style={[styles.drawerContent, { backgroundColor: theme['background-basic-color-1'] }]}>
         <View>
@@ -30,11 +44,11 @@ const Sidemenu = () => {
 
         <Drawer style={{paddingLeft:10, paddingRight:10}}
           selectedIndex={selectedIndex}
-          onSelect={index => setSelectedIndex(index)}>
-            <DrawerItem title='Home' accessoryLeft={props => <Icon {...props} name='home-outline'/>}/>
+          onSelect={(index) => onSelect(index)}>
+            <DrawerItem title='Home' selectedIndex={selectedIndex} accessoryLeft={props => <Icon {...props} name='home-outline'/>}/>
             <DrawerItem title='Search' accessoryLeft={props => <Icon {...props} name='search-outline'/>}/>
             <DrawerItem title='Wishlist' accessoryLeft={props => <Icon {...props} name='heart-outline'/>}/>
-            <DrawerItem title='Theme' accessoryLeft={props => <Icon {...props} name='color-palette-outline'/>} accessoryRight={renderToggle}/>
+            <DrawerGroup  title='Theme' accessoryLeft={props => <Icon {...props} name='color-palette-outline'/>} accessoryRight={renderToggle}/>
         </Drawer>
       </View>
     )
