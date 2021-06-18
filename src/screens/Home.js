@@ -18,7 +18,7 @@ const Home = (props) => {
    
     return (
       <ScrollView style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
-        <Maincontent/>
+        <Maincontent onPress={() => props.navigation.navigate("ProductStack",{ screen: 'ProductList'})}/>
 
         <View style={{ alignSelf:'center', marginTop:25, marginBottom:25 }}>
           <Htext color={Colors.mainText} fontsize={35} fontfamily='CHESTER-Basic'>FEATURED PRODUCTS</Htext>
