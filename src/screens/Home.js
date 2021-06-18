@@ -12,7 +12,7 @@ import Show_Image from '../component/Show_Image';
 import Background_Image from '../component/Background_Image';
 import * as StaticData from '../constant/StaticData';
 
-const Home = () => {
+const Home = (props) => {
 
   const theme = useTheme();
    

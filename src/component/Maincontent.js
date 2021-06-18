@@ -4,8 +4,10 @@ import Colors from '../constant/Colors';
 import Htext from './Htext';
 import Ntext from './Ntext';
 import Cbutton from './Cbutton';
+import { useNavigation } from '@react-navigation/native'
 
-const Maincontent = () => {
+const Maincontent = (props) => {
+  const navigation = useNavigation();
   
     return (
       <View style={{position: 'relative', width: "100%", height: 380}}>
@@ -29,7 +31,7 @@ const Maincontent = () => {
               </View>
           </View> 
           <View style={{ marginTop:15 }}>
-            <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwith={120} bheight={42} bordercolor={Colors.mainText}>Shop Now</Cbutton>
+            <Cbutton onPress={() => navigation.navigate("ProductStack",{ screen: 'ProductList'})} textcolor={Colors.mainText} bcolor="transparent" bwith={120} bheight={42} bordercolor={Colors.mainText}>Shop Now</Cbutton>
           </View>
         </ImageBackground> 
       </View>

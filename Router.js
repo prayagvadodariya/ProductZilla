@@ -127,6 +127,41 @@ const NavigationDrawerStructure = (props) => {
     );
   };
 
+  const ProductStack = ({navigation}) => {
+    const theme = useTheme();
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+        name="ProductList"
+        component={ProductList}
+        options={({navigation,}) => ({
+          headerTitle: 'Product List',
+          headerLeft: () => (
+            <TouchableOpacity>
+             <AntDesign name="left" onPress={()=> navigation.goBack()} color={theme['text-basic-color']} size={26} style={{ marginLeft: 10}} />
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity style={{paddingRight:10}}>
+             <AntDesign name="menu-unfold" color={theme['text-basic-color']} size={26}/>
+            </TouchableOpacity>  
+          ),
+          headerStyle: {
+            backgroundColor: theme['background-basic-color-1'], //Set Header color
+          },
+          headerTitleStyle: {
+            color: theme['text-basic-color'],
+            fontFamily:'CHESTER-Basic',
+            fontSize:25,
+            textTransform: 'lowercase',
+            textAlign:"center" //Set Header text style
+          },
+        })}
+        />
+      </Stack.Navigator> 
+    )
+    }    
+
   const Router = () => {
     return (
       <NavigationContainer>
@@ -138,7 +173,12 @@ const NavigationDrawerStructure = (props) => {
             name="HomeScreenStack"
             options={{drawerLabel: 'Home'}}
             component={HomeScreenStack}
-          />  
+          /> 
+          <Drawer.Screen
+          name="ProductStack"
+          options={{drawerLabel: 'ProductStack'}}
+          component={ProductStack}
+         /> 
         </Drawer.Navigator>
     </NavigationContainer>
     );
