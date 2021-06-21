@@ -19,7 +19,7 @@ const Home = (props) => {
       <ScrollView style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
         <Maincontent onPress={() => props.navigation.navigate("HomeScreenStack",{ screen: 'ProductList'})}/>
 
-        <View style={{ alignSelf:'center', marginTop:25, marginBottom:25 }}>
+        <View style={{ marginTop:25, marginBottom:25 }}>
           <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic'>FEATURED PRODUCTS</Htext>
         </View>
 
@@ -48,7 +48,7 @@ const Home = (props) => {
         />
 
         <View style={{ margin:20 }}>
-          <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='DustWest'>WE CREATE PRODUCTS TO HELP YOU REACH THE FITNESS GOALS YOU NEVER KNEW YOU HAD</Htext>
+          <Htext color={theme['text-basic-color']} textalign='left' fontsize={35} fontfamily='DustWest'>WE CREATE PRODUCTS TO HELP YOU REACH THE FITNESS GOALS YOU NEVER KNEW YOU HAD</Htext>
         </View>
 
         <View style={{ marginLeft:20, marginRight:20, marginBottom:20}}>
@@ -65,7 +65,7 @@ const Home = (props) => {
           </ShowImage>
         </View>
 
-        <View style={{ marginTop:0, marginBottom:15, marginLeft:5, marginRight:5 }}>
+        <View style={{ marginBottom:25, marginLeft:5, marginRight:5 }}>
           <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic' lineheight={30} textalign='center'>WHAT’S YOUR PURPOSE?</Htext>
         </View>
 
@@ -92,7 +92,7 @@ const Home = (props) => {
         </ShowImage>  
         </View>
 
-        <View style={{ marginTop:5, marginBottom:15, marginLeft:5, marginRight:5 }}>
+        <View style={{ marginTop:7, marginBottom:15, marginLeft:5, marginRight:5 }}>
           <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic' lineheight={30} textalign='center'>CAPACITYX FITNESS BLOG</Htext>
         </View>
 
@@ -112,11 +112,11 @@ const Home = (props) => {
                   {
                   <View>
                   <View style={{ marginTop: 25, marginLeft:20, marginRight:20, marginBottom: 25}}>
-                    <Htext color={Colors.normaltext} fontsize={15} fontfamily='PTSans-Regular'>{item.userName}</Htext>
-                    <Htext color={Colors.normaltext} fontsize={15} fontfamily='PTSans-Regular'>{item.fue_day}</Htext>
+                    <Htext color={Colors.normaltext} fontsize={15} textalign='left' fontfamily='PTSans-Regular'>{item.userName}</Htext>
+                    <Htext color={Colors.normaltext} fontsize={15} textalign='left' fontfamily='PTSans-Regular'>{item.fue_day}</Htext>
 
                     <View style={{ marginTop:195}}>
-                    <Htext color={Colors.mainText} fontsize={35} fontfamily='DustWest'>{item.title}</Htext>
+                    <Htext color={Colors.mainText} textalign='left' fontsize={35} fontfamily='DustWest'>{item.title}</Htext>
                     </View>
                   </View>
                   </View>
