@@ -87,3 +87,18 @@ export const Product_one=[
       title: 'Protein Powder',
     },
   ]
+
+  export const SlideImage = [
+    {
+      id: 1,
+      url: 'https://static.wixstatic.com/media/913019_732a14d0a59742478bb9fce81d52a474~mv2_d_3227_3116_s_4_2.jpg/v1/fill/w_552,h_552,al_c,q_80,usm_0.66_1.00_0.01/913019_732a14d0a59742478bb9fce81d52a474~mv2_d_3227_3116_s_4_2.webp',
+    },
+    {
+      id: 2,
+      url: 'https://static.wixstatic.com/media/913019_8f9f83e039584a7ba0cb8be7934876ec~mv2_d_4502_3000_s_4_2.jpg/v1/fill/w_550,h_400,al_c,q_80,usm_0.66_1.00_0.01/913019_8f9f83e039584a7ba0cb8be7934876ec~mv2_d_4502_3000_s_4_2.webp',
+    },
+    {
+      id: 3,
+      url: 'https://static.wixstatic.com/media/913019_e041a68b0e62406184655aea26d07e1b~mv2_d_3227_3116_s_4_2.jpg/v1/fill/w_552,h_552,al_c,q_80,usm_0.66_1.00_0.01/913019_e041a68b0e62406184655aea26d07e1b~mv2_d_3227_3116_s_4_2.webp', 
+    },
+  ]

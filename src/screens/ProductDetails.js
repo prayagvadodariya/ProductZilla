@@ -1,6 +1,6 @@
 import React, {useState, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, ScrollView, View, StyleSheet, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
 import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
 import Ntext from '../component/Ntext';
@@ -8,19 +8,36 @@ import CartButton from '../component/CartButton';
 import Hairline from '../component/Hairline';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import ActionButton from '../component/ActionButton';
+import ImageSlider from 'react-native-image-slider';
+import * as StaticData from '../constant/StaticData';
 
-const ProductDetails = () => {
+const ProductDetails = (props) => {
   const [isVisible, setIsVisible] = useState(false);
   const theme = useTheme();
+
+  console.log('pops',props);
 
   const toggleFunction = () => {
     setIsVisible(!isVisible);
   }; 
     return (
-      <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
+      <ScrollView style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
         <View style={{ alignSelf:'flex-start', margin:15 }}>
           <Htext color={theme['text-custome-color']} fontsize={20}>SKU: 0001</Htext>
         </View>
+
+        <View style={styles.imgslider}>
+          <ImageSlider
+              loopBothSides={false}
+              images={StaticData.SlideImage}
+              customSlide={({ index, item, style, width }) => {
+              return(
+                <TouchableOpacity key={index} style={styles.top}>  
+                  <ImageBackground source={{uri: item.url}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>    
+                </TouchableOpacity>
+              )}}
+          />
+        </View>  
 
         <View style={{ alignSelf:'flex-start', marginTop:25, marginBottom:5, marginLeft:15 }}>
           <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='DustWest'>BCAA Capsules</Htext>
@@ -49,10 +66,6 @@ const ProductDetails = () => {
           </View>
         : null}
 
-        {/* <View style={{margin:10}}>
-          <Hairline/>
-        </View> */}
-
         <View style={{flexDirection: 'row', alignItems: 'center',margin:15}}>
           <Hairline/>
           <View style={{marginLeft:10, marginRight:10}}>
@@ -68,7 +81,7 @@ const ProductDetails = () => {
           <View style={styles.shar}><ActionButton icon='instagram'/></View>
         </View>
 
-      </View>
+      </ScrollView>
     );
   }
 
@@ -79,10 +92,19 @@ const styles = StyleSheet.create({
   justifyContent:'center',
    alignItems:'center',
  },
+ imgslider: {
+  marginLeft:15,
+  marginRight:15
+ },
+ top: {
+  width: Dimensions.get('screen').width /1 - 20,
+  height: 390,
+ },
  sharing: {
   justifyContent:'center',
   alignItems:'center',
   flexDirection:"row",
+   marginBottom:15
  },
  shar: {
   marginLeft:10,
