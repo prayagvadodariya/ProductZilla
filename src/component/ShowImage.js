@@ -5,7 +5,7 @@ import Colors from '../constant/Colors';
  const ShowImage = (props) => {  
      
   return (
-    <TouchableOpacity style={styles.imglayout}>
+    <TouchableOpacity style={{ height: props.height}}>
        <ImageBackground resizeMode='stretch' style={{height: "100%"}} source={{ uri: props.url }}>
          {props.children}
       </ImageBackground> 
@@ -14,9 +14,7 @@ import Colors from '../constant/Colors';
 }
 
 const styles = StyleSheet.create({
-  imglayout: {
-    height:360,
- }
+ 
 });
 
 export default ShowImage;

@@ -7,7 +7,6 @@ import Colors from '../constant/Colors';
   if(props.color){
     textColor = props.color
   }
-   console.log('props',props); 
   return (
     <Text 
       style={[{ fontSize: props.fontsize, color: textColor, fontFamily: props.fontfamily, fontWeight: props.fontweight, textAlign: props.textalign, lineHeight: props.lineheight},props.style]}>

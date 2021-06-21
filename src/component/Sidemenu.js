@@ -32,7 +32,7 @@ const Sidemenu = (props) => {
     }else if(index.row===2){
       props.navigation.navigate("Wishlist")
     }  
-    console.log('drawer select', index);
+    // console.log('drawer select', index);
   }
 
     return (

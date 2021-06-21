@@ -7,8 +7,6 @@ import Htext from '../component/Htext';
 import Ntext from '../component/Ntext';
 import Addtocart from '../component/Addtocart';
 import Cbutton from '../component/Cbutton';
-import Product_Content from '../component/Product_Content';
-import ImageContent from '../component/ImageContent';
 import ShowImage from '../component/ShowImage';
 import BackgroundImage from '../component/BackgroundImage';
 import * as StaticData from '../constant/StaticData';
@@ -33,7 +31,7 @@ const Home = (props) => {
           { 
           return (
             <View style={styles.product}>
-              <ShowImage url={item.url}>
+              <ShowImage url={item.url} height={360}>
               {item?.seller!=null && item?.seller!='' ?
                 <View style={{width:100, height:35, backgroundColor: Colors.sellcolor}}>
                     <View style={{flex:1, justifyContent:'center', alignItems:'center'}}> 
@@ -49,10 +47,6 @@ const Home = (props) => {
         )}}  
         />
 
-        {/* <View style={{marginTop:-15}}>
-          <Product_Content/>
-        </View> */}
-
         <View style={{ margin:20 }}>
           <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='DustWest'>WE CREATE PRODUCTS TO HELP YOU REACH THE FITNESS GOALS YOU NEVER KNEW YOU HAD</Htext>
         </View>
@@ -66,7 +60,9 @@ const Home = (props) => {
         </View>
 
         <View style={{marginTop:45, marginBottom: 35}}>
-         <ImageContent/>
+          <ShowImage height={460} url='https://static.wixstatic.com/media/84770f_e58156816cbb4505a7a3388d6593def9~mv2.jpg/v1/fill/w_640,h_800,al_c,q_85,usm_0.66_1.00_0.01/84770f_e58156816cbb4505a7a3388d6593def9~mv2.webp'>
+            <View style={styles.content}></View>
+          </ShowImage>
         </View>
 
         <View style={{ marginTop:0, marginBottom:15, marginLeft:5, marginRight:5 }}>
@@ -74,11 +70,11 @@ const Home = (props) => {
         </View>
 
         <View>
-         <ShowImage url='https://static.wixstatic.com/media/913019_c320c0ab23b1448788d28ccdc2caf717~mv2_d_4502_3000_s_4_2.jpg/v1/fill/w_640,h_638,al_c,q_85,usm_0.66_1.00_0.01/913019_c320c0ab23b1448788d28ccdc2caf717~mv2_d_4502_3000_s_4_2.webp'/>
+         <ShowImage height={360} url='https://static.wixstatic.com/media/913019_c320c0ab23b1448788d28ccdc2caf717~mv2_d_4502_3000_s_4_2.jpg/v1/fill/w_640,h_638,al_c,q_85,usm_0.66_1.00_0.01/913019_c320c0ab23b1448788d28ccdc2caf717~mv2_d_4502_3000_s_4_2.webp'/>
         </View>
 
         <View style={{marginTop:15, marginBottom: 15}}>
-         <ShowImage url='https://static.wixstatic.com/media/913019_8f603dfde7054663a40189f5bb7bcafa~mv2_d_3000_3000_s_4_2.jpg/v1/fill/w_640,h_580,al_c,q_85,usm_0.66_1.00_0.01/913019_8f603dfde7054663a40189f5bb7bcafa~mv2_d_3000_3000_s_4_2.webp'>
+         <ShowImage height={360} url='https://static.wixstatic.com/media/913019_8f603dfde7054663a40189f5bb7bcafa~mv2_d_3000_3000_s_4_2.jpg/v1/fill/w_640,h_580,al_c,q_85,usm_0.66_1.00_0.01/913019_8f603dfde7054663a40189f5bb7bcafa~mv2_d_3000_3000_s_4_2.webp'>
           {
           <View>
             <View style={{ marginTop: 25, marginBottom:15, marginLeft:5, marginRight:5 }}>
@@ -112,7 +108,7 @@ const Home = (props) => {
             { 
             return (
               <View style={{margin:20}}>
-                <ShowImage url={item.url}>
+                <ShowImage url={item.url} height={360}>
                   {
                   <View>
                   <View style={{ marginTop: 25, marginLeft:20, marginRight:20, marginBottom: 25}}>
@@ -160,6 +156,15 @@ const styles = StyleSheet.create({
   margin:15,
   height:430
  },
+ content: {
+  borderColor: Colors.mainText,
+  borderWidth:2,
+  marginTop:-35,
+  marginLeft:20,
+  marginRight:35,
+  marginBottom:35,
+  height:460
+},
  sidebutton: {
   marginRight:10,
   width: 50,
