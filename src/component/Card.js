@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, Dimensions,ImageBackground,  FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View,ImageBackground,  FlatList, TouchableOpacity } from 'react-native';
 import Colors from '../constant/Colors';
 import AntDesign from "react-native-vector-icons/AntDesign";
 
