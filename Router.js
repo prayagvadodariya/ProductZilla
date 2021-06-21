@@ -123,22 +123,14 @@ const NavigationDrawerStructure = (props) => {
             },
           })}
         />
-      </Stack.Navigator>
-    );
-  };
-
-  const ProductStack = ({navigation}) => {
-    const theme = useTheme();
-    return (
-      <Stack.Navigator>
         <Stack.Screen
         name="ProductList"
         component={ProductList}
         options={({navigation,}) => ({
           headerTitle: 'Product List',
           headerLeft: () => (
-            <TouchableOpacity>
-             <AntDesign name="left" onPress={()=> navigation.goBack()} color={theme['text-basic-color']} size={26} style={{ marginLeft: 10}} />
+            <TouchableOpacity onPress={()=> navigation.goBack()}>
+             <AntDesign name="left"  color={theme['text-basic-color']} size={25} style={{ marginLeft: 10}} />
             </TouchableOpacity>
           ),
           headerRight: () => (
@@ -164,8 +156,8 @@ const NavigationDrawerStructure = (props) => {
         options={({navigation,}) => ({
           headerTitle: 'Product Details',
           headerLeft: () => (
-            <TouchableOpacity>
-             <AntDesign name="left" onPress={()=> navigation.goBack()} color={theme['text-basic-color']} size={26} style={{ marginLeft: 10}} />
+            <TouchableOpacity onPress={()=> navigation.goBack()}>
+             <AntDesign name="left" color={theme['text-basic-color']} size={25} style={{ marginLeft: 10}} />
             </TouchableOpacity>
           ),
           headerRight: () => (
@@ -190,9 +182,9 @@ const NavigationDrawerStructure = (props) => {
           },
         })}
         />
-      </Stack.Navigator> 
-    )
-    }    
+      </Stack.Navigator>
+    );
+  };
 
   const Router = () => {
     return (
@@ -206,11 +198,11 @@ const NavigationDrawerStructure = (props) => {
             options={{drawerLabel: 'Home'}}
             component={HomeScreenStack}
           /> 
-          <Drawer.Screen
+          {/* <Drawer.Screen
           name="ProductStack"
           options={{drawerLabel: 'ProductStack'}}
           component={ProductStack}
-         /> 
+         />  */}
         </Drawer.Navigator>
     </NavigationContainer>
     );

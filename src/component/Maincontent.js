@@ -8,7 +8,7 @@ import Cbutton from './Cbutton';
 const Maincontent = (props) => {
   
     return (
-      <View style={{position: 'relative', width: "100%", height: 380}}>
+      <View style={[{position: 'relative', width: "100%", height: 380},props.style]}>
         <ImageBackground resizeMode='stretch' style={{height: "100%"}} source={{ uri: 'https://static.wixstatic.com/media/913019_4ad1a433891b4dfe827c2b574e39a6f9~mv2_d_7132_4238_s_4_2.jpg/v1/fill/w_640,h_828,al_c,q_85,usm_0.66_1.00_0.01/913019_4ad1a433891b4dfe827c2b574e39a6f9~mv2_d_7132_4238_s_4_2.webp' }}>
           <View>
               <View style={{ alignSelf:'flex-start',marginLeft:15, marginTop:20 }}>
@@ -29,7 +29,7 @@ const Maincontent = (props) => {
               </View>
           </View> 
           <View style={{ marginTop:15 }}>
-            <Cbutton onPress={props.onPress} textcolor={Colors.mainText} bcolor="transparent" bwith={120} bheight={42} bordercolor={Colors.mainText}>Shop Now</Cbutton>
+            <Cbutton onPress={props.onPress} textcolor={Colors.mainText} bcolor="transparent" bwidth={120} bheight={42} bordercolor={Colors.mainText}>Shop Now</Cbutton>
           </View>
         </ImageBackground> 
       </View>

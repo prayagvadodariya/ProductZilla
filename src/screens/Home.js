@@ -17,7 +17,7 @@ const Home = (props) => {
    
     return (
       <ScrollView style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
-        <Maincontent onPress={() => props.navigation.navigate("ProductStack",{ screen: 'ProductList'})}/>
+        <Maincontent onPress={() => props.navigation.navigate("HomeScreenStack",{ screen: 'ProductList'})}/>
 
         <View style={{ alignSelf:'center', marginTop:25, marginBottom:25 }}>
           <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic'>FEATURED PRODUCTS</Htext>
@@ -41,7 +41,7 @@ const Home = (props) => {
               :null}
               </ShowImage>
               <View style={{flex:1,backgroundColor: Colors.gray, marginLeft:1, marginBottom:1, marginRight:1,}}>
-                <Addtocart  bcolor={Colors.mainText} bwith='100%' bheight='100%'/>
+                <Addtocart  bcolor={Colors.mainText} bwidth='100%' bheight='100%'/>
               </View>
             </View>
         )}}  
@@ -56,7 +56,7 @@ const Home = (props) => {
         </View>
 
         <View style={{alignSelf:'flex-start', marginLeft:20, marginBottom:15}}>
-         <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwith={180} bheight={42} bordercolor={Colors.mainText}>LEARN MORE</Cbutton>
+         <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwidth={180} bheight={42} bordercolor={Colors.mainText}>LEARN MORE</Cbutton>
         </View>
 
         <View style={{marginTop:45, marginBottom: 35}}>
@@ -80,12 +80,12 @@ const Home = (props) => {
             <View style={{ marginTop: 25, marginBottom:15, marginLeft:5, marginRight:5 }}>
               <Htext color={Colors.normaltext} fontsize={35} fontfamily='DustWest' textalign='center'>MUSCLE & STRENGTH</Htext>
             </View>
-            <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwith={180} bheight={42} bordercolor={Colors.mainText}>SELECT</Cbutton>
+            <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwidth={180} bheight={42} bordercolor={Colors.mainText}>SELECT</Cbutton>
           
             <View style={{ marginTop: 85, marginBottom:15, marginLeft:5, marginRight:5 }}>
               <Htext color={Colors.normaltext} fontsize={35} fontfamily='DustWest' textalign='center'>PERFORMANCE & FOCUS</Htext>
             </View>
-            <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwith={180} bheight={42} bordercolor={Colors.mainText}>SELECT</Cbutton>
+            <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwidth={180} bheight={42} bordercolor={Colors.mainText}>SELECT</Cbutton>
           
           </View>
           }
@@ -126,7 +126,7 @@ const Home = (props) => {
             )}}
             /> 
             <View style={{marginBottom:20}}>
-              <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwith={170} bheight={42} bordercolor={Colors.mainText}>READ MORE</Cbutton>
+              <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwidth={170} bheight={42} bordercolor={Colors.mainText}>READ MORE</Cbutton>
             </View> 
             </>
             }

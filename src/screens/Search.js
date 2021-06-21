@@ -45,7 +45,7 @@ const Search = () => {
         </View>
 
         <View style={{flex:1,justifyContent:'flex-end', alignItems:'flex-end', marginBottom:20}}>
-         <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwith={120} bheight={42} bordercolor={Colors.mainText}>SEE ALL</Cbutton>
+         <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwidth={120} bheight={42} bordercolor={Colors.mainText}>SEE ALL</Cbutton>
         </View>
 
       </ScrollView>

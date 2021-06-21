@@ -5,7 +5,7 @@ import Colors from '../constant/Colors';
  const ShowImage = (props) => {  
      
   return (
-    <TouchableOpacity style={{ height: props.height}}>
+    <TouchableOpacity style={[{ height: props.height},props.style]}>
        <ImageBackground resizeMode='stretch' style={{height: "100%"}} source={{ uri: props.url }}>
          {props.children}
       </ImageBackground> 

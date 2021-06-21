@@ -10,7 +10,7 @@ import Colors from '../constant/Colors';
   }  
     
   return (
-    <TouchableOpacity onPress={props.onPress} disabled={props.disabled} style={{ flex:1,alignSelf:'center', width: props.bwith, height: props.bheight, backgroundColor: props.bcolor}}>
+    <TouchableOpacity onPress={props.onPress} disabled={props.disabled} style={[{ flex:1,alignSelf:'center', width: props.bwidth, height: props.bheight, backgroundColor: props.bcolor},props.style]}>
         <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
           <Htext color={Colors.darktext} fontsize={32} fontfamily='DustWest'>ADD TO CART</Htext>
         </View>
