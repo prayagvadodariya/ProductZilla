@@ -5,7 +5,7 @@ import { SearchBar } from 'react-native-elements';
 import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
 import Cbutton from '../component/Cbutton';
-import Flat_Product from '../component/Flat_Product';
+import FlatProduct from '../component/FlatProduct';
 import Card from '../component/Card';
 import * as StaticData from '../constant/StaticData';
 
@@ -29,15 +29,15 @@ const Search = () => {
         />
 
         <View style={{ alignSelf:'center', marginTop:25, marginBottom:15 }}>
-          <Htext color={Colors.mainText} fontsize={35} fontfamily='CHESTER-Basic'>CAPACITYX PRODUCTS</Htext>
+          <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic'>CAPACITYX PRODUCTS</Htext>
         </View>
 
         <View>
-          <Flat_Product productdata={StaticData.Product_List} showlayout={true}/>
+          <FlatProduct productdata={StaticData.Product_List} showlayout={true}/>
         </View>
 
         <View style={{ marginTop:20, marginLeft:20, marginRight:20 }}>
-          <Htext color={Colors.mainText} fontsize={20} >SHOP BY</Htext>
+          <Htext color={theme['text-basic-color']} fontsize={20} >SHOP BY</Htext>
         </View>
 
         <View style={{ marginBottom:20 }}>

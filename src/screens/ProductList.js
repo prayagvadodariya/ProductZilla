@@ -1,7 +1,7 @@
 import React, {useState, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
 import { Text, View, StyleSheet } from 'react-native';
-import Flat_Product from '../component/Flat_Product';
+import FlatProduct from '../component/FlatProduct';
 import * as StaticData from '../constant/StaticData';
 
 const ProductList = (props) => {
@@ -11,7 +11,7 @@ const ProductList = (props) => {
     return (
       <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
         <View>
-          <Flat_Product onPress={() => props.navigation.navigate("ProductStack",{ screen: 'ProductDetails'})} productdata={StaticData.Product_List}/>
+          <FlatProduct onPress={() => props.navigation.navigate("ProductStack",{ screen: 'ProductDetails'})} productdata={StaticData.Product_List}/>
         </View>  
       </View>
     );
