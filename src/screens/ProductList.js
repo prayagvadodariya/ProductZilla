@@ -7,12 +7,11 @@ import * as StaticData from '../constant/StaticData';
 const ProductList = (props) => {
 
   const theme = useTheme();
+
    
     return (
       <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
-        <View>
-          <FlatProduct onPress={() => props.navigation.navigate("HomeScreenStack",{ screen: 'ProductDetails',params: { Producthandel: '' }})} productdata={StaticData.Product_List}/>
-        </View>  
+        <FlatProduct onPress={(item) => props.navigation.navigate("HomeScreenStack",{ screen: 'ProductDetails',params: { Producthandel: item.id }})} productdata={StaticData.Product_List}/>
       </View>
     );
   }

@@ -6,11 +6,11 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 
  const FlatProduct = (props) => { 
   const theme = useTheme();
-  
+
   const renderItem = ({item}) => {
     return (
       <View>
-        <TouchableOpacity onPress={props.onPress}> 
+        <TouchableOpacity onPress={() => props.onPress(item)}> 
           <View style={styles.top}><Image source={{ uri: item.url}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/></View> 
           <Text style={{paddingRight:10, paddingLeft:10, width: Dimensions.get('screen').width / 2 - 20, margin:10, textAlign:"center", color: theme['text-basic-color'], fontSize:15, fontWeight:"bold" }}>{item.title}</Text> 
         </TouchableOpacity>

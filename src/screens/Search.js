@@ -32,9 +32,7 @@ const Search = () => {
           <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic'>CAPACITYX PRODUCTS</Htext>
         </View>
 
-        <View>
-          <FlatProduct productdata={StaticData.Product_List} showlayout={true}/>
-        </View>
+        <FlatProduct productdata={StaticData.Product_List} showlayout={true}/>
 
         <View style={{ marginTop:20, marginLeft:20, marginRight:20 }}>
           <Htext color={theme['text-basic-color']} fontsize={20} >SHOP BY</Htext>

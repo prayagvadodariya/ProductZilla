@@ -13,7 +13,9 @@ import { useTheme } from '@ui-kitten/components';
         textAlign: props.textalign || 'center',
         lineHeight: props.lineheight},
         props.style
-        ]}>
+        ]}
+        {...props}
+        >
         {props.children}
     </Text> 
   );
