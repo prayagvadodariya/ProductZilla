@@ -39,11 +39,6 @@ const Search = (props) => {
           <Htext color={theme['text-basic-color']} fontsize={20} >SHOP BY</Htext>
         </View>
 
-        {/* <View style={{ marginBottom:20 }}> */}
-          {/* <Card productdata={StaticData.Shop_by} cardwidth={140} cardheight={140} showlayout={true}/> */}
-          
-        {/* </View> */}
-
         <FlatList
           horizontal={true}
           data={StaticData.Shop_by} 

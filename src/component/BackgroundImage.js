@@ -7,7 +7,7 @@ import { ImageBackground } from 'react-native';
     <ImageBackground 
       style={[{
         width:'100%', 
-        height: props.height,
+        height: props.height || '100%',
         overflow:'hidden',
         borderRadius: props.bradius || 0},
         props.style
