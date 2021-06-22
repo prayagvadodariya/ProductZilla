@@ -61,7 +61,7 @@ const Home = (props) => {
 
         <View style={{marginTop:45, marginBottom: 35}}>
           <ShowImage height={460} url='https://static.wixstatic.com/media/84770f_e58156816cbb4505a7a3388d6593def9~mv2.jpg/v1/fill/w_640,h_800,al_c,q_85,usm_0.66_1.00_0.01/84770f_e58156816cbb4505a7a3388d6593def9~mv2.webp'>
-            <View style={styles.content}></View>
+            <View style={styles.content}/>
           </ShowImage>
         </View>
 
@@ -69,9 +69,7 @@ const Home = (props) => {
           <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic' lineheight={30} textalign='center'>WHAT’S YOUR PURPOSE?</Htext>
         </View>
 
-        <View>
-         <ShowImage height={360} url='https://static.wixstatic.com/media/913019_c320c0ab23b1448788d28ccdc2caf717~mv2_d_4502_3000_s_4_2.jpg/v1/fill/w_640,h_638,al_c,q_85,usm_0.66_1.00_0.01/913019_c320c0ab23b1448788d28ccdc2caf717~mv2_d_4502_3000_s_4_2.webp'/>
-        </View>
+        <ShowImage height={360} url='https://static.wixstatic.com/media/913019_c320c0ab23b1448788d28ccdc2caf717~mv2_d_4502_3000_s_4_2.jpg/v1/fill/w_640,h_638,al_c,q_85,usm_0.66_1.00_0.01/913019_c320c0ab23b1448788d28ccdc2caf717~mv2_d_4502_3000_s_4_2.webp'/>
 
         <View style={{marginTop:15, marginBottom: 15}}>
          <ShowImage height={360} url='https://static.wixstatic.com/media/913019_8f603dfde7054663a40189f5bb7bcafa~mv2_d_3000_3000_s_4_2.jpg/v1/fill/w_640,h_580,al_c,q_85,usm_0.66_1.00_0.01/913019_8f603dfde7054663a40189f5bb7bcafa~mv2_d_3000_3000_s_4_2.webp'>
@@ -96,11 +94,10 @@ const Home = (props) => {
           <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic' lineheight={30} textalign='center'>CAPACITYX FITNESS BLOG</Htext>
         </View>
 
-        <View>
-          <BackgroundImage height={1300} url='https://static.wixstatic.com/media/913019_f56865726c2e4dedb42e6c4e1f15474e~mv2.jpg/v1/fill/w_256,h_1080,al_tr,q_80/913019_f56865726c2e4dedb42e6c4e1f15474e~mv2.webp'>
-            {
-            <>  
-            <FlatList
+        <BackgroundImage height={1300} url='https://static.wixstatic.com/media/913019_f56865726c2e4dedb42e6c4e1f15474e~mv2.jpg/v1/fill/w_256,h_1080,al_tr,q_80/913019_f56865726c2e4dedb42e6c4e1f15474e~mv2.webp'>
+          {
+          <>  
+          <FlatList
             data={StaticData.Fitness} 
             style={{flex:1}} 
             keyExtractor={(item, index) => String(index)}
@@ -110,7 +107,6 @@ const Home = (props) => {
               <View style={{margin:20}}>
                 <ShowImage url={item.url} height={360}>
                   {
-                  <View>
                   <View style={{ marginTop: 25, marginLeft:20, marginRight:20, marginBottom: 25}}>
                     <Htext color={Colors.normaltext} fontsize={15} textalign='left' fontfamily='PTSans-Regular'>{item.userName}</Htext>
                     <Htext color={Colors.normaltext} fontsize={15} textalign='left' fontfamily='PTSans-Regular'>{item.fue_day}</Htext>
@@ -119,26 +115,23 @@ const Home = (props) => {
                     <Htext color={Colors.mainText} textalign='left' fontsize={35} fontfamily='DustWest'>{item.title}</Htext>
                     </View>
                   </View>
-                  </View>
                   }
                 </ShowImage>
               </View>
             )}}
-            /> 
-            <View style={{marginBottom:20}}>
-              <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwidth={170} bheight={42} bordercolor={Colors.mainText}>READ MORE</Cbutton>
-            </View> 
-            </>
-            }
-          </BackgroundImage>
-
+          /> 
+          <View style={{marginBottom:20}}>
+            <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwidth={170} bheight={42} bordercolor={Colors.mainText}>READ MORE</Cbutton>
+          </View> 
+          </>
+          }
+          </BackgroundImage>    
+          
           {/* <View style={{alignSelf:'flex-end'}}>
             <TouchableOpacity style={styles.sidebutton}>
             </TouchableOpacity>
           </View> */}
-        </View>
         
-
       </ScrollView>
     );
   }

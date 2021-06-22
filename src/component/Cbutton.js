@@ -15,7 +15,9 @@ import { useTheme } from '@ui-kitten/components';
         borderColor: props.bordercolor || theme['text-basic-color'],
         borderRadius:25, backgroundColor: props.bcolor || 'transparent'}
         ,props.style
-        ]}>
+        ]}
+        {...props}
+        >
           <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
             <Text style={{color: props.textcolor || theme['text-basic-color'], fontSize:15, textTransform: 'uppercase'}}>{props.children}</Text>
           </View>

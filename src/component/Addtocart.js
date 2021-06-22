@@ -13,7 +13,9 @@ import Colors from '../constant/Colors';
         width: props.bwidth,
         height: props.bheight,
         backgroundColor: props.bcolor},props.style
-        ]}>
+        ]}
+        {...props}
+        >
           <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
             <Htext color={Colors.darktext} fontsize={32} fontfamily='DustWest'>ADD TO CART</Htext>
           </View>

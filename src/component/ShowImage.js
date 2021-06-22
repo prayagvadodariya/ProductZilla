@@ -9,7 +9,9 @@ import Colors from '../constant/Colors';
       style={[{
         height: props.height},
         props.style
-        ]}>
+        ]}
+        {...props}
+        >
           <ImageBackground resizeMode='stretch' style={{height: "100%"}} source={{ uri: props.url }}>
             {props.children}
           </ImageBackground> 

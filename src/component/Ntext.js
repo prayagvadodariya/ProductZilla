@@ -11,7 +11,9 @@ import { useTheme } from '@ui-kitten/components';
           color: props.color || theme['text-basic-color'],
           fontFamily: props.fontfamily },
           props.style
-        ]}>
+        ]}
+        {...props}
+        >
         {props.children}
       </Text>     
   );
