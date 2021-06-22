@@ -7,6 +7,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem} from '@react-navigation/drawer';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
+import CartItem from './src/component/CartIcon';
 import Home from './src/screens/Home';
 import Search from './src/screens/Search';
 import Wishlist from './src/screens/Wishlist';
@@ -90,7 +91,7 @@ const NavigationDrawerStructure = (props) => {
     const theme = useTheme();
   
     return (
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName='BottomTabtack'>
         <Stack.Screen
           name="BottomTabtack"
           component={BottomTabStack}
@@ -104,11 +105,9 @@ const NavigationDrawerStructure = (props) => {
             headerRight: () => (
               <View style={{flexDirection: 'row'}}> 
                 <TouchableOpacity style={{paddingRight:18}}>
-                    <AntDesign name="user" color={theme['text-basic-color']} size={26}/>
+                    <AntDesign name="user" color={theme['text-basic-color']} size={25}/>
                 </TouchableOpacity>
-                <TouchableOpacity style={{paddingRight:10}}>
-                  <AntDesign name="shoppingcart" color={theme['text-basic-color']} size={26}/>
-                </TouchableOpacity>
+                <CartItem onPress={()=> navigation.navigate('Cart')}/>
               </View>  
             ),
             headerStyle: {
@@ -135,7 +134,7 @@ const NavigationDrawerStructure = (props) => {
           ),
           headerRight: () => (
             <TouchableOpacity style={{paddingRight:10}}>
-             <AntDesign name="menu-unfold" color={theme['text-basic-color']} size={26}/>
+             <AntDesign name="menu-unfold" color={theme['text-basic-color']} size={25}/>
             </TouchableOpacity>  
           ),
           headerStyle: {
@@ -163,12 +162,37 @@ const NavigationDrawerStructure = (props) => {
           headerRight: () => (
             <View style={{flexDirection: 'row'}}> 
               <TouchableOpacity style={{paddingRight:18}}>
-                <AntDesign name="user" color={theme['text-basic-color']} size={26}/>
+                <AntDesign name="user" color={theme['text-basic-color']} size={25}/>
               </TouchableOpacity>
-              <TouchableOpacity style={{paddingRight:10}}>
-                <AntDesign name="shoppingcart" color={theme['text-basic-color']} size={26}/>
-              </TouchableOpacity>
+              <CartItem onPress={()=> navigation.navigate('Cart')}/>
             </View>  
+          ),
+          headerStyle: {
+            backgroundColor: theme['background-basic-color-1'], //Set Header color
+          },
+          headerTitleStyle: {
+            color: theme['text-basic-color'],
+            fontFamily:'CHESTER-Basic',
+            fontSize:25,
+            textTransform: 'lowercase',
+            textAlign:"center" //Set Header text style
+          },
+        })}
+        />
+        <Stack.Screen
+        name="Cart"
+        component={Cart}
+        options={({navigation,}) => ({
+          headerTitle: 'Cart',
+          headerLeft: () => (
+            <TouchableOpacity onPress={()=> navigation.goBack()}>
+             <AntDesign name="left" color={theme['text-basic-color']} size={25} style={{ marginLeft: 10}} />
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <TouchableOpacity style={{paddingRight:18}}>
+              <AntDesign name="user" color={theme['text-basic-color']} size={25}/>
+            </TouchableOpacity>
           ),
           headerStyle: {
             backgroundColor: theme['background-basic-color-1'], //Set Header color

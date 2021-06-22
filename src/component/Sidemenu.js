@@ -25,12 +25,12 @@ const Sidemenu = (props) => {
     setSelectedIndex(index)
     if(index.row===0){
       props.navigation.navigate("Home")
-
     }else if(index.row===1){
       props.navigation.navigate("Search")
-     
     }else if(index.row===2){
       props.navigation.navigate("Wishlist")
+    }else if(index.row===3){
+      props.navigation.navigate("Cart")
     }  
     // console.log('drawer select', index);
   }
@@ -48,6 +48,8 @@ const Sidemenu = (props) => {
             <DrawerItem title='Home' selectedIndex={selectedIndex} accessoryLeft={props => <Icon {...props} name='home-outline'/>}/>
             <DrawerItem title='Search' accessoryLeft={props => <Icon {...props} name='search-outline'/>}/>
             <DrawerItem title='Wishlist' accessoryLeft={props => <Icon {...props} name='heart-outline'/>}/>
+            <DrawerItem title='Cart' accessoryLeft={props => <Icon {...props} name='shopping-cart-outline'/>}/>
+            <DrawerItem title='Log in' accessoryLeft={props => <Icon {...props} name='log-in-outline'/>}/>
             <DrawerGroup  title='Theme' accessoryLeft={props => <Icon {...props} name='color-palette-outline'/>} accessoryRight={renderToggle}/>
         </Drawer>
       </View>

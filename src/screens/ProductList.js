@@ -11,7 +11,7 @@ const ProductList = (props) => {
    
     return (
       <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
-        <FlatProduct onPress={(item) => props.navigation.navigate("HomeScreenStack",{ screen: 'ProductDetails',params: { Producthandel: item.id }})} productdata={StaticData.Product_List}/>
+        <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",params= { Producthandel: item.id })} productdata={StaticData.Product_List}/>
       </View>
     );
   }
