@@ -5,8 +5,11 @@ import { ImageBackground } from 'react-native';
      
   return (
     <ImageBackground 
-      style={[{ 
-        height: props.height},
+      style={[{
+        width:'100%', 
+        height: props.height,
+        overflow:'hidden',
+        borderRadius: props.bradius || 0},
         props.style
       ]} 
         source={{ uri: props.url }}>

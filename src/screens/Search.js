@@ -1,11 +1,12 @@
 import React, {useState, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
-import { Text, View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, FlatList, ScrollView } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
 import Cbutton from '../component/Cbutton';
 import FlatProduct from '../component/FlatProduct';
+import BackgroundImage from '../component/BackgroundImage';
 import Card from '../component/Card';
 import * as StaticData from '../constant/StaticData';
 
@@ -34,15 +35,35 @@ const Search = (props) => {
 
         <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",params= { Producthandel: item.id })} productdata={StaticData.Product_List} showlayout={true}/>
 
-        <View style={{ marginTop:20, marginLeft:20, marginRight:20 }}>
+        <View style={{ alignSelf:'flex-start',marginTop:20, marginLeft:10, marginRight:10 }}>
           <Htext color={theme['text-basic-color']} fontsize={20} >SHOP BY</Htext>
         </View>
 
-        <View style={{ marginBottom:20 }}>
-          <Card productdata={StaticData.Shop_by} cardwidth={140} cardheight={140} showlayout={true}/>
-        </View>
+        {/* <View style={{ marginBottom:20 }}> */}
+          {/* <Card productdata={StaticData.Shop_by} cardwidth={140} cardheight={140} showlayout={true}/> */}
+          
+        {/* </View> */}
 
-        <View style={{flex:1,justifyContent:'flex-end', alignItems:'flex-end', marginBottom:20}}>
+        <FlatList
+          horizontal={true}
+          data={StaticData.Shop_by} 
+          keyExtractor={(item, index) => String(index)}
+          renderItem={({item, index}) => 
+          { 
+          return (
+           <Card cardwidth={140} cardheight={140}>
+             {
+              <BackgroundImage height={"100%"} url={item.url} bradius={10}>
+                <View style={styles.textcontent}>
+                  <Htext style={{ fontSize:18, fontWeight:"bold", color:Colors.normaltext}}>{item.title}</Htext>  
+                </View>
+             </BackgroundImage>
+             }
+           </Card>
+          )}}
+        />
+
+        <View style={{flex:1,justifyContent:'flex-end', alignItems:'flex-end', margin:20}}>
          <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwidth={120} bheight={42} bordercolor={Colors.mainText}>SEE ALL</Cbutton>
         </View>
 
@@ -52,11 +73,12 @@ const Search = (props) => {
 
 
 const styles = StyleSheet.create({
- contenar: {
-  flex:1, 
-  justifyContent:'center',
-   alignItems:'center',
- }
+ textcontent:{
+  flex: 1,
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: 'rgba(0, 0, 0, 0.3)'
+},
 });
 
 export default Search;
