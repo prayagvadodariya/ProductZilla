@@ -6,6 +6,7 @@ import Ntext from '../component/Ntext';
 import Colors from '../constant/Colors';
 import Cbutton from '../component/Cbutton';
 import BackgroundImage from '../component/BackgroundImage';
+import Hairline from '../component/Hairline';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import * as StaticData from '../constant/StaticData';
 
@@ -21,20 +22,19 @@ const Cart = (props) => {
           contentContainerStyle={{flexGrow:1}}
           renderItem={({item ,index}) =>   {
             return(
+              <>
               <View style={styles.layout}>
                 <Card cardwidth={95} cardheight={100}>
                   {
                     <BackgroundImage url={item.url} bradius={10}/>
                   }
                 </Card>
-                <View style={{ flexDirection:"column" }}>
-                  <View style={{ marginTop:15, flexWrap: 'wrap'}}>
-                   <Ntext color={theme['text-custome-color']} fontsize={18} fontfamily='PTSans-Regular'>{item.title}</Ntext>
-                   <Ntext color={Colors.gray} fontsize={15} >{item.amount}</Ntext>
-                    {/* <Text style={styles.itemtitle}>{item.title}</Text> */}
-                  </View>  
+                <View style={{ flex:1,marginTop:15,marginRight:5 }}>
+                  <Ntext color={theme['text-custome-color']} lineheight={18} fontsize={15} fontfamily='PTSans-Regular'>{item.title}</Ntext>
+                  <Ntext color={Colors.gray} fontsize={15} >{item.amount}</Ntext>
                 </View>
-                <View style={{ flex:1, alignItems:"flex-end", flexDirection:'column' }}>
+
+                <View style={{  alignItems:"flex-end", flexDirection:'column' }}>
                   <TouchableOpacity style={styles.icon}>
                     <AntDesign  name="delete" color='red' size={21}/>
                   </TouchableOpacity>
@@ -48,9 +48,10 @@ const Cart = (props) => {
                       <AntDesign style={{marginBottom:0}} name="minus" color='gray' size={18}/>
                     </TouchableOpacity>
                   </View>
-
                 </View>
               </View>
+              <Hairline height={0.5} mleftright={15} bcolor={Colors.gray}/>
+              </>
             )
           }}
         />
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
  layout: {
   flex:1,
   flexDirection:"row",
-  margin:10,
+  margin:5,
   marginTop: 10,
   backgroundColor: 'transparent',
  },

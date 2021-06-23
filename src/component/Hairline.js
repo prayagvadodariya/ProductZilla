@@ -7,11 +7,15 @@ import { useTheme } from '@ui-kitten/components';
 
   return (
     <View 
-      style={{
+      style={[{
         flex: 1,
-        height: 1,
-        backgroundColor: theme['text-basic-color']
-      }}
+        height: props.height || 1,
+        marginLeft: props.mleftright,
+        marginRight: props.mleftright,
+        backgroundColor: props.bcolor || theme['text-basic-color']},
+        props.style  
+        ]}
+        {...props}
     />
   );
 }

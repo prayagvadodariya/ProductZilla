@@ -9,7 +9,8 @@ import { useTheme } from '@ui-kitten/components';
         style={[{ 
           fontSize: props.fontsize || 15,
           color: props.color || theme['text-basic-color'],
-          fontFamily: props.fontfamily },
+          fontFamily: props.fontfamily,
+          lineHeight: props.lineheight },
           props.style
         ]}
         {...props}
