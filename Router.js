@@ -132,11 +132,6 @@ const NavigationDrawerStructure = (props) => {
              <AntDesign name="left"  color={theme['text-basic-color']} size={25} style={{ marginLeft: 10}} />
             </TouchableOpacity>
           ),
-          headerRight: () => (
-            <TouchableOpacity style={{paddingRight:10}}>
-             <AntDesign name="menu-unfold" color={theme['text-basic-color']} size={25}/>
-            </TouchableOpacity>  
-          ),
           headerStyle: {
             backgroundColor: theme['background-basic-color-1'], //Set Header color
           },
