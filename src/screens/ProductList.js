@@ -1,5 +1,5 @@
 import React, {useState, Component} from 'react';
-import { useTheme } from '@ui-kitten/components';
+import { useTheme , CheckBox  } from '@ui-kitten/components';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Dialog, { SlideAnimation, FadeAnimation, DialogContent } from 'react-native-popup-dialog';
 import Colors from '../constant/Colors';
@@ -12,6 +12,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 const ProductList = (props) => {
   const theme = useTheme();
   const [visible, setVisible] = React.useState(false);
+  const [checked, setChecked] = React.useState(false);
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
@@ -45,6 +46,11 @@ const ProductList = (props) => {
             </View>
 
             <Htext style={{color:Colors.gray, fontSize:30, fontFamily:'CHESTER-Basic', textAlign:'left', marginTop:10 }}>SHORT BY :</Htext>
+            <CheckBox
+              checked={checked}
+              onChange={nextChecked => setChecked(nextChecked)}>
+              {`Checked: ${checked}`}
+            </CheckBox>
           </DialogContent>
         </Dialog>  
       </View>
