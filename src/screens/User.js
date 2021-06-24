@@ -1,6 +1,6 @@
 import React, {useState, Component} from 'react';
 import { useTheme, Icon, MenuItem } from '@ui-kitten/components';
-import { TouchableOpacity, View, StyleSheet } from 'react-native';
+import { TouchableOpacity, ScrollView, View, StyleSheet } from 'react-native';
 import Card from '../component/Card';
 import Ntext from '../component/Ntext';
 import Colors from '../constant/Colors';
@@ -11,7 +11,7 @@ const User = (props) => {
   const theme = useTheme();
    
     return (
-      <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
+      <ScrollView style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
         <Card disabled={true} style={{ height:120, backgroundColor: Colors.orange, margin:15, borderRadius: 10, shadowColor: 'black', shadowOpacity: 0.5, elevation: 5,}}>
         {
         <View style={{flex:1,flexDirection:'row', marginLeft:20}}>
@@ -57,7 +57,7 @@ const User = (props) => {
           accessoryRight={props => <Icon {...props} name='arrow-ios-forward'/>}
           />
         </View>
-      </View>
+      </ScrollView>
     );
   }
 

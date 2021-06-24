@@ -1,6 +1,6 @@
 import React, {useState, useEffect, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView, View, StyleSheet, TouchableOpacity } from 'react-native';
 import  CheckBox  from '@react-native-community/checkbox'
 import Dialog, { SlideAnimation, FadeAnimation, DialogContent } from 'react-native-popup-dialog';
 import Colors from '../constant/Colors';

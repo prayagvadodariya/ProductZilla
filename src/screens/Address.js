@@ -17,9 +17,9 @@ const Address = (props) => {
             keyExtractor={(item, index) => String(index)} 
             renderItem={({item, index}) => {
               return(
-                <View>
+                <React.Fragment>
                   <View style={styles.cover}>
-                  <Ntext color={Colors.darktext} lineheight={22} fontsize={18} fontfamily='PTSans-Regular'>{item.firstName}, {item.lastName}, {item.company}, {item.address1}, {item.address2}, {item.zip}, {item.city}</Ntext>
+                    <Ntext color={Colors.darktext} lineheight={22} fontsize={18} fontfamily='PTSans-Regular'>{item.firstName}, {item.lastName}, {item.company}, {item.address1}, {item.address2}, {item.zip}, {item.city}</Ntext>
                   </View>
 
                   <View style={styles.cover2}>
@@ -30,7 +30,7 @@ const Address = (props) => {
                       <ActionButton bwidth={55} iconColor={Colors.mainText} bordercolor={Colors.mainText} bcolor='transparent' icon='trash-o'/>
                     </View>
                   </View>  
-                </View>
+                </React.Fragment>
               ) 
             }}
         />
