@@ -31,6 +31,8 @@ const Sidemenu = (props) => {
       props.navigation.navigate("Wishlist")
     }else if(index.row===3){
       props.navigation.navigate("Cart")
+    }else if(index.row===4){
+      props.navigation.navigate("User")
     }  
     // console.log('drawer select', index);
   }
@@ -49,6 +51,7 @@ const Sidemenu = (props) => {
             <DrawerItem title='Search' accessoryLeft={props => <Icon {...props} name='search-outline'/>}/>
             <DrawerItem title='Wishlist' accessoryLeft={props => <Icon {...props} name='heart-outline'/>}/>
             <DrawerItem title='Cart' accessoryLeft={props => <Icon {...props} name='shopping-cart-outline'/>}/>
+            <DrawerItem title='Account' accessoryLeft={props => <Icon {...props} name='person-outline'/>}/>
             <DrawerItem title='Log in' accessoryLeft={props => <Icon {...props} name='log-in-outline'/>}/>
             <DrawerGroup  title='Theme' accessoryLeft={props => <Icon {...props} name='color-palette-outline'/>} accessoryRight={renderToggle}/>
         </Drawer>
