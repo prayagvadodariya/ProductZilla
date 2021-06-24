@@ -13,6 +13,7 @@ import Search from './src/screens/Search';
 import Wishlist from './src/screens/Wishlist';
 import Cart from './src/screens/Cart';
 import User from './src/screens/User';
+import Address from './src/screens/Address';
 import ProductList from './src/screens/ProductList';
 import ProductDetails from './src/screens/ProductDetails';
 import SideMenu from './src/component/Sidemenu';
@@ -215,6 +216,35 @@ const NavigationDrawerStructure = (props) => {
           headerRight: () => (           
             <CartItem onPress={()=> navigation.navigate('Cart')}/>
            
+          ),
+          headerStyle: {
+            backgroundColor: theme['background-basic-color-1'], //Set Header color
+          },
+          headerTitleStyle: {
+            color: theme['text-basic-color'],
+            fontFamily:'CHESTER-Basic',
+            fontSize:25,
+            textTransform: 'lowercase',
+            textAlign:"center" //Set Header text style
+          },
+        })}
+        />
+        <Stack.Screen
+        name="Address"
+        component={Address}
+        options={({navigation,}) => ({
+          headerTitle: 'Your Addresses',
+          headerLeft: () => (
+            <TouchableOpacity onPress={()=> navigation.goBack()}>
+             <AntDesign name="left" color={theme['text-basic-color']} size={25} style={{ marginLeft: 10}} />
+            </TouchableOpacity>
+          ),
+          headerRight: () => (
+            <View style={{flexDirection: 'row'}}> 
+              <TouchableOpacity style={{paddingRight:10}}>
+                <AntDesign name="plus" color={theme['text-basic-color']} size={25}/>
+              </TouchableOpacity>
+            </View>
           ),
           headerStyle: {
             backgroundColor: theme['background-basic-color-1'], //Set Header color

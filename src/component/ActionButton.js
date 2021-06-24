@@ -21,7 +21,7 @@ import { useTheme } from '@ui-kitten/components';
         ]}
         {...props}
         >
-        <FontAwesome name={props.icon} color={props.iconColor || theme['background-basic-color-2']} size={25} />   
+        <FontAwesome name={props.icon} color={props.iconColor || theme['background-basic-color-2']} size={20} />   
     </TouchableOpacity>
   );
 }

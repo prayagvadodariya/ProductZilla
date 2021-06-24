@@ -18,7 +18,7 @@ const User = (props) => {
           <View style={{ flex:1,justifyContent:'center',alignContent:'center' }}>
             <Ntext color={Colors.darktext} fontsize={35} fontfamily='CHESTER-Basic'>PROFILE</Ntext>
             <Ntext color={Colors.darktext} lineheight={22} fontsize={18} fontfamily='PTSans-Regular'>Test Dev</Ntext>
-            <Ntext color={Colors.darktext} lineheight={18} fontsize={18} >testuser401@gmail.com</Ntext>
+            <Ntext color={Colors.darktext} lineheight={18} fontsize={18} fontfamily='PTSans-Regular' >testuser401@gmail.com</Ntext>
           </View>
 
           <TouchableOpacity style={{justifyContent:'center', marginRight:20}}>
@@ -42,6 +42,7 @@ const User = (props) => {
           />
           <MenuItem
           title='My Addresses'
+          onPress={()=> props.navigation.navigate("Address")}
           accessoryLeft={props => <Icon {...props} name='pin-outline'/>}
           accessoryRight={props => <Icon {...props} name='arrow-ios-forward'/>}
           />

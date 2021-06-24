@@ -102,3 +102,28 @@ export const Product_one=[
       url: 'https://static.wixstatic.com/media/913019_e041a68b0e62406184655aea26d07e1b~mv2_d_3227_3116_s_4_2.jpg/v1/fill/w_552,h_552,al_c,q_80,usm_0.66_1.00_0.01/913019_e041a68b0e62406184655aea26d07e1b~mv2_d_3227_3116_s_4_2.webp', 
     },
   ]
+
+  export const AddressList=[
+    {
+      id: 1,
+      firstName: 'Test',
+      lastName: 'Dev',
+      company: 'Test Company',
+      address1: 'Test address lone 1',
+      address2: 'Test address lone 2',
+      zip: '360001',
+      city: 'Rajkot',
+      country: 'India',
+    },
+    {
+      id: 1,
+      firstName: 'Test1',
+      lastName: 'Dev1',
+      company: 'Test Company1',
+      address1: 'Test address lone 111',
+      address2: 'Test address lone 211',
+      zip: '360001',
+      city: 'Rajkot',
+      country: 'India',   
+      },
+  ] 
