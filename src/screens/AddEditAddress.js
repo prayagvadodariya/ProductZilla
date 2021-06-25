@@ -3,10 +3,11 @@ import { useTheme } from '@ui-kitten/components';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import UserIcon from '../component/UserIcon';
 import CartItem from '../component/CartIcon';
-import InputField from '../component/InputField';
-import Cbutton from '../component/Cbutton';
 import {addressValidationSchema} from '../yupValidation/ValidationSchema';
 import { Formik } from 'formik';
+import InputField from '../component/InputField';
+import InputFieldError from '../component/InputFieldError';
+import Cbutton from '../component/Cbutton';
 
 const AddEditAddress = (props) => {
   const theme = useTheme();
@@ -53,7 +54,7 @@ const AddEditAddress = (props) => {
             onChangeText={handleChange('firstname')}
             />
             {errors.firstname &&
-               <Text style={{ fontSize: 13, color: 'red', marginLeft: 40, marginTop: 10 }}>{errors.firstname}</Text>
+               <InputFieldError error={errors.firstname}/>
             }
 
             <InputField
@@ -64,7 +65,7 @@ const AddEditAddress = (props) => {
             onChangeText={handleChange('lastname')}
             />
             {errors.lastname &&
-               <Text style={{ fontSize: 13, color: 'red', marginLeft: 40, marginTop: 10 }}>{errors.lastname}</Text>
+               <InputFieldError error={errors.lastname}/>
             }
 
             <InputField
@@ -75,7 +76,7 @@ const AddEditAddress = (props) => {
             onChangeText={handleChange('company')}
             />
             {errors.company &&
-               <Text style={{ fontSize: 13, color: 'red', marginLeft: 40, marginTop: 10 }}>{errors.company}</Text>
+               <InputFieldError error={errors.company}/>
             }
 
             <InputField
@@ -86,7 +87,7 @@ const AddEditAddress = (props) => {
             onChangeText={handleChange('address1')}
             />
             {errors.address1 &&
-               <Text style={{ fontSize: 13, color: 'red', marginLeft: 40, marginTop: 10 }}>{errors.address1}</Text>
+               <InputFieldError error={errors.address1}/>
             }
 
             <InputField
@@ -97,7 +98,7 @@ const AddEditAddress = (props) => {
             onChangeText={handleChange('address2')}
             />
             {errors.address2 &&
-               <Text style={{ fontSize: 13, color: 'red', marginLeft: 40, marginTop: 10 }}>{errors.address2}</Text>
+               <InputFieldError error={errors.address2}/>
             }
 
             <InputField
@@ -108,7 +109,7 @@ const AddEditAddress = (props) => {
             onChangeText={handleChange('city')}
             />
             {errors.city &&
-               <Text style={{ fontSize: 13, color: 'red', marginLeft: 40, marginTop: 10 }}>{errors.city}</Text>
+               <InputFieldError error={errors.city}/>
             }
 
             <InputField
@@ -119,11 +120,11 @@ const AddEditAddress = (props) => {
             onChangeText={handleChange('pincode')}
             />
             {errors.pincode &&
-               <Text style={{ fontSize: 13, color: 'red', marginLeft: 40, marginTop: 10 }}>{errors.pincode}</Text>
+               <InputFieldError error={errors.pincode}/>
             }
 
             <View style={{ marginTop:20, marginBottom:20}}>
-              <Cbutton onPress={handleSubmit} textcolor={theme['text-basic-color']} bcolor="transparent" bwidth={180} bheight={42} bordercolor={theme['text-basic-color']}>SAVE</Cbutton>
+              <Cbutton onPress={handleSubmit} disabled={!isValid} textcolor={theme['text-basic-color']} bcolor="transparent" bwidth={180} bheight={42} bordercolor={theme['text-basic-color']}>SAVE</Cbutton>
             </View>
             </>
             )}
