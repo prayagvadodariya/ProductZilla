@@ -3,9 +3,7 @@ import { useTheme } from '@ui-kitten/components';
 import { View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import CartItem from '../component/CartIcon';
-import Ntext from '../component/Ntext';
-import Colors from '../constant/Colors';
-import * as StaticData from '../constant/StaticData';
+import InputField from '../component/InputField';
 
 const AddEditAddress = (props) => {
   const theme = useTheme();
@@ -34,6 +32,12 @@ const AddEditAddress = (props) => {
    
     return (
       <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
+        <InputField
+        label='sasas'
+        />
+        <InputField
+        label='sasas'
+        />
       </View>
     );
   }
