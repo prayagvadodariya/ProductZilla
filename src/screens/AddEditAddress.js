@@ -74,6 +74,9 @@ const AddEditAddress = (props) => {
             onBlur={handleBlur('company')}
             onChangeText={handleChange('company')}
             />
+            {errors.company &&
+               <Text style={{ fontSize: 13, color: 'red', marginLeft: 40, marginTop: 10 }}>{errors.company}</Text>
+            }
 
             <InputField
             label='Address 1'
@@ -82,6 +85,9 @@ const AddEditAddress = (props) => {
             onBlur={handleBlur('address1')}
             onChangeText={handleChange('address1')}
             />
+            {errors.address1 &&
+               <Text style={{ fontSize: 13, color: 'red', marginLeft: 40, marginTop: 10 }}>{errors.address1}</Text>
+            }
 
             <InputField
             label='Address 2'
@@ -90,6 +96,9 @@ const AddEditAddress = (props) => {
             onBlur={handleBlur('address2')}
             onChangeText={handleChange('address2')}
             />
+            {errors.address2 &&
+               <Text style={{ fontSize: 13, color: 'red', marginLeft: 40, marginTop: 10 }}>{errors.address2}</Text>
+            }
 
             <InputField
             label='City'
@@ -98,6 +107,9 @@ const AddEditAddress = (props) => {
             onBlur={handleBlur('city')}
             onChangeText={handleChange('city')}
             />
+            {errors.city &&
+               <Text style={{ fontSize: 13, color: 'red', marginLeft: 40, marginTop: 10 }}>{errors.city}</Text>
+            }
 
             <InputField
             label='Zip'
@@ -106,6 +118,9 @@ const AddEditAddress = (props) => {
             onBlur={handleBlur('pincode')}
             onChangeText={handleChange('pincode')}
             />
+            {errors.pincode &&
+               <Text style={{ fontSize: 13, color: 'red', marginLeft: 40, marginTop: 10 }}>{errors.pincode}</Text>
+            }
 
             <View style={{ marginTop:20, marginBottom:20}}>
               <Cbutton onPress={handleSubmit} textcolor={theme['text-basic-color']} bcolor="transparent" bwidth={180} bheight={42} bordercolor={theme['text-basic-color']}>SAVE</Cbutton>

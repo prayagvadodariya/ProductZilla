@@ -4,7 +4,6 @@ import { Input } from '@ui-kitten/components';
 import Colors from '../constant/Colors';
 
  const InputField = (props) => {  
-  const [value, setValue] = React.useState('');
 
   return (
     <View style={{marginTop:15, marginLeft:20,marginRight:20}}>
