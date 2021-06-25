@@ -1,19 +1,19 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { useTheme, Input } from '@ui-kitten/components';
+import { Input } from '@ui-kitten/components';
+import Colors from '../constant/Colors';
 
  const InputField = (props) => {  
-  const theme = useTheme();
   const [value, setValue] = React.useState('');
 
   return (
-    <View style={{marginTop:15, marginLeft:15,marginRight:15}}>
+    <View style={{marginTop:15, marginLeft:20,marginRight:20}}>
         <Text 
          style={[{ 
-            fontSize: 15,
-            marginLeft:15,
+            fontSize: 18,
+            marginLeft:0,
             marginBottom:5,
-            color: theme['text-basic-color'],
+            color: Colors.cyanblue,
             fontFamily: 'PTSans-Regular'},
             props.style
             ]}
@@ -22,7 +22,7 @@ import { useTheme, Input } from '@ui-kitten/components';
             {props.label}
         </Text>
         <Input
-        placeholder='Place your Text'
+        placeholder={props.placeholder}
         value={value}
         onChangeText={nextValue => setValue(nextValue)}
         /> 

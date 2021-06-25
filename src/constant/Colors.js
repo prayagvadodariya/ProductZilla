@@ -6,6 +6,7 @@ const Colors = {
   sellcolor: '#3d7009',
   orange: '#da913c',
   gainsboro: '#e2e2e2',
+  cyanblue: '#8f9bb3',
   overlaycolor: 'rgba(12, 23, 43, 0.35)'
 };
 

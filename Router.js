@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
+import UserIcon from './src/component/UserIcon';
 import CartItem from './src/component/CartIcon';
 import Home from './src/screens/Home';
 import Search from './src/screens/Search';
@@ -103,9 +104,7 @@ const NavigationDrawerStructure = (props) => {
             ),
             headerRight: () => (
               <View style={{flexDirection: 'row'}}> 
-                <TouchableOpacity onPress={()=> navigation.navigate('User')} style={{paddingRight:18}}>
-                    <AntDesign name="user" color={theme['text-basic-color']} size={22}/>
-                </TouchableOpacity>
+                <UserIcon onPress={()=> navigation.navigate('User')}/>
                 <CartItem onPress={()=> navigation.navigate('Cart')}/>
               </View>  
             ),
@@ -155,9 +154,7 @@ const NavigationDrawerStructure = (props) => {
           ),
           headerRight: () => (
             <View style={{flexDirection: 'row'}}> 
-              <TouchableOpacity onPress={()=> navigation.navigate('User')} style={{paddingRight:18}}>
-                <AntDesign name="user" color={theme['text-basic-color']} size={22}/>
-              </TouchableOpacity>
+              <UserIcon onPress={()=> navigation.navigate('User')}/>
               <CartItem onPress={()=> navigation.navigate('Cart')}/>
             </View>  
           ),
@@ -184,9 +181,7 @@ const NavigationDrawerStructure = (props) => {
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <TouchableOpacity onPress={()=> navigation.navigate('User')} style={{paddingRight:18}}>
-              <AntDesign name="user" color={theme['text-basic-color']} size={22}/>
-            </TouchableOpacity>
+            <UserIcon onPress={()=> navigation.navigate('User')}/>
           ),
           headerStyle: {
             backgroundColor: theme['background-basic-color-1'],

@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { useTheme } from '@ui-kitten/components';
-import { View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import AntDesign from "react-native-vector-icons/AntDesign";
+import UserIcon from '../component/UserIcon';
 import CartItem from '../component/CartIcon';
 import InputField from '../component/InputField';
+import Cbutton from '../component/Cbutton';
 
 const AddEditAddress = (props) => {
   const theme = useTheme();
@@ -20,10 +22,8 @@ const AddEditAddress = (props) => {
           headerTitle: 'Edit Address',
           headerRight: () => (
             <View style={{flexDirection: 'row'}}> 
-              <TouchableOpacity onPress={()=> navigation.navigate('User')} style={{paddingRight:18}}>
-                <AntDesign name="user" color={theme['text-basic-color']} size={22}/>
-              </TouchableOpacity>
-              <CartItem onPress={()=> navigation.navigate('Cart')}/>
+              <UserIcon onPress={()=> props.navigation.navigate('User')}/>
+              <CartItem onPress={()=> props.navigation.navigate('Cart')}/>
             </View>  
           ),
         }); 
@@ -31,21 +31,45 @@ const AddEditAddress = (props) => {
   }, [props.navigation, props.route]);
    
     return (
-      <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
+      <ScrollView style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
         <InputField
-        label='sasas'
+        label='First Name'
+        placeholder= 'First Name'
         />
         <InputField
-        label='sasas'
+        label='Last Name'
+        placeholder='Last Name'
         />
-      </View>
+        <InputField
+        label='Company'
+        placeholder='Company'
+        />
+        <InputField
+        label='Address 1'
+        placeholder='Address 1'
+        />
+        <InputField
+        label='Address 2'
+        placeholder='Address 2'
+        />
+        <InputField
+        label='City'
+        placeholder='City'
+        />
+        <InputField
+        label='Zip'
+        placeholder='Zip'
+        />
+        <View style={{ marginTop:20, marginBottom:20}}>
+         <Cbutton textcolor={theme['text-basic-color']} bcolor="transparent" bwidth={180} bheight={42} bordercolor={theme['text-basic-color']}>SAVE</Cbutton>
+        </View>
+      </ScrollView>
     );
   }
 
 
 const styles = StyleSheet.create({
- cover: {
-}
+ 
 });
 
 export default AddEditAddress;
