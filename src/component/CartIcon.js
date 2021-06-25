@@ -8,7 +8,7 @@ const CartIcon = (props) =>{
     const theme = useTheme();
   return(
     <TouchableOpacity onPress={props.onPress} style={{paddingRight:10}}>
-      <AntDesign name="shoppingcart" color={theme['text-basic-color']} size={25}/>
+      <AntDesign name="shoppingcart" color={theme['text-basic-color']} size={23}/>
       <Badge value={0} status="error"  containerStyle={{ position: 'absolute', top: -8, right: 4 }}/>
     </TouchableOpacity>
   )

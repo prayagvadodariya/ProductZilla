@@ -27,7 +27,7 @@ const ProductList = (props) => {
     props.navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity onPress={showModal} style={{paddingRight:10}}>
-             <AntDesign name="menu-unfold" color={theme['text-basic-color']} size={25}/>
+             <AntDesign name="menu-unfold" color={theme['text-basic-color']} size={22}/>
         </TouchableOpacity>
       ),
     });

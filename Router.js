@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Button, Image, StyleSheet, View, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, TouchableOpacity } from 'react-native';
 import { useTheme } from '@ui-kitten/components';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem} from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
 import CartItem from './src/component/CartIcon';
@@ -24,23 +24,18 @@ const Tab = createBottomTabNavigator();
 
 
 const NavigationDrawerStructure = (props) => {
-    //Structure for the navigatin Drawer
     const theme = useTheme();
     const toggleDrawer = () => {
-      //Props to open/close the drawer
       props.navigationProps.toggleDrawer();
       return true
     };
   
     return (
-      <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => toggleDrawer()}>
-          <Entypo name="menu" color={theme['text-basic-color']} size={26} style={{ marginLeft: 15}} />
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity onPress={() => toggleDrawer()}>
+        <Entypo name="menu" color={theme['text-basic-color']} size={25} style={{ marginLeft: 15}} />
+      </TouchableOpacity>
     );
   };
-
 
   const BottomTabStack = () => {
     const theme = useTheme();
@@ -56,6 +51,7 @@ const NavigationDrawerStructure = (props) => {
           labelStyle: {
             textAlign: 'center',
             fontSize: 12,
+            fontFamily: 'CHESTER-Basic'
           },
         }}>
         <Tab.Screen
@@ -64,7 +60,7 @@ const NavigationDrawerStructure = (props) => {
           options={{
             tabBarLabel: 'Home',
             tabBarIcon: ({ color }) => (
-              <AntDesign name="home" color={color} size={26} />)
+              <AntDesign name="home" color={color} size={22} />)
           }}
         />
         <Tab.Screen
@@ -73,7 +69,7 @@ const NavigationDrawerStructure = (props) => {
           options={{
             tabBarLabel: 'Search',
             tabBarIcon: ({ color }) => (
-              <AntDesign name="search1" color={color} size={26} />)
+              <AntDesign name="search1" color={color} size={22} />)
           }}
         />
         <Tab.Screen
@@ -82,7 +78,7 @@ const NavigationDrawerStructure = (props) => {
           options={{
             tabBarLabel: 'Wishlist',
             tabBarIcon: ({ color }) => (
-              <AntDesign name="hearto" color={color} size={26} />)
+              <AntDesign name="hearto" color={color} size={22} />)
           }}
         />
       </Tab.Navigator>
@@ -107,20 +103,20 @@ const NavigationDrawerStructure = (props) => {
             headerRight: () => (
               <View style={{flexDirection: 'row'}}> 
                 <TouchableOpacity onPress={()=> navigation.navigate('User')} style={{paddingRight:18}}>
-                    <AntDesign name="user" color={theme['text-basic-color']} size={25}/>
+                    <AntDesign name="user" color={theme['text-basic-color']} size={22}/>
                 </TouchableOpacity>
                 <CartItem onPress={()=> navigation.navigate('Cart')}/>
               </View>  
             ),
             headerStyle: {
-              backgroundColor: theme['background-basic-color-1'], //Set Header color
+              backgroundColor: theme['background-basic-color-1'],
             },
             headerTitleStyle: {
               color: theme['text-basic-color'],
               fontFamily:'CHESTER-Basic',
-              fontSize:25,
+              fontSize:22,
               textTransform: 'lowercase',
-              textAlign:"center" //Set Header text style
+              textAlign:"center"
             },
           })}
         />
@@ -131,18 +127,18 @@ const NavigationDrawerStructure = (props) => {
           headerTitle: 'Product List',
           headerLeft: () => (
             <TouchableOpacity onPress={()=> navigation.goBack()}>
-             <AntDesign name="left"  color={theme['text-basic-color']} size={25} style={{ marginLeft: 10}} />
+             <AntDesign name="left"  color={theme['text-basic-color']} size={22} style={{ marginLeft: 10}} />
             </TouchableOpacity>
           ),
           headerStyle: {
-            backgroundColor: theme['background-basic-color-1'], //Set Header color
+            backgroundColor: theme['background-basic-color-1'],
           },
           headerTitleStyle: {
             color: theme['text-basic-color'],
             fontFamily:'CHESTER-Basic',
-            fontSize:25,
+            fontSize:22,
             textTransform: 'lowercase',
-            textAlign:"center" //Set Header text style
+            textAlign:"center"
           },
         })}
         />
@@ -153,26 +149,26 @@ const NavigationDrawerStructure = (props) => {
           headerTitle: 'Product Details',
           headerLeft: () => (
             <TouchableOpacity onPress={()=> navigation.goBack()}>
-             <AntDesign name="left" color={theme['text-basic-color']} size={25} style={{ marginLeft: 10}} />
+             <AntDesign name="left" color={theme['text-basic-color']} size={22} style={{ marginLeft: 10}} />
             </TouchableOpacity>
           ),
           headerRight: () => (
             <View style={{flexDirection: 'row'}}> 
               <TouchableOpacity onPress={()=> navigation.navigate('User')} style={{paddingRight:18}}>
-                <AntDesign name="user" color={theme['text-basic-color']} size={25}/>
+                <AntDesign name="user" color={theme['text-basic-color']} size={22}/>
               </TouchableOpacity>
               <CartItem onPress={()=> navigation.navigate('Cart')}/>
             </View>  
           ),
           headerStyle: {
-            backgroundColor: theme['background-basic-color-1'], //Set Header color
+            backgroundColor: theme['background-basic-color-1'],
           },
           headerTitleStyle: {
             color: theme['text-basic-color'],
             fontFamily:'CHESTER-Basic',
-            fontSize:25,
+            fontSize:22,
             textTransform: 'lowercase',
-            textAlign:"center" //Set Header text style
+            textAlign:"center"
           },
         })}
         />
@@ -183,23 +179,23 @@ const NavigationDrawerStructure = (props) => {
           headerTitle: 'Cart',
           headerLeft: () => (
             <TouchableOpacity onPress={()=> navigation.goBack()}>
-             <AntDesign name="left" color={theme['text-basic-color']} size={25} style={{ marginLeft: 10}} />
+             <AntDesign name="left" color={theme['text-basic-color']} size={22} style={{ marginLeft: 10}} />
             </TouchableOpacity>
           ),
           headerRight: () => (
             <TouchableOpacity onPress={()=> navigation.navigate('User')} style={{paddingRight:18}}>
-              <AntDesign name="user" color={theme['text-basic-color']} size={25}/>
+              <AntDesign name="user" color={theme['text-basic-color']} size={22}/>
             </TouchableOpacity>
           ),
           headerStyle: {
-            backgroundColor: theme['background-basic-color-1'], //Set Header color
+            backgroundColor: theme['background-basic-color-1'],
           },
           headerTitleStyle: {
             color: theme['text-basic-color'],
             fontFamily:'CHESTER-Basic',
-            fontSize:25,
+            fontSize:22,
             textTransform: 'lowercase',
-            textAlign:"center" //Set Header text style
+            textAlign:"center"
           },
         })}
         />
@@ -210,7 +206,7 @@ const NavigationDrawerStructure = (props) => {
           headerTitle: 'Account',
           headerLeft: () => (
             <TouchableOpacity onPress={()=> navigation.goBack()}>
-             <AntDesign name="left" color={theme['text-basic-color']} size={25} style={{ marginLeft: 10}} />
+             <AntDesign name="left" color={theme['text-basic-color']} size={22} style={{ marginLeft: 10}} />
             </TouchableOpacity>
           ),
           headerRight: () => (           
@@ -218,14 +214,14 @@ const NavigationDrawerStructure = (props) => {
            
           ),
           headerStyle: {
-            backgroundColor: theme['background-basic-color-1'], //Set Header color
+            backgroundColor: theme['background-basic-color-1'],
           },
           headerTitleStyle: {
             color: theme['text-basic-color'],
             fontFamily:'CHESTER-Basic',
-            fontSize:25,
+            fontSize:22,
             textTransform: 'lowercase',
-            textAlign:"center" //Set Header text style
+            textAlign:"center"
           },
         })}
         />
@@ -236,25 +232,23 @@ const NavigationDrawerStructure = (props) => {
           headerTitle: 'Your Addresses',
           headerLeft: () => (
             <TouchableOpacity onPress={()=> navigation.goBack()}>
-             <AntDesign name="left" color={theme['text-basic-color']} size={25} style={{ marginLeft: 10}} />
+             <AntDesign name="left" color={theme['text-basic-color']} size={22} style={{ marginLeft: 10}} />
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <View style={{flexDirection: 'row'}}> 
-              <TouchableOpacity style={{paddingRight:10}}>
-                <AntDesign name="plus" color={theme['text-basic-color']} size={25}/>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity style={{paddingRight:10}}>
+              <AntDesign name="plus" color={theme['text-basic-color']} size={22}/>
+            </TouchableOpacity>
           ),
           headerStyle: {
-            backgroundColor: theme['background-basic-color-1'], //Set Header color
+            backgroundColor: theme['background-basic-color-1'],
           },
           headerTitleStyle: {
             color: theme['text-basic-color'],
             fontFamily:'CHESTER-Basic',
-            fontSize:25,
+            fontSize:22,
             textTransform: 'lowercase',
-            textAlign:"center" //Set Header text style
+            textAlign:"center"
           },
         })}
         />
