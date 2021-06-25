@@ -33,6 +33,8 @@ const Sidemenu = (props) => {
       props.navigation.navigate("Cart")
     }else if(index.row===4){
       props.navigation.navigate("User")
+    }else if(index.row===5){
+      props.navigation.navigate("Signin")
     }  
     // console.log('drawer select', index);
   }

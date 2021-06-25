@@ -18,6 +18,8 @@ import Address from './src/screens/Address';
 import AddEditAddress from './src/screens/AddEditAddress';
 import ProductList from './src/screens/ProductList';
 import ProductDetails from './src/screens/ProductDetails';
+import Signin from './src/screens/Signin';
+import Signup from './src/screens/Signup';
 import SideMenu from './src/component/Sidemenu';
 
 const Stack = createStackNavigator();
@@ -267,6 +269,36 @@ const NavigationDrawerStructure = (props) => {
             fontSize:22,
             textTransform: 'lowercase'
           },
+        })}
+        />
+        <Stack.Screen
+        name="Signin"
+        component={Signin}
+        options={({navigation,}) => ({
+          headerLeft: () => (
+            <TouchableOpacity onPress={()=> navigation.goBack()}>
+             <AntDesign name="left"  color={theme['text-basic-color']} size={22} style={{ marginLeft: 10}} />
+            </TouchableOpacity>
+          ),
+          headerRight: false,
+          headerTitle: false, 
+          headerStyle: false, 
+          headerTransparent: true
+        })}
+        />
+        <Stack.Screen
+        name="Signup"
+        component={Signup}
+        options={({navigation,}) => ({
+          headerLeft: () => (
+            <TouchableOpacity onPress={()=> navigation.goBack()}>
+             <AntDesign name="left"  color={theme['text-basic-color']} size={22} style={{ marginLeft: 10}} />
+            </TouchableOpacity>
+          ),
+          headerRight: false,
+          headerTitle: false, 
+          headerStyle: false, 
+          headerTransparent: true
         })}
         />
       </Stack.Navigator>
