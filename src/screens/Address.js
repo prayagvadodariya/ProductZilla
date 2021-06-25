@@ -7,7 +7,6 @@ import ActionButton from '../component/ActionButton';
 import * as StaticData from '../constant/StaticData';
 
 const Address = (props) => {
-
   const theme = useTheme();
    
     return (
@@ -24,7 +23,7 @@ const Address = (props) => {
 
                   <View style={styles.cover2}>
                     <View style={{ flex:1, alignItems:'flex-start', marginLeft:20 }}>
-                      <ActionButton bwidth={55} iconColor={Colors.mainText} bordercolor={Colors.mainText} bcolor='transparent' icon='pencil'/>
+                      <ActionButton onPress={()=> props.navigation.navigate("AddEditAddress",{ active:false })} bwidth={55} iconColor={Colors.mainText} bordercolor={Colors.mainText} bcolor='transparent' icon='pencil'/>
                     </View>
                     <View style={{ flex:1, alignItems:'flex-end', marginRight:20 }}>
                       <ActionButton bwidth={55} iconColor={Colors.mainText} bordercolor={Colors.mainText} bcolor='transparent' icon='trash-o'/>

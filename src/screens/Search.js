@@ -33,7 +33,7 @@ const Search = (props) => {
           <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic'>CAPACITYX PRODUCTS</Htext>
         </View>
 
-        <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",params= { Producthandel: item.id })} productdata={StaticData.Product_List} showlayout={true}/>
+        <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} productdata={StaticData.Product_List} showlayout={true}/>
 
         <View style={{ alignSelf:'flex-start',marginTop:20, marginLeft:10, marginRight:10 }}>
           <Htext color={theme['text-basic-color']} fontsize={20} >SHOP BY</Htext>

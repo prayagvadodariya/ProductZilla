@@ -7,7 +7,6 @@ import Colors from '../constant/Colors';
 import ActionButton from '../component/ActionButton';
 
 const User = (props) => {
-
   const theme = useTheme();
    
     return (

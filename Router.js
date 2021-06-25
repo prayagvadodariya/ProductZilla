@@ -14,6 +14,7 @@ import Wishlist from './src/screens/Wishlist';
 import Cart from './src/screens/Cart';
 import User from './src/screens/User';
 import Address from './src/screens/Address';
+import AddEditAddress from './src/screens/AddEditAddress';
 import ProductList from './src/screens/ProductList';
 import ProductDetails from './src/screens/ProductDetails';
 import SideMenu from './src/component/Sidemenu';
@@ -111,12 +112,12 @@ const NavigationDrawerStructure = (props) => {
             headerStyle: {
               backgroundColor: theme['background-basic-color-1'],
             },
+            headerTitleAlign: 'center',
             headerTitleStyle: {
               color: theme['text-basic-color'],
               fontFamily:'CHESTER-Basic',
               fontSize:22,
-              textTransform: 'lowercase',
-              textAlign:"center"
+              textTransform: 'lowercase'
             },
           })}
         />
@@ -133,12 +134,12 @@ const NavigationDrawerStructure = (props) => {
           headerStyle: {
             backgroundColor: theme['background-basic-color-1'],
           },
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             color: theme['text-basic-color'],
             fontFamily:'CHESTER-Basic',
             fontSize:22,
-            textTransform: 'lowercase',
-            textAlign:"center"
+            textTransform: 'lowercase'
           },
         })}
         />
@@ -163,12 +164,12 @@ const NavigationDrawerStructure = (props) => {
           headerStyle: {
             backgroundColor: theme['background-basic-color-1'],
           },
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             color: theme['text-basic-color'],
             fontFamily:'CHESTER-Basic',
             fontSize:22,
-            textTransform: 'lowercase',
-            textAlign:"center"
+            textTransform: 'lowercase'
           },
         })}
         />
@@ -190,12 +191,12 @@ const NavigationDrawerStructure = (props) => {
           headerStyle: {
             backgroundColor: theme['background-basic-color-1'],
           },
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             color: theme['text-basic-color'],
             fontFamily:'CHESTER-Basic',
             fontSize:22,
-            textTransform: 'lowercase',
-            textAlign:"center"
+            textTransform: 'lowercase'
           },
         })}
         />
@@ -216,12 +217,12 @@ const NavigationDrawerStructure = (props) => {
           headerStyle: {
             backgroundColor: theme['background-basic-color-1'],
           },
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             color: theme['text-basic-color'],
             fontFamily:'CHESTER-Basic',
             fontSize:22,
-            textTransform: 'lowercase',
-            textAlign:"center"
+            textTransform: 'lowercase'
           },
         })}
         />
@@ -236,19 +237,40 @@ const NavigationDrawerStructure = (props) => {
             </TouchableOpacity>
           ),
           headerRight: () => (
-            <TouchableOpacity style={{paddingRight:10}}>
+            <TouchableOpacity onPress={()=> navigation.navigate('AddEditAddress',{ active:true })} style={{paddingRight:10}}>
               <AntDesign name="plus" color={theme['text-basic-color']} size={22}/>
             </TouchableOpacity>
           ),
           headerStyle: {
             backgroundColor: theme['background-basic-color-1'],
           },
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             color: theme['text-basic-color'],
             fontFamily:'CHESTER-Basic',
             fontSize:22,
-            textTransform: 'lowercase',
-            textAlign:"center"
+            textTransform: 'lowercase'
+          },
+        })}
+        />
+        <Stack.Screen
+        name="AddEditAddress"
+        component={AddEditAddress}
+        options={({navigation,}) => ({
+          headerLeft: () => (
+            <TouchableOpacity onPress={()=> navigation.goBack()}>
+             <AntDesign name="left" color={theme['text-basic-color']} size={22} style={{ marginLeft: 10}} />
+            </TouchableOpacity>
+          ),
+          headerStyle: {
+            backgroundColor: theme['background-basic-color-1'],
+          },
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            color: theme['text-basic-color'],
+            fontFamily:'CHESTER-Basic',
+            fontSize:22,
+            textTransform: 'lowercase'
           },
         })}
         />

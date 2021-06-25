@@ -12,7 +12,6 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import * as StaticData from '../constant/StaticData';
 
 const Cart = (props) => {
-
   const theme = useTheme();
    
     return (

@@ -15,8 +15,6 @@ const ProductDetails = (props) => {
   const [isVisible, setIsVisible] = useState(false);
   const theme = useTheme();
 
-  console.log('pops',props);
-
   const toggleFunction = () => {
     setIsVisible(!isVisible);
   }; 

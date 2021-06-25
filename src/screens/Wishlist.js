@@ -9,7 +9,6 @@ import * as StaticData from '../constant/StaticData';
 import AntDesign from "react-native-vector-icons/AntDesign";
 
 const Wishlist = () => {
-
   const theme = useTheme();
    
     return (

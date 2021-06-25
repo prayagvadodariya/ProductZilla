@@ -12,7 +12,6 @@ import BackgroundImage from '../component/BackgroundImage';
 import * as StaticData from '../constant/StaticData';
 
 const Home = (props) => {
-
   const theme = useTheme();
    
     return (

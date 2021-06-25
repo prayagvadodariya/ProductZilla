@@ -35,7 +35,7 @@ const ProductList = (props) => {
 
     return (
       <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
-        <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",params= { Producthandel: item.id })} productdata={StaticData.Product_List}/>
+        <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} productdata={StaticData.Product_List}/>
         <Dialog
           height="50%"
           width='100%'
