@@ -3,7 +3,6 @@ import Colors from '../constant/Colors';
 import Ntext from '../component/Ntext';
 
  const InputFieldError = (props) => {  
-  const theme = useTheme();  
   return (
      <Ntext style={{
          fontSize: 13,
