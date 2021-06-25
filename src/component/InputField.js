@@ -23,8 +23,9 @@ import Colors from '../constant/Colors';
         </Text>
         <Input
         placeholder={props.placeholder}
-        value={value}
-        onChangeText={nextValue => setValue(nextValue)}
+        value={props.value}
+        onChangeText={props.onChangeText}
+        onBlur={props.onBlur}
         /> 
     </View>   
   );
