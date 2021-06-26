@@ -151,6 +151,7 @@ const User = (props) => {
                 placeholder= 'Enter your old password here'
                 value={values.oldpassword}
                 onBlur={handleBlur('oldpassword')}
+                secureTextEntry={true}
                 onChangeText={handleChange('oldpassword')}
                 />
                 {errors.oldpassword &&
@@ -162,6 +163,7 @@ const User = (props) => {
                 placeholder= 'Enter your new password here'
                 value={values.newpassword}
                 onBlur={handleBlur('newpassword')}
+                secureTextEntry={true}
                 onChangeText={handleChange('newpassword')}
                 />
                 {errors.newpassword &&
@@ -173,6 +175,7 @@ const User = (props) => {
                 placeholder= 'Re-enter your new password here'
                 value={values.confirmpassword}
                 onBlur={handleBlur('confirmpassword')}
+                secureTextEntry={true}
                 onChangeText={handleChange('confirmpassword')}
                 />
                 {errors.confirmpassword &&

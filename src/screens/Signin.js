@@ -39,6 +39,7 @@ const Signin = (props) => {
             <>
             <InputField
             label='Email'
+            type='email'
             placeholder= 'Enter your email here'
             value={values.email}
             onBlur={handleBlur('email')}
@@ -50,9 +51,11 @@ const Signin = (props) => {
 
             <InputField
             label='Password'
+            type='security'
             placeholder= 'Enter your password here'
             value={values.password}
             onBlur={handleBlur('password')}
+            secureTextEntry={true}
             onChangeText={handleChange('password')}
             />
             {errors.password &&

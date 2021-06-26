@@ -1,6 +1,6 @@
 import React, {useState, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
-import { Text, View, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, FlatList } from 'react-native';
 import Maincontent from '../component/Maincontent';
 import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
