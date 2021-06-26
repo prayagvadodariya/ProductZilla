@@ -1,7 +1,7 @@
 import React, {useState, Component} from 'react';
 import { useTheme, Icon, MenuItem } from '@ui-kitten/components';
-import { TouchableOpacity, ScrollView, View, StyleSheet } from 'react-native';
-import { updateprofileValidationSchema } from '../yupValidation/ValidationSchema';
+import { ScrollView, View, StyleSheet } from 'react-native';
+import { updateprofileValidationSchema, changepasswordValidationSchema } from '../yupValidation/ValidationSchema';
 import { Formik } from 'formik';
 import InputField from '../component/InputField';
 import InputFieldError from '../component/InputFieldError';
@@ -15,11 +15,17 @@ import ModalBox from '../component/ModalBox';
 import ActionButton from '../component/ActionButton';
 
 const User = (props) => {
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
+  const [visiblesecond, setVisibleSecond] = useState(false);
+
   const theme = useTheme();
 
   const onUpdate = (value) => {
     console.log('update', value);
+  }
+
+  const onPasswordChange = (value) => {
+    console.log('changepassword', value);
   }
    
     return (
@@ -33,9 +39,9 @@ const User = (props) => {
             <Ntext color={Colors.darktext} lineheight={18} fontsize={18} fontfamily='PTSans-Regular' >testuser401@gmail.com</Ntext>
           </View>
 
-          <TouchableOpacity onPress={() => setVisible(true)} style={{justifyContent:'center', marginRight:20}}>
-            <ActionButton bwidth={55} iconColor={Colors.normaltext} bordercolor={Colors.normaltext} bcolor='transparent' icon='pencil'/>
-          </TouchableOpacity>
+          <View style={{justifyContent:'center', marginRight:20}}>
+            <ActionButton onPress={() => setVisible(true)} bwidth={55} iconColor={Colors.normaltext} bordercolor={Colors.normaltext} bcolor='transparent' icon='pencil'/>
+          </View>
         </View>
         }
         </Card>
@@ -60,6 +66,7 @@ const User = (props) => {
           />
           <MenuItem
           title='Change Password'
+          onPress={() => setVisibleSecond(true)}
           accessoryLeft={props => <Icon {...props} name='lock-outline'/>}
           accessoryRight={props => <Icon {...props} name='arrow-ios-forward'/>}
           />
@@ -83,7 +90,7 @@ const User = (props) => {
               onSubmit={values => onUpdate(values)}
             >
               {({ handleChange, handleBlur, handleSubmit, values, errors, isValid,}) => (
-              <>
+              <ScrollView>
                 <InputField
                 label='First Name'
                 placeholder= 'First Name'
@@ -118,7 +125,64 @@ const User = (props) => {
                 <View style={{ marginTop:20, marginBottom:20}}>
                 <Cbutton onPress={handleSubmit} disabled={!isValid} textcolor={theme['text-basic-color']} bcolor="transparent" bwidth={180} bheight={42} bordercolor={theme['text-basic-color']}>UPDATE</Cbutton>
               </View>
-              </>
+              </ScrollView>
+              )}
+           </Formik>
+           </>
+          }
+        </ModalBox>
+
+        <ModalBox onBackdropPress={() => setVisibleSecond(false)} visible={visiblesecond}>
+          {
+           <> 
+            <Htext style={{color:theme['text-custome-color'], fontSize:30, fontFamily:'CHESTER-Basic', textAlign:'center', marginTop:5 }}>CHANGE PASSWORD</Htext>
+            <Hairline bcolor={Colors.cyanblue}/>
+            
+            <Formik
+              enableReinitialize={true}
+              validationSchema={changepasswordValidationSchema}
+              initialValues={{ oldpassword: '', newpassword: '', confirmpassword: ''}}
+              onSubmit={values => onPasswordChange(values)}
+            >
+              {({ handleChange, handleBlur, handleSubmit, values, errors, isValid,}) => (
+              <ScrollView>
+                <InputField
+                label='Old Password'
+                placeholder= 'Enter your old password here'
+                value={values.oldpassword}
+                onBlur={handleBlur('oldpassword')}
+                onChangeText={handleChange('oldpassword')}
+                />
+                {errors.oldpassword &&
+                  <InputFieldError error={errors.oldpassword}/>
+                }
+
+                <InputField
+                label='New Password'
+                placeholder= 'Enter your new password here'
+                value={values.newpassword}
+                onBlur={handleBlur('newpassword')}
+                onChangeText={handleChange('newpassword')}
+                />
+                {errors.newpassword &&
+                  <InputFieldError error={errors.newpassword}/>
+                }
+
+                <InputField
+                label='Confirm Password'
+                placeholder= 'Re-enter your new password here'
+                value={values.confirmpassword}
+                onBlur={handleBlur('confirmpassword')}
+                onChangeText={handleChange('confirmpassword')}
+                />
+                {errors.confirmpassword &&
+                  <InputFieldError error={errors.confirmpassword}/>
+                }
+
+                <View style={{ marginTop:20, marginBottom:20}}>
+                <Cbutton onPress={handleSubmit} disabled={!isValid} textcolor={theme['text-basic-color']} bcolor="transparent" bwidth={180} bheight={42} bordercolor={theme['text-basic-color']}>UPDATE</Cbutton>
+              </View>
+              </ScrollView>
               )}
            </Formik>
            </>

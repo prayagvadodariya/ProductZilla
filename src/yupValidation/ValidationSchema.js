@@ -63,7 +63,28 @@ export const updateprofileValidationSchema = yup.object().shape({
     .string()
     .email("Please enter valid email")
     .required('Email Address is Required'),
-})    
+})  
+
+export const changepasswordValidationSchema = yup.object().shape({
+  oldpassword: yup
+    .string()
+    .min(8, ({ min }) => `Password must be at least ${min} characters`)
+    .required('Old password is required'),
+  newpassword: yup
+    .string()
+    .min(8, ({ min }) => `Password must be at least ${min} characters`)
+    .required('New password is required'),
+  confirmpassword: yup
+    .string()
+    .when("newpassword", {
+      is: val => (val && val.length > 0 ? true : false),
+      then: yup.string().oneOf(
+        [yup.ref("newpassword")],
+        "Both password need to be the same"
+      )
+    })
+    .required('Confirm Password is required'), 
+}) 
 
 export const addressValidationSchema = yup.object().shape({
   firstname: yup
