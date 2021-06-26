@@ -79,7 +79,7 @@ const User = (props) => {
 
         <ModalBox onBackdropPress={() => setVisible(false)} visible={visible}>
           {
-           <> 
+           <ScrollView> 
             <Htext style={{color:theme['text-custome-color'], fontSize:30, fontFamily:'CHESTER-Basic', textAlign:'center', marginTop:5 }}>FORGOT PASSWORD ?</Htext>
             <Hairline bcolor={Colors.cyanblue}/>
             
@@ -90,7 +90,7 @@ const User = (props) => {
               onSubmit={values => onUpdate(values)}
             >
               {({ handleChange, handleBlur, handleSubmit, values, errors, isValid,}) => (
-              <ScrollView>
+              <>
                 <InputField
                 label='First Name'
                 placeholder= 'First Name'
@@ -125,16 +125,16 @@ const User = (props) => {
                 <View style={{ marginTop:20, marginBottom:20}}>
                 <Cbutton onPress={handleSubmit} disabled={!isValid} textcolor={theme['text-basic-color']} bcolor="transparent" bwidth={180} bheight={42} bordercolor={theme['text-basic-color']}>UPDATE</Cbutton>
               </View>
-              </ScrollView>
+              </>
               )}
            </Formik>
-           </>
+           </ScrollView>
           }
         </ModalBox>
 
         <ModalBox onBackdropPress={() => setVisibleSecond(false)} visible={visiblesecond}>
           {
-           <> 
+           <ScrollView> 
             <Htext style={{color:theme['text-custome-color'], fontSize:30, fontFamily:'CHESTER-Basic', textAlign:'center', marginTop:5 }}>CHANGE PASSWORD</Htext>
             <Hairline bcolor={Colors.cyanblue}/>
             
@@ -145,7 +145,7 @@ const User = (props) => {
               onSubmit={values => onPasswordChange(values)}
             >
               {({ handleChange, handleBlur, handleSubmit, values, errors, isValid,}) => (
-              <ScrollView>
+              <>
                 <InputField
                 label='Old Password'
                 placeholder= 'Enter your old password here'
@@ -182,10 +182,10 @@ const User = (props) => {
                 <View style={{ marginTop:20, marginBottom:20}}>
                 <Cbutton onPress={handleSubmit} disabled={!isValid} textcolor={theme['text-basic-color']} bcolor="transparent" bwidth={180} bheight={42} bordercolor={theme['text-basic-color']}>UPDATE</Cbutton>
               </View>
-              </ScrollView>
+              </>
               )}
            </Formik>
-           </>
+           </ScrollView>
           }
         </ModalBox>
       </ScrollView>
