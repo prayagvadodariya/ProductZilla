@@ -3,7 +3,6 @@ import { useTheme, } from '@ui-kitten/components';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
-import Ntext from '../component/Ntext';
 import { loginValidationSchema, forgetValidationSchema } from '../yupValidation/ValidationSchema';
 import { Formik } from 'formik';
 import InputField from '../component/InputField';
