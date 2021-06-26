@@ -148,6 +148,7 @@ const User = (props) => {
               <>
                 <InputField
                 label='Old Password'
+                type='security'
                 placeholder= 'Enter your old password here'
                 value={values.oldpassword}
                 onBlur={handleBlur('oldpassword')}
@@ -160,6 +161,7 @@ const User = (props) => {
 
                 <InputField
                 label='New Password'
+                type='security'
                 placeholder= 'Enter your new password here'
                 value={values.newpassword}
                 onBlur={handleBlur('newpassword')}
@@ -172,7 +174,8 @@ const User = (props) => {
 
                 <InputField
                 label='Confirm Password'
-                placeholder= 'Re-enter your new password here'
+                type='security'
+                placeholder= 'Re-enter your new password'
                 value={values.confirmpassword}
                 onBlur={handleBlur('confirmpassword')}
                 secureTextEntry={true}
