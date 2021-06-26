@@ -52,6 +52,19 @@ export const forgetValidationSchema = yup.object().shape({
 
 })
 
+export const updateprofileValidationSchema = yup.object().shape({
+  firstname: yup
+    .string()
+    .required('First Name is Required'),
+  lastname: yup
+    .string()
+    .required('Last Name is Required'),
+  email: yup
+    .string()
+    .email("Please enter valid email")
+    .required('Email Address is Required'),
+})    
+
 export const addressValidationSchema = yup.object().shape({
   firstname: yup
     .string()
