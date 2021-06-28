@@ -1,7 +1,8 @@
 import React,{useEffect, useState} from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, Dimensions, FlatList, TouchableOpacity } from 'react-native';
 import { useTheme } from '@ui-kitten/components';
 import Colors from '../constant/Colors';
+import Htext from '../component/Htext';
 import AntDesign from "react-native-vector-icons/AntDesign";
 
  const FlatProduct = (props) => { 
@@ -28,11 +29,11 @@ import AntDesign from "react-native-vector-icons/AntDesign";
             <Image source={{ uri: item.url}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>
           </View>
           <View style={{width: 160, margin:10}}>
-            <Text style={{textAlign:"center", paddingLeft:10, paddingRight:10, color: theme['text-basic-color'], fontSize:15, fontWeight:"bold" }}>{item.title}</Text>
+            <Htext style={{textAlign:"center", paddingLeft:10, paddingRight:10, color: theme['text-basic-color'], fontFamily:'PTSans-Regular', fontSize:15, fontWeight:'800' }}>{item.title}</Htext>
           </View>
         </TouchableOpacity>
         <View style={styles.cover}>
-          <Text style={{color: theme['text-basic-color'], marginTop:10, fontSize:15, marginBottom:10}}>{item.amount}</Text>
+          <Htext style={{color: theme['text-basic-color'],textAlign:"center", margin:10, fontSize:15}}>{item.amount}</Htext>
           <TouchableOpacity onPress={props.onPress1}>
             <AntDesign style={{ marginLeft:10,marginTop:12}} name='hearto'  color={theme['text-basic-color']} size={15} />
           </TouchableOpacity>  
