@@ -46,66 +46,67 @@ const ProductList = (props) => {
           dialogAnimation={new SlideAnimation({
           slideFrom: 'bottom',})}>
           <DialogContent>
-            <View style={{ marginTop:15, alignSelf:'center'}}>
-              <Hairline style={{height:5, width:40, backgroundColor:Colors.gray, borderRadius:30,alignItems:'center'}} />
-            </View>
+            <ScrollView>
+              <View style={{ marginTop:15, alignSelf:'center'}}>
+                <Hairline style={{height:5, width:40, backgroundColor:Colors.gray, borderRadius:30,alignItems:'center'}} />
+              </View>
 
-            <Htext style={{color:Colors.gray, fontSize:30, fontFamily:'CHESTER-Basic', textAlign:'left', marginTop:10 }}>SHORT BY :</Htext>
-            
-            <CkeckBoxs
-              label='All'
-              value={isAll}
-              onValueChange={setAll}
-              tintColors={{ true: Colors.mainText }}
-              tintColor={{ true: Colors.mainText }}
-              textColor={theme['text-custome-color']}
-            />
+              <Htext style={{color:Colors.gray, fontSize:30, fontFamily:'CHESTER-Basic', textAlign:'left', marginTop:10 }}>SHORT BY :</Htext>
+              
+              <CkeckBoxs
+                label='All'
+                value={isAll}
+                onValueChange={setAll}
+                tintColors={{ true: Colors.mainText }}
+                tintColor={{ true: Colors.mainText }}
+                textColor={theme['text-custome-color']}
+              />
 
-            <CkeckBoxs
-              label='Pre Workout'
-              value={isPreWorkout}
-              onValueChange={setPreWorkout}
-              tintColors={{ true: Colors.mainText }}
-              tintColor={{ true: Colors.mainText }}
-              textColor={theme['text-custome-color']}
-            />
+              <CkeckBoxs
+                label='Pre Workout'
+                value={isPreWorkout}
+                onValueChange={setPreWorkout}
+                tintColors={{ true: Colors.mainText }}
+                tintColor={{ true: Colors.mainText }}
+                textColor={theme['text-custome-color']}
+              />
 
-            <CkeckBoxs
-              label='Capsules'
-              value={isCapsules}
-              onValueChange={setCapsules}
-              tintColors={{ true: Colors.mainText }}
-              tintColor={{ true: Colors.mainText }}
-              textColor={theme['text-custome-color']}
-            />
+              <CkeckBoxs
+                label='Capsules'
+                value={isCapsules}
+                onValueChange={setCapsules}
+                tintColors={{ true: Colors.mainText }}
+                tintColor={{ true: Colors.mainText }}
+                textColor={theme['text-custome-color']}
+              />
 
-            <CkeckBoxs
-              label='Protein Powder'
-              value={isProteinPowder}
-              onValueChange={setProteinPowder}
-              tintColors={{ true: Colors.mainText }}
-              tintColor={{ true: Colors.mainText }}
-              textColor={theme['text-custome-color']}
-            />
+              <CkeckBoxs
+                label='Protein Powder'
+                value={isProteinPowder}
+                onValueChange={setProteinPowder}
+                tintColors={{ true: Colors.mainText }}
+                tintColor={{ true: Colors.mainText }}
+                textColor={theme['text-custome-color']}
+              />
 
-            <CkeckBoxs
-              label='Price - Low To High'
-              value={isPriceLow}
-              onValueChange={setPriceLow}
-              tintColors={{ true: Colors.mainText }}
-              tintColor={{ true: Colors.mainText }}
-              textColor={theme['text-custome-color']}
-            />      
+              <CkeckBoxs
+                label='Price - Low To High'
+                value={isPriceLow}
+                onValueChange={setPriceLow}
+                tintColors={{ true: Colors.mainText }}
+                tintColor={{ true: Colors.mainText }}
+                textColor={theme['text-custome-color']}
+              />      
 
-            <CkeckBoxs
-              label='Price - High To Low'
-              value={isPriceHigh}
-              onValueChange={setPriceHigh}
-              tintColors={{ true: Colors.mainText }}
-              tintColor={{ true: Colors.mainText }}
-              textColor={theme['text-custome-color']}
-            />  
-
+              <CkeckBoxs
+                label='Price - High To Low'
+                value={isPriceHigh}
+                onValueChange={setPriceHigh}
+                tintColors={{ true: Colors.mainText }}
+                tintColor={{ true: Colors.mainText }}
+                textColor={theme['text-custome-color']}
+              />  
+            </ScrollView>
           </DialogContent>
         </Dialog>  
       </View>
