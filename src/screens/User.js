@@ -79,8 +79,8 @@ const User = (props) => {
 
         <ModalBox onBackdropPress={() => setVisible(false)} visible={visible}>
           {
-           <ScrollView style={{height:280}}> 
-            <Htext style={{color:theme['text-custome-color'], fontSize:30, fontFamily:'CHESTER-Basic', textAlign:'center', marginTop:5 }}>FORGOT PASSWORD ?</Htext>
+           <ScrollView style={{height:280, width:290}}> 
+            <Htext style={{color:theme['text-custome-color'], fontSize:30, fontFamily:'CHESTER-Basic', textAlign:'center', marginTop:5 }}>EDIT INFO</Htext>
             <Hairline bcolor={Colors.cyanblue}/>
             
             <Formik
@@ -134,7 +134,7 @@ const User = (props) => {
 
         <ModalBox onBackdropPress={() => setVisibleSecond(false)} visible={visiblesecond}>
           {
-           <ScrollView style={{height:280}}> 
+           <ScrollView style={{height:280, width:290}}> 
             <Htext style={{color:theme['text-custome-color'], fontSize:30, fontFamily:'CHESTER-Basic', textAlign:'center', marginTop:5 }}>CHANGE PASSWORD</Htext>
             <Hairline bcolor={Colors.cyanblue}/>
             
