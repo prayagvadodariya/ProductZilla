@@ -1,10 +1,9 @@
 import React, {useState, useEffect, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
 import { ScrollView, View, StyleSheet, TouchableOpacity } from 'react-native';
-import  CheckBox  from '@react-native-community/checkbox'
-import Dialog, { SlideAnimation, FadeAnimation, DialogContent } from 'react-native-popup-dialog';
+import Dialog, { SlideAnimation, DialogContent } from 'react-native-popup-dialog';
+import CkeckBoxs from '../component/CheckBoxs';
 import Colors from '../constant/Colors';
-import Ntext from '../component/Ntext';
 import FlatProduct from '../component/FlatProduct';
 import Hairline from '../component/Hairline';
 import Htext from '../component/Htext';
@@ -39,7 +38,7 @@ const ProductList = (props) => {
         <Dialog
           height="50%"
           width='100%'
-          dialogStyle={{marginTop:450, borderRadius:15}}
+          dialogStyle={{marginTop:450, borderRadius:15, backgroundColor: theme['background-basic-color-2']}}
           onTouchOutside={() => {
           setVisible(false)
           }}
@@ -53,71 +52,59 @@ const ProductList = (props) => {
 
             <Htext style={{color:Colors.gray, fontSize:30, fontFamily:'CHESTER-Basic', textAlign:'left', marginTop:10 }}>SHORT BY :</Htext>
             
-            <View style={styles.checkboxContainer}>
-              <CheckBox
-                value={isAll}
-                onValueChange={setAll}
-                tintColors={{ true: Colors.mainText }}
-                tintColor={{ true: Colors.mainText }}
-                style={styles.checkbox}
-              />
-              <Ntext style={{ marginTop:6,color:Colors.darktext, fontFamily:'PTSans-Regular', fontSize:15}} >All</Ntext>
-            </View>
+            <CkeckBoxs
+              label='All'
+              value={isAll}
+              onValueChange={setAll}
+              tintColors={{ true: Colors.mainText }}
+              tintColor={{ true: Colors.mainText }}
+              textColor={theme['text-custome-color']}
+            />
 
-            <View style={styles.checkboxContainer}>
-              <CheckBox
-                value={isPreWorkout}
-                tintColor={{ true: Colors.mainText }}
-                tintColors={{ true: Colors.mainText }}
-                onValueChange={setPreWorkout}
-                style={styles.checkbox}
-              />
-              <Ntext style={{ marginTop:6,color:Colors.darktext, fontFamily:'PTSans-Regular', fontSize:15}} >Pre Workout</Ntext>
-            </View>
+            <CkeckBoxs
+              label='Pre Workout'
+              value={isPreWorkout}
+              onValueChange={setPreWorkout}
+              tintColors={{ true: Colors.mainText }}
+              tintColor={{ true: Colors.mainText }}
+              textColor={theme['text-custome-color']}
+            />
 
-            <View style={styles.checkboxContainer}>
-              <CheckBox
-                value={isCapsules}
-                tintColor={{ true: Colors.mainText }}
-                tintColors={{ true: Colors.mainText }}
-                onValueChange={setCapsules}
-                style={styles.checkbox}
-              />
-              <Ntext style={{ marginTop:6,color:Colors.darktext, fontFamily:'PTSans-Regular', fontSize:15}} >Capsules</Ntext>
-            </View>
+            <CkeckBoxs
+              label='Capsules'
+              value={isCapsules}
+              onValueChange={setCapsules}
+              tintColors={{ true: Colors.mainText }}
+              tintColor={{ true: Colors.mainText }}
+              textColor={theme['text-custome-color']}
+            />
 
-            <View style={styles.checkboxContainer}>
-              <CheckBox
-                value={isProteinPowder}
-                tintColor={{ true: Colors.mainText }}
-                tintColors={{ true: Colors.mainText }}
-                onValueChange={setProteinPowder}
-                style={styles.checkbox}
-              />
-              <Ntext style={{ marginTop:6,color:Colors.darktext, fontFamily:'PTSans-Regular', fontSize:15}} >Protein Powder</Ntext>
-            </View>
+            <CkeckBoxs
+              label='Protein Powder'
+              value={isProteinPowder}
+              onValueChange={setProteinPowder}
+              tintColors={{ true: Colors.mainText }}
+              tintColor={{ true: Colors.mainText }}
+              textColor={theme['text-custome-color']}
+            />
 
-            <View style={styles.checkboxContainer}>
-              <CheckBox
-                value={isPriceLow}
-                tintColor={{ true: Colors.mainText }}
-                tintColors={{ true: Colors.mainText }}
-                onValueChange={setPriceLow}
-                style={styles.checkbox}
-              />
-              <Ntext style={{ marginTop:6,color:Colors.darktext, fontFamily:'PTSans-Regular', fontSize:15}} >Price - Low To High</Ntext>
-            </View>
+            <CkeckBoxs
+              label='Price - Low To High'
+              value={isPriceLow}
+              onValueChange={setPriceLow}
+              tintColors={{ true: Colors.mainText }}
+              tintColor={{ true: Colors.mainText }}
+              textColor={theme['text-custome-color']}
+            />      
 
-            <View style={styles.checkboxContainer}>
-              <CheckBox
-                value={isPriceHigh}
-                tintColor={{ true: Colors.mainText }}
-                tintColors={{ true: Colors.mainText }}
-                onValueChange={setPriceHigh}
-                style={styles.checkbox}
-              />
-              <Ntext style={{ marginTop:6,color:Colors.darktext, fontFamily:'PTSans-Regular', fontSize:15}} >Price - High To Low</Ntext>
-            </View>
+            <CkeckBoxs
+              label='Price - High To Low'
+              value={isPriceHigh}
+              onValueChange={setPriceHigh}
+              tintColors={{ true: Colors.mainText }}
+              tintColor={{ true: Colors.mainText }}
+              textColor={theme['text-custome-color']}
+            />  
 
           </DialogContent>
         </Dialog>  
