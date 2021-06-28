@@ -20,14 +20,16 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 
   }, []);
 
-  console.log('ckeckrotaion', orientation);
-
   const renderItem = ({item}) => {
     return (
       <View>
         <TouchableOpacity onPress={(item) => props.onPress(item)}> 
-          <View style={styles.top}><Image source={{ uri: item.url}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/></View> 
-          <Text style={{paddingRight:10, paddingLeft:10, width: Dimensions.get('screen').width / 2 - 20, margin:10, textAlign:"center", color: theme['text-basic-color'], fontSize:15, fontWeight:"bold" }}>{item.title}</Text> 
+          <View style={styles.top}>
+            <Image source={{ uri: item.url}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>
+          </View>
+          <View style={{width: 160, margin:10}}>
+            <Text style={{textAlign:"center", paddingLeft:10, paddingRight:10, color: theme['text-basic-color'], fontSize:15, fontWeight:"bold" }}>{item.title}</Text>
+          </View>
         </TouchableOpacity>
         <View style={styles.cover}>
           <Text style={{color: theme['text-basic-color'], marginTop:10, fontSize:15, marginBottom:10}}>{item.amount}</Text>
@@ -43,6 +45,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
     <View>
     {props?.showlayout ? (
     <FlatList
+      key={'_'}
       horizontal={props.showlayout}
       data={props.productdata} 
       keyExtractor={(item, index) => String(index)}
@@ -50,13 +53,24 @@ import AntDesign from "react-native-vector-icons/AntDesign";
       renderItem={renderItem}
     />
     ):(
-    <FlatList  
-      numColumns={orientation==='LANDSCAPE'? 4:2}
+    orientation==='LANDSCAPE'?( 
+    <FlatList 
+      key={'#'} 
+      numColumns={4}
       data={props.productdata} 
       keyExtractor={(item, index) => String(index)}
-      extraData={Colors}
+      extraData={Colors, orientation}
       renderItem={renderItem}
     />  
+    ): (
+      <FlatList  
+      numColumns={2}
+      data={props.productdata} 
+      keyExtractor={(item, index) => String(index)}
+      extraData={Colors, orientation}
+      renderItem={renderItem}
+    />
+    )
     )}
     </View>
   );
