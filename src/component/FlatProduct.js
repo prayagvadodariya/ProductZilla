@@ -5,7 +5,22 @@ import Colors from '../constant/Colors';
 import AntDesign from "react-native-vector-icons/AntDesign";
 
  const FlatProduct = (props) => { 
+  const [orientation, setOrientation] = useState("PORTRAIT");
   const theme = useTheme();
+
+  useEffect(() => {
+    Dimensions.addEventListener('change', ({window:{width,height}})=>{
+      if (width<height) {
+        setOrientation("PORTRAIT")
+      } else {
+        setOrientation("LANDSCAPE")
+    
+      }
+    })
+
+  }, []);
+
+  console.log('ckeckrotaion', orientation);
 
   const renderItem = ({item}) => {
     return (

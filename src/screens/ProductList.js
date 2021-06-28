@@ -36,9 +36,10 @@ const ProductList = (props) => {
       <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
         <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} productdata={StaticData.Product_List}/>
         <Dialog
-          height="50%"
+          height="45%"
           width='100%'
-          dialogStyle={{marginTop:450, borderRadius:15, backgroundColor: theme['background-basic-color-2']}}
+          containerStyle={{flex:1,justifyContent:'flex-end', alignItems:'flex-end', marginBottom:-10}}
+          dialogStyle={{borderTopLeftRadius:15, borderTopRightRadius:15, backgroundColor: theme['background-basic-color-2']}}
           onTouchOutside={() => {
           setVisible(false)
           }}
