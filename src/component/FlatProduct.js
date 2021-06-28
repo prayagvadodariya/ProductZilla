@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect, useState} from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, FlatList, TouchableOpacity } from 'react-native';
 import { useTheme } from '@ui-kitten/components';
 import Colors from '../constant/Colors';
@@ -51,7 +51,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
     />
     ):(
     <FlatList  
-      numColumns={2}
+      numColumns={orientation==='LANDSCAPE'? 4:2}
       data={props.productdata} 
       keyExtractor={(item, index) => String(index)}
       extraData={Colors}
