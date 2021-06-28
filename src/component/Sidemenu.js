@@ -1,8 +1,8 @@
 import React, {useState, Component} from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { Toggle, useTheme , Drawer, DrawerGroup, DrawerItem, IndexPath, Icon  } from '@ui-kitten/components';
+import { Avatar, Toggle, useTheme , Drawer, DrawerGroup, DrawerItem, IndexPath, Icon  } from '@ui-kitten/components';
 import { ThemeContext } from '../constant/ThemeContext';
-import AntDesign from "react-native-vector-icons/AntDesign";
+import Htext from '../component/Htext';
 
 const Sidemenu = (props) => {
   const [checked, setChecked] = React.useState(false);
@@ -41,10 +41,12 @@ const Sidemenu = (props) => {
 
     return (
       <View style={[styles.drawerContent, { backgroundColor: theme['background-basic-color-1'] }]}>
-        <View>
-          <Text style={styles.sectionHeadingStyle1}>Test Dev</Text>
-          <Text style={styles.sectionHeadingStyle2}>testdev301@gmail.com</Text>
-        </View> 
+        
+        <View style={styles.container}>
+           <Avatar style={{margin: 8, width:80, height:80}} source={{ uri: 'https://www.lemonlight.com/app/uploads/2019/04/Your-Guide-to-the-18-Most-Important-Camera-Shots.jpg' }}/>
+           <Htext style={{color:theme['text-custome-color'], fontSize:23, marginLeft:5, marginTop:5, fontFamily:'PTSans-Regular'}}>Test Dev</Htext>
+           <Htext style={{color:theme['text-custome-color'], fontSize:17, marginLeft:8, marginBottom:10, fontFamily:'PTSans-Regular'}}>testdev301@gmail.com</Htext>
+        </View>
 
         <Drawer style={{paddingLeft:10, paddingRight:10}}
           selectedIndex={selectedIndex}
@@ -67,20 +69,12 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: Platform.OS === 'android' ? 8 : 5,
   },
-  sectionHeadingStyle1: {
-    marginTop:3,
-    marginLeft:15,
-    fontSize:23,
-    color: 'gray',
-    fontWeight: 'bold'
-  },
-  sectionHeadingStyle2: {
-    marginTop:3,
-    marginLeft:15,
-    fontSize:17,
-    marginBottom:10,
-    color: 'gray',
-  },
+  container: {
+    alignItems: 'flex-start',
+    marginTop:9,
+    marginLeft:20,
+    flexWrap: 'wrap',
+  }
 });
 
 export default Sidemenu;
