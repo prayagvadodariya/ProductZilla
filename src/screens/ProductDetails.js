@@ -9,6 +9,7 @@ import Hairline from '../component/Hairline';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import ActionButton from '../component/ActionButton';
 import ImageSlider from 'react-native-image-slider';
+import FlatProduct from '../component/FlatProduct';
 import * as StaticData from '../constant/StaticData';
 
 const ProductDetails = (props) => {
@@ -37,12 +38,13 @@ const ProductDetails = (props) => {
           />
         </View>  
 
-        <View style={{ alignSelf:'flex-start', marginTop:25, marginBottom:5, marginLeft:15 }}>
-          <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='DustWest'>BCAA Capsules</Htext>
-        </View> 
+        <Htext style={{ alignSelf:'flex-start', color:theme['text-basic-color'], fontSize:35, fontFamily:'DustWest', marginLeft:15, marginTop:25, marginBottom:5 }}>BCAA Capsules</Htext>  
 
-        <View style={{ alignSelf:'flex-start', marginLeft:15 }}>
-          <Htext color={theme['text-custome-color']} fontsize={20}>$15.00</Htext>
+        <View style={{flexDirection:'row'}}>
+          <Htext style={{ flex:1,alignSelf:'flex-start', color:theme['text-custome-color'], fontSize:20, marginLeft:15 }}>$15.00</Htext>
+          <TouchableOpacity style={{ alignSelf:'flex-end', marginRight:15 }}>
+            <AntDesign name='hearto' color={theme['text-custome-color']} size={25} />
+          </TouchableOpacity>
         </View> 
 
         <View style={{margin:20}}>
@@ -79,6 +81,9 @@ const ProductDetails = (props) => {
           <View style={styles.shar}><ActionButton icon='instagram'/></View>
         </View>
 
+        <Htext style={{ color:theme['text-basic-color'], fontSize:30, fontFamily:'CHESTER-Basic', marginBottom:10, text:'center', textAlign:'center' }}>RECENTLY VIEWED</Htext>
+        
+        <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} showlayout={true} productdata={StaticData.Product_List}/>
       </ScrollView>
     );
   }

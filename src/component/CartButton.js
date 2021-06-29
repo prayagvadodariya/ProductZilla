@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { useTheme } from '@ui-kitten/components';
+import Entypo from "react-native-vector-icons/Entypo";
 
  const CartButton = (props) => {  
   const theme = useTheme();
@@ -19,7 +20,8 @@ import { useTheme } from '@ui-kitten/components';
         ]}
         {...props}
         >
-          <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+          <View style={{flex:1, justifyContent:'center', alignItems:'center', flexDirection:'row'}}>
+            <Entypo name='shopping-bag' color={theme['text-basic-color']} size={17} style={{ marginRight:10 }} />
             <Text style={{color: props.textcolor || theme['text-basic-color'], fontSize:15, textTransform: 'uppercase'}}>ADD TO CART</Text>
           </View>
     </TouchableOpacity>

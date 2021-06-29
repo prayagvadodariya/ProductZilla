@@ -18,7 +18,7 @@ const Wishlist = () => {
           keyExtractor={(item, index) => String(index)}
           renderItem={({item ,index}) =>   {
             return( 
-              <Card disabled={true} style={{ height:120, backgroundColor: Colors.normaltext, margin:10, borderRadius: 10, shadowColor: 'black', shadowOpacity: 0.5, elevation: 5}}>
+              <Card disabled={true} style={{ height:120, backgroundColor: theme['background-basic-color-2'], margin:10, borderRadius: 10, shadowColor: 'black', shadowOpacity: 0.5, elevation: 5}}>
               {
                 <View style={{flexDirection:'row'}}>
                   <Card cardwidth={80} cardheight={100}>
