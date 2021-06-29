@@ -2,6 +2,7 @@ import React,{useEffect, useState} from 'react';
 import { StyleSheet, View, Image, Dimensions, FlatList, TouchableOpacity } from 'react-native';
 import { useTheme } from '@ui-kitten/components';
 import Colors from '../constant/Colors';
+import Currency from '../component/Currency';
 import Htext from '../component/Htext';
 import AntDesign from "react-native-vector-icons/AntDesign";
 
@@ -33,7 +34,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
           </View>
         </TouchableOpacity>
         <View style={styles.cover}>
-          <Htext style={{color: theme['text-basic-color'],textAlign:"center", margin:10, fontSize:15}}>{item.amount}</Htext>
+          <Currency style={{color: theme['text-basic-color'],textAlign:"center", margin:10, fontSize:15}} currencyCode='INR' amount={item.amount}/>
           <TouchableOpacity onPress={props.onPress1}>
             <AntDesign style={{ marginLeft:10,marginTop:12}} name='hearto'  color={theme['text-basic-color']} size={15} />
           </TouchableOpacity>  

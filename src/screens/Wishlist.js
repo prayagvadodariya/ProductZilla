@@ -4,6 +4,7 @@ import { TouchableOpacity, View, StyleSheet, FlatList } from 'react-native';
 import Card from '../component/Card';
 import Ntext from '../component/Ntext';
 import Colors from '../constant/Colors';
+import Currency from '../component/Currency';
 import BackgroundImage from '../component/BackgroundImage';
 import * as StaticData from '../constant/StaticData';
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -29,7 +30,7 @@ const Wishlist = () => {
 
                   <View style={{ flex:1,justifyContent:'center',alignContent:'center' }}>
                     <Ntext color={theme['text-custome-color']} lineheight={18} fontsize={15} fontfamily='PTSans-Regular'>{item.title}</Ntext>
-                    <Ntext color={Colors.gray} fontsize={15} >{item.amount}</Ntext>
+                    <Currency color={Colors.gray} fontsize={15} currencyCode={item.currencyCode} amount={item.amount}/>
                   </View>
 
                   <TouchableOpacity style={{justifyContent:'center', marginRight:20}}>

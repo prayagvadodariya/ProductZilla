@@ -4,6 +4,7 @@ import { Text, View, StyleSheet, FlatList, TouchableOpacity, ScrollView } from '
 import Card from '../component/Card';
 import Htext from '../component/Htext';
 import Ntext from '../component/Ntext';
+import Currency from '../component/Currency';
 import Colors from '../constant/Colors';
 import Cbutton from '../component/Cbutton';
 import BackgroundImage from '../component/BackgroundImage';
@@ -32,7 +33,7 @@ const Cart = (props) => {
                   </Card>
                   <View style={{ flex:1,marginTop:15,marginRight:5 }}>
                     <Ntext color={theme['text-custome-color']} lineheight={18} fontsize={15} fontfamily='PTSans-Regular'>{item.title}</Ntext>
-                    <Ntext color={Colors.gray} fontsize={15} >{item.amount}</Ntext>
+                    <Currency color={Colors.gray} fontsize={15} currencyCode={item.currencyCode} amount={item.amount}/>
                   </View>
 
                   <View style={{  alignItems:"flex-end", flexDirection:'column' }}>
@@ -59,7 +60,7 @@ const Cart = (props) => {
        
           <View style={{ flexDirection:'row',margin:15 }}>
           <Htext color={theme['text-custome-color']} fontfamily='PTSans-Regular' fontsize={18}>Sub Total :</Htext> 
-            <Htext  style={{flex:1, textAlign:'right', fontFamily:'PTSans-Regular', fontSize:18, color:theme['text-custome-color']}} fontsize={18}>$185.000055</Htext> 
+            <Currency  style={{flex:1, textAlign:'right', fontSize:18, color:theme['text-custome-color']}} currencyCode='INR' fontsize={18} amount='185.000'/>
           </View>
 
           <Htext color={theme['text-custome-color']} fontfamily='PTSans-Regular' fontsize={18}>Shipping, textes, and discounts will be calculated at checkout.</Htext>

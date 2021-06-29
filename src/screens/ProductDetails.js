@@ -4,6 +4,7 @@ import { Text, ScrollView, View, StyleSheet, ImageBackground, Dimensions, Toucha
 import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
 import Ntext from '../component/Ntext';
+import Currency from '../component/Currency';
 import CartButton from '../component/CartButton';
 import Hairline from '../component/Hairline';
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -41,7 +42,7 @@ const ProductDetails = (props) => {
         <Htext style={{ alignSelf:'flex-start', color:theme['text-basic-color'], fontSize:35, fontFamily:'DustWest', marginLeft:15, marginTop:25, marginBottom:5 }}>BCAA Capsules</Htext>  
 
         <View style={{flexDirection:'row'}}>
-          <Htext style={{ flex:1,alignSelf:'flex-start', color:theme['text-custome-color'], fontSize:20, marginLeft:15 }}>$15.00</Htext>
+          <Currency style={{ flex:1,alignSelf:'flex-start', color:theme['text-custome-color'], fontSize:20, marginLeft:15 }} currencyCode='INR' amount='15.00'/>
           <TouchableOpacity style={{ alignSelf:'flex-end', marginRight:15 }}>
             <AntDesign name='hearto' color={theme['text-custome-color']} size={25} />
           </TouchableOpacity>
