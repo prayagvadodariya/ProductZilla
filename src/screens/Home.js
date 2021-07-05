@@ -1,4 +1,4 @@
-import React, {useState, Component} from 'react';
+import React, {useEffect, useState, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
 import { Text, View, StyleSheet, ScrollView, FlatList } from 'react-native';
 import Maincontent from '../component/Maincontent';
@@ -13,7 +13,7 @@ import * as StaticData from '../constant/StaticData';
 
 const Home = (props) => {
   const theme = useTheme();
-   
+
     return (
       <ScrollView style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
         <Maincontent onPress={() => props.navigation.navigate("ProductList")}/>

@@ -1,4 +1,4 @@
-import React, {useState, Component} from 'react';
+import React, {useState, useEffect, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
 import { View, StyleSheet, FlatList, ScrollView } from 'react-native';
 import { SearchBar } from 'react-native-elements';
@@ -8,11 +8,34 @@ import Cbutton from '../component/Cbutton';
 import FlatProduct from '../component/FlatProduct';
 import BackgroundImage from '../component/BackgroundImage';
 import Card from '../component/Card';
+import * as services from '../services/services_hendler';
 import * as StaticData from '../constant/StaticData';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as StorageKeys from '../constant/StorageKeys';
 
 const Search = (props) => {
   const [search, setSearch] = useState('');
   const theme = useTheme();
+
+  // useEffect (() => {
+  //   services.onCollectionsApi().then(data => {
+  //   console.log('data',data);
+  //   })  
+  // },[])
+
+
+const retriveData = async () => {
+  const value = await AsyncStorage.getItem(StorageKeys.AUTH_TOKEN);
+  return JSON.parse(value)
+}
+
+
+var p = Promise.resolve(retriveData());
+p.then(function(v) {
+  console.log(v); // 1
+});
+
+console.log('geter', p);
 
   const updateSearch = (search) => {
     setSearch(search);
