@@ -1,5 +1,5 @@
 import React, {useState,useEffect, Component} from 'react';
-import * as services from '../services/services_hendler';
+import * as services from '../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as StorageKeys from '../constant/StorageKeys';
 

@@ -8,34 +8,18 @@ import Cbutton from '../component/Cbutton';
 import FlatProduct from '../component/FlatProduct';
 import BackgroundImage from '../component/BackgroundImage';
 import Card from '../component/Card';
-import * as services from '../services/services_hendler';
+import * as services from '../services/api';
 import * as StaticData from '../constant/StaticData';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as StorageKeys from '../constant/StorageKeys';
 
 const Search = (props) => {
   const [search, setSearch] = useState('');
   const theme = useTheme();
 
-  // useEffect (() => {
-  //   services.onCollectionsApi().then(data => {
-  //   console.log('data',data);
-  //   })  
-  // },[])
-
-
-const retriveData = async () => {
-  const value = await AsyncStorage.getItem(StorageKeys.AUTH_TOKEN);
-  return JSON.parse(value)
-}
-
-
-var p = Promise.resolve(retriveData());
-p.then(function(v) {
-  console.log(v); // 1
-});
-
-console.log('geter', p);
+  useEffect (() => {
+    services.onCollectionsApi().then(data => {
+    console.log('data',data);
+    })  
+  },[])
 
   const updateSearch = (search) => {
     setSearch(search);

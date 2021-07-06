@@ -1,23 +1,41 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as StorageKeys from '../constant/StorageKeys';
+import * as servicesHandler from './services_hendler';
 
-export const NEW_BASE_URL = 'https://prayagnetworld301.wixsite.com/productzilla/_api/';
-export const BASE_URL = 'https://www.wixapis.com/stores/v1/';
-
-(async()=>{
-    const accessToken = await AsyncStorage.getItem(StorageKeys.AUTH_TOKEN);
-    const auth_code = JSON.parse(accessToken);
-})
+const NEW_BASE_URL = 'https://prayagnetworld301.wixsite.com/productzilla/_api/';
+const BASE_URL = 'https://www.wixapis.com/stores/v1/';
 
 
-
-export const headers = {  
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-};
-
-export const headers1= {
-    'Content-Type': 'application/json',
-    'Accept' : 'application/json',
-    'Authorization' : ''
+export const getdynamicmodelApi = () => {
+    let URL = NEW_BASE_URL + 'v2/dynamicmodel';
+     return servicesHandler.Get(URL)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        return error
+      });
 }
+
+export const loginApi = (Parameter) => {
+    let URL = NEW_BASE_URL + 'wix-sm-webapp/v1/auth/login';
+       return servicesHandler.Post(URL, Parameter)
+        .then(response => {
+          return response.data;
+        })
+        .catch(error => {
+          return error
+        });
+  }
+
+export const onCollectionsApi = (Parameter) => {
+    let URL = BASE_URL + "collections/query";
+       return servicesHandler.PostWithHeader(URL, Parameter)
+        .then(response => {
+          return response.data;
+        })
+        .catch(error => {
+          return error
+        });
+}
+
+
+
