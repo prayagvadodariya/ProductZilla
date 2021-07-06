@@ -2,6 +2,8 @@ import React, {useState, useEffect, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
 import { ScrollView, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Dialog, { SlideAnimation, DialogContent } from 'react-native-popup-dialog';
+import * as services from '../services/api';
+import Loader from '../component/Loader';
 import CkeckBoxs from '../component/CheckBoxs';
 import Colors from '../constant/Colors';
 import FlatProduct from '../component/FlatProduct';
@@ -12,6 +14,8 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 
 const ProductList = (props) => {
   const theme = useTheme();
+  const [loading, setLoading] = useState(true);
+  const [result, setResult] = useState();
   const [visible, setVisible] = useState(false);
   const [isAll, setAll] = useState(true);
   const [isPreWorkout, setPreWorkout] = useState(false);
@@ -21,6 +25,15 @@ const ProductList = (props) => {
   const [isPriceHigh, setPriceHigh] = useState(false);
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
+
+  useEffect (() => {
+    services.onProductsApi().then(data => {
+    setResult(data)  
+    setLoading(false)  
+    console.log('data',data);
+    })  
+  },[])
+
 
   useEffect(() => {
     props.navigation.setOptions({
@@ -32,9 +45,17 @@ const ProductList = (props) => {
     });
   },);
 
+
+  if(loading===true && !result){
+    return(
+      <Loader/>
+    )
+  }
+
     return (
       <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
         <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} productdata={StaticData.Product_List}/>
+        
         <Dialog
           height="45%"
           width='100%'

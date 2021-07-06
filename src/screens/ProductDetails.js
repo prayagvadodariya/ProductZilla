@@ -84,7 +84,7 @@ const ProductDetails = (props) => {
 
         <Htext style={{ color:theme['text-basic-color'], fontSize:30, fontFamily:'CHESTER-Basic', marginBottom:10, text:'center', textAlign:'center' }}>RECENTLY VIEWED</Htext>
         
-        <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} showlayout={true} productdata={StaticData.Product_List}/>
+        {/* <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} showlayout={true} productdata={StaticData.Product_List}/> */}
       </ScrollView>
     );
   }

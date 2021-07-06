@@ -2,6 +2,7 @@ import React, {useState, useEffect, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
 import { View, StyleSheet, FlatList, ScrollView } from 'react-native';
 import { SearchBar } from 'react-native-elements';
+import Loader from '../component/Loader';
 import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
 import Cbutton from '../component/Cbutton';
@@ -12,11 +13,15 @@ import * as services from '../services/api';
 import * as StaticData from '../constant/StaticData';
 
 const Search = (props) => {
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [result, setResult] = useState();
   const theme = useTheme();
 
   useEffect (() => {
     services.onCollectionsApi().then(data => {
+    setResult(data)  
+    setLoading(false)  
     console.log('data',data);
     })  
   },[])
@@ -24,7 +29,12 @@ const Search = (props) => {
   const updateSearch = (search) => {
     setSearch(search);
   }
-   
+  
+  if(loading===true && !result){
+    return(
+      <Loader/>
+    )
+  }
     return (
       <ScrollView style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
         <SearchBar
@@ -40,7 +50,7 @@ const Search = (props) => {
           <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic'>CAPACITYX PRODUCTS</Htext>
         </View>
 
-        <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} productdata={StaticData.Product_List} showlayout={true}/>
+        {/* <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} productdata={StaticData.Product_List} showlayout={true}/> */}
 
         <View style={{ alignSelf:'flex-start',marginTop:20, marginLeft:10, marginRight:10 }}>
           <Htext color={theme['text-basic-color']} fontsize={20} >SHOP BY</Htext>
@@ -48,16 +58,16 @@ const Search = (props) => {
 
         <FlatList
           horizontal={true}
-          data={StaticData.Shop_by} 
+          data={result.collections} 
           keyExtractor={(item, index) => String(index)}
           renderItem={({item, index}) => 
           { 
           return (
-           <Card cardwidth={140} cardheight={140}>
+           <Card cardwidth={140} cardheight={140} onPress={(item) => props.navigation.navigate("ProductList",{ Producthandel: item.id })}>
              {
-              <BackgroundImage height={"100%"} url={item.url} bradius={10}>
+              <BackgroundImage height={"100%"} url={item.media.mainMedia.image.url} bradius={10}>
                 <View style={styles.textcontent}>
-                  <Htext style={{ fontSize:18, fontWeight:"bold", color:Colors.normaltext}}>{item.title}</Htext>  
+                  <Htext style={{ fontSize:18, fontWeight:"bold", color:Colors.normaltext}}>{item.name}</Htext>  
                 </View>
              </BackgroundImage>
              }

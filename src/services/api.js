@@ -37,5 +37,16 @@ export const onCollectionsApi = (Parameter) => {
         });
 }
 
+export const onProductsApi = (Parameter) => {
+  let URL = BASE_URL + "products/query";
+     return servicesHandler.PostWithHeader(URL, Parameter)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        return error
+      });
+}
+
 
 
