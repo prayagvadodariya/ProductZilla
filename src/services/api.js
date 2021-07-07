@@ -48,5 +48,16 @@ export const onProductsApi = (Parameter) => {
       });
 }
 
+export const onProductsDetailsApi = (Parameter) => {
+  let URL = BASE_URL + "products/id";
+     return servicesHandler.GetWithHeader(URL, Parameter)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        return error
+      });
+}
+
 
 

@@ -26,22 +26,28 @@ const ProductList = (props) => {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
+  console.log('props', props);
+
   const id = '5c2d7a59-fa80-d03c-4987-191ef935855c'
 
   useEffect (() => {
-    
-    let Parameter= {
-      "query":{
-        "filter":`{\"collections.id\": { \"$hasSome\": ["${id}"]} }`
+    if(props.route.params.Producthandel.name!='All Products'){
+      var Parameter = {
+        "query":{
+          "filter":`{\"collections.id\": { \"$hasSome\": ["${props.route.params.Producthandel.id}"]} }`
+        }
       }
+      console.log('query', Parameter);
     }
-    console.log('query', Parameter);
+    else{
+      var Parameter = {}
+    }
     services.onProductsApi(Parameter).then(data => {
     setResult(data)  
     setLoading(false)  
     console.log('data',data);
     })  
-  },[])
+  },[props.route.params.Producthandel.id])
 
 
   useEffect(() => {
@@ -63,7 +69,7 @@ const ProductList = (props) => {
 
     return (
       <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
-        <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} productdata={StaticData.Product_List}/>
+        <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} productdata={result.products}/>
         
         <Dialog
           height="45%"

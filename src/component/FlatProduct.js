@@ -27,14 +27,14 @@ import AntDesign from "react-native-vector-icons/AntDesign";
       <View>
         <TouchableOpacity onPress={(item) => props.onPress(item)}> 
           <View style={styles.top}>
-            <Image source={{ uri: item.url}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>
+            <Image source={{ uri: item.media.items[0].image.url}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>
           </View>
           <View style={{width: 160, margin:10}}>
-            <Htext style={{textAlign:"center", paddingLeft:10, paddingRight:10, color: theme['text-basic-color'], fontFamily:'PTSans-Regular', fontSize:15, fontWeight:'800' }}>{item.title}</Htext>
+            <Htext style={{textAlign:"center", paddingLeft:10, paddingRight:10, color: theme['text-basic-color'], fontFamily:'PTSans-Regular', fontSize:15, fontWeight:'800' }}>{item.name}</Htext>
           </View>
         </TouchableOpacity>
         <View style={styles.cover}>
-          <Currency style={{color: theme['text-basic-color'],textAlign:"center", margin:10, fontSize:15}} currencyCode='INR' amount={item.amount}/>
+          <Currency style={{color: theme['text-basic-color'],textAlign:"center", margin:10, fontSize:15}} currencyCode={item.price.currency} amount={item.price.price}/>
           <TouchableOpacity onPress={props.onPress1}>
             <AntDesign style={{ marginLeft:10,marginTop:12}} name='hearto'  color={theme['text-basic-color']} size={15} />
           </TouchableOpacity>  

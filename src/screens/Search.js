@@ -63,7 +63,7 @@ const Search = (props) => {
           renderItem={({item, index}) => 
           { 
           return (
-           <Card cardwidth={140} cardheight={140} onPress={(item) => props.navigation.navigate("ProductList",{ Producthandel: item.id })}>
+           <Card key={index} cardwidth={140} cardheight={140} onPress={() => props.navigation.navigate("ProductList",{ Producthandel: item })}>
              {
               <BackgroundImage height={"100%"} url={item.media.mainMedia.image.url} bradius={10}>
                 <View style={styles.textcontent}>

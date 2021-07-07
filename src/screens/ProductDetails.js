@@ -1,6 +1,8 @@
-import React, {useState, Component} from 'react';
+import React, {useState, useEffect, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
 import { Text, ScrollView, View, StyleSheet, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
+import * as services from '../services/api';
+import Loader from '../component/Loader';
 import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
 import Ntext from '../component/Ntext';
@@ -14,12 +16,32 @@ import FlatProduct from '../component/FlatProduct';
 import * as StaticData from '../constant/StaticData';
 
 const ProductDetails = (props) => {
+  const [loading, setLoading] = useState(true);
+  const [result, setResult] = useState();
   const [isVisible, setIsVisible] = useState(false);
   const theme = useTheme();
+
+  useEffect (() => {
+   var Parameter={
+    // id: props.route.params.Producthandel
+    id:'e52dca14-2d65-d97b-5bf8-6c1c9ca9367c'
+   }
+    services.onProductsDetailsApi(Parameter).then(data => {
+    setResult(data)  
+    setLoading(false)  
+    console.log('data',data);
+    })  
+  },[])
 
   const toggleFunction = () => {
     setIsVisible(!isVisible);
   }; 
+
+  if(loading===true && !result){
+    return(
+      <Loader/>
+    )
+  }
     return (
       <ScrollView style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
         <View style={{ alignSelf:'flex-start', margin:15 }}>
