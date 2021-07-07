@@ -26,8 +26,17 @@ const ProductList = (props) => {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
+  const id = '5c2d7a59-fa80-d03c-4987-191ef935855c'
+
   useEffect (() => {
-    services.onProductsApi().then(data => {
+    
+    let Parameter= {
+      "query":{
+        "filter":`{\"collections.id\": { \"$hasSome\": ["${id}"]} }`
+      }
+    }
+    console.log('query', Parameter);
+    services.onProductsApi(Parameter).then(data => {
     setResult(data)  
     setLoading(false)  
     console.log('data',data);
