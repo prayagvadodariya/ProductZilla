@@ -6,25 +6,25 @@ import axios from 'axios';
   export const Get = async (URL) => {
     return axios.get(URL)
       .then(response => {
-        return response;
+        return response.data;
       })
       .catch(error => {
-        return error
+        return error.response.data
       });
   }
   
-  export const GetWithHeader = async (URL, Parameter) => {
+  export const GetWithHeader = async (URL) => {
     var accessToken = await AsyncStorage.getItem(StorageKeys.AUTH_TOKEN);
     const auth_code = JSON.parse(accessToken);
     let headers = {
       'Authorization' : auth_code
     }
-    return axios.get(URL, Parameter, { headers })
+    return axios.get(URL, { headers })
       .then(response => {
-        return response;
+        return response.data;
       })
       .catch(error => {
-        return error
+        return error.response.data
       });
   }
 
@@ -35,10 +35,10 @@ import axios from 'axios';
     }
     return axios.post(URL, Parameter, { headers })
       .then(response => {
-        return response;
+        return response.data;
       })
       .catch(error => {
-        return error
+        return error.response.data
       });
   }
   
@@ -52,9 +52,9 @@ import axios from 'axios';
     }
     return axios.post(URL, Parameter, { headers })
       .then(response => {
-        return response;
+        return response.data;
       })
       .catch(error => {
-        return error
+        return error.response.data
       });
   }

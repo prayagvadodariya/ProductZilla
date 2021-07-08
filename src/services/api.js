@@ -8,7 +8,7 @@ export const getdynamicmodelApi = () => {
     let URL = NEW_BASE_URL + 'v2/dynamicmodel';
      return servicesHandler.Get(URL)
       .then(response => {
-        return response.data;
+        return response;
       })
       .catch(error => {
         return error
@@ -19,18 +19,18 @@ export const loginApi = (Parameter) => {
     let URL = NEW_BASE_URL + 'wix-sm-webapp/v1/auth/login';
        return servicesHandler.Post(URL, Parameter)
         .then(response => {
-          return response.data;
+          return response;
         })
         .catch(error => {
           return error
         });
   }
 
-export const onCollectionsApi = (Parameter) => {
+export const onCollectionsApi = () => {
     let URL = BASE_URL + "collections/query";
-       return servicesHandler.PostWithHeader(URL, Parameter)
+       return servicesHandler.PostWithHeader(URL)
         .then(response => {
-          return response.data;
+          return response;
         })
         .catch(error => {
           return error
@@ -41,7 +41,7 @@ export const onProductsApi = (Parameter) => {
   let URL = BASE_URL + "products/query";
      return servicesHandler.PostWithHeader(URL, Parameter)
       .then(response => {
-        return response.data;
+        return response;
       })
       .catch(error => {
         return error
@@ -49,10 +49,10 @@ export const onProductsApi = (Parameter) => {
 }
 
 export const onProductsDetailsApi = (Parameter) => {
-  let URL = BASE_URL + "products/id";
-     return servicesHandler.GetWithHeader(URL, Parameter)
+  let URL = BASE_URL + "products/" + Parameter;
+     return servicesHandler.GetWithHeader(URL)
       .then(response => {
-        return response.data;
+        return response;
       })
       .catch(error => {
         return error

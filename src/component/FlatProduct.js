@@ -25,7 +25,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
   const renderItem = ({item}) => {
     return (
       <View>
-        <TouchableOpacity onPress={(item) => props.onPress(item)}> 
+        <TouchableOpacity onPress={() => props.onPress(item)}> 
           <View style={styles.top}>
             <Image source={{ uri: item.media.items[0].image.url}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>
           </View>

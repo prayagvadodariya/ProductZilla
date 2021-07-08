@@ -22,16 +22,13 @@ const ProductDetails = (props) => {
   const theme = useTheme();
 
   useEffect (() => {
-   var Parameter={
-    // id: props.route.params.Producthandel
-    id:'e52dca14-2d65-d97b-5bf8-6c1c9ca9367c'
-   }
-    services.onProductsDetailsApi(Parameter).then(data => {
-    setResult(data)  
+  
+    services.onProductsDetailsApi(props.route.params.Producthandel).then(data => {
+    setResult(data.product)  
     setLoading(false)  
     console.log('data',data);
     })  
-  },[])
+  },[props.route.params.Producthandel])
 
   const toggleFunction = () => {
     setIsVisible(!isVisible);
@@ -45,26 +42,26 @@ const ProductDetails = (props) => {
     return (
       <ScrollView style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
         <View style={{ alignSelf:'flex-start', margin:15 }}>
-          <Htext color={theme['text-custome-color']} fontsize={20}>SKU: 0001</Htext>
+          <Htext color={theme['text-custome-color']} fontsize={20}>SKU: {result.sku}</Htext>
         </View>
 
         <View style={styles.imgslider}>
           <ImageSlider
               loopBothSides={false}
-              images={StaticData.SlideImage}
+              images={result.media.items}
               customSlide={({ index, item, style, width }) => {
               return(
                 <TouchableOpacity key={index} style={styles.top}>  
-                  <ImageBackground source={{uri: item.url}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>    
+                  <ImageBackground source={{uri: item.image.url}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>    
                 </TouchableOpacity>
               )}}
           />
         </View>  
 
-        <Htext style={{ alignSelf:'flex-start', color:theme['text-basic-color'], fontSize:35, fontFamily:'DustWest', marginLeft:15, marginTop:25, marginBottom:5 }}>BCAA Capsules</Htext>  
+        <Htext style={{ alignSelf:'flex-start', color:theme['text-basic-color'], fontSize:35, fontFamily:'DustWest', marginLeft:15, marginTop:25, marginBottom:5 }}>{result.name}</Htext>  
 
         <View style={{flexDirection:'row'}}>
-          <Currency style={{ flex:1,alignSelf:'flex-start', color:theme['text-custome-color'], fontSize:20, marginLeft:15 }} currencyCode='INR' amount='15.00'/>
+          <Currency style={{ flex:1,alignSelf:'flex-start', color:theme['text-custome-color'], fontSize:20, marginLeft:15 }} currencyCode={result.price.currency} amount={result.price.price}/>
           <TouchableOpacity style={{ alignSelf:'flex-end', marginRight:15 }}>
             <AntDesign name='hearto' color={theme['text-custome-color']} size={25} />
           </TouchableOpacity>
@@ -85,7 +82,7 @@ const ProductDetails = (props) => {
 
         {isVisible ? 
           <View style={{ marginLeft:15, marginRight:15}}>
-           <Ntext color={Colors.gray} fontsize={18} fontfamily='PTSans-Regular'>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click me to add your own content and make changes to the font.</Ntext>
+           <Ntext color={Colors.gray} fontsize={18} fontfamily='PTSans-Regular'>{result.description}</Ntext>
           </View>
         : null}
 
@@ -123,7 +120,7 @@ const styles = StyleSheet.create({
   marginRight:15
  },
  top: {
-  width: Dimensions.get('screen').width /1 - 20,
+  width: Dimensions.get('screen').width /1 - 30,
   height: 390,
  },
  sharing: {
