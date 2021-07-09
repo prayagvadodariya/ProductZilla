@@ -18,8 +18,9 @@ const ProductList = (props) => {
   const theme = useTheme();
   const [orientation, setOrientation] = useState("PORTRAIT");
   const [loading, setLoading] = useState(true);
-  const [loadmore, SetLoadMore] = useState(true);
-  const [result, setResult] = useState();
+  const [loadmore, SetLoadMore] = useState(false);
+  const [result, setResult] = useState(null);
+  const [offset, setOffset] = useState(0);
   const [visible, setVisible] = useState(false);
   const [isAll, setAll] = useState(true);
   const [isPreWorkout, setPreWorkout] = useState(false);
@@ -36,13 +37,24 @@ const ProductList = (props) => {
     if(props.route.params.Producthandel.name!='All Products'){
       var Parameter = {
         "query":{
-          "filter":`{\"collections.id\": { \"$hasSome\": ["${props.route.params.Producthandel.id}"]} }`
+          "filter":`{\"collections.id\": { \"$hasSome\": ["${props.route.params.Producthandel.id}"]} }`,
+          "paging": { 
+            "limit": 10, 
+            "offset": offset
+          }
         }
       }
       console.log('query', Parameter);
     }
     else{
-      var Parameter = {}
+      var Parameter = {
+        "query":{
+        "paging": { 
+          "limit": 10, 
+          "offset": offset
+        }
+      }
+    }
     }
     services.onProductsApi(Parameter).then(data => {
     setResult(data)  
@@ -80,29 +92,60 @@ const ProductList = (props) => {
     )
   }
 
+  
+
+  const lodeMoreData = () => {
+    
+    if(props.route.params.Producthandel.name!='All Products'){
+      var Parameter = {
+        "query":{
+          "filter":`{\"collections.id\": { \"$hasSome\": ["${props.route.params.Producthandel.id}"]} }`,
+          "paging": { 
+            "limit": 10, 
+            "offset": offset + 10 
+          }
+        }
+      }
+    }
+    else{
+      var Parameter = {
+        "query":{
+          "paging": { 
+            "limit": 10, 
+            "offset": offset + 10 
+          }
+        }
+      }
+    }
+    services.onProductsApi(Parameter).then(data => {
+      setResult([...result, ...data]); 
+      SetLoadMore(false); 
+      setOffset(offset+10);
+      // console.log('data',data);
+      })
+  }
+
   const renderOnScroll = (e) => {
     let paddingToBottom = 10;
         paddingToBottom +=
         e.nativeEvent.layoutMeasurement.height;
         var currentOffset = e.nativeEvent.contentOffset.y;
 
-        var direction = currentOffset > 1 ? 'down' : 'up';
-        if (direction != 'up') {
+        var direction = currentOffset > offset ? 'down' : 'up';
+
+        if (direction === 'down') {
           if ( e.nativeEvent.contentOffset.y >= e.nativeEvent.contentSize.height - paddingToBottom ) {
-            console.log("sdad");
-            if (loadmore) {
-              console.log('next page');
+            if (result.products.length >= 10) {
+              console.log('nextpage');
               SetLoadMore(true)
-              setTimeout(() => {
-              SetLoadMore(false)
-              // this.lodeMoreData();
-              }, 1000);
+              lodeMoreData();
             }
           }
         }
   }
-
-  if(loading===true && !result){
+  
+  console.log("cpmbin", result);
+  if(loading && !result){
     return(
       <Loader/>
     )
