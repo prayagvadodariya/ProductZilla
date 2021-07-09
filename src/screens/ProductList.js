@@ -31,8 +31,7 @@ const ProductList = (props) => {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
-  console.log('props', props);
-
+  
   useEffect (() => {
     if(props.route.params.Producthandel.name!='All Products'){
       var Parameter = {
@@ -44,7 +43,6 @@ const ProductList = (props) => {
           }
         }
       }
-      console.log('query', Parameter);
     }
     else{
       var Parameter = {
@@ -57,9 +55,8 @@ const ProductList = (props) => {
     }
     }
     services.onProductsApi(Parameter).then(data => {
-    setResult(data)  
+    setResult(data.products)  
     setLoading(false)  
-    console.log('data',data);
     })  
 
     Dimensions.addEventListener('change', ({window:{width,height}})=>{
@@ -92,8 +89,6 @@ const ProductList = (props) => {
     )
   }
 
-  
-
   const lodeMoreData = () => {
     
     if(props.route.params.Producthandel.name!='All Products'){
@@ -118,10 +113,9 @@ const ProductList = (props) => {
       }
     }
     services.onProductsApi(Parameter).then(data => {
-      setResult([...result, ...data]); 
+      setResult([...result, ...data.products]); 
       SetLoadMore(false); 
       setOffset(offset+10);
-      // console.log('data',data);
       })
   }
 
@@ -135,8 +129,7 @@ const ProductList = (props) => {
 
         if (direction === 'down') {
           if ( e.nativeEvent.contentOffset.y >= e.nativeEvent.contentSize.height - paddingToBottom ) {
-            if (result.products.length >= 10) {
-              console.log('nextpage');
+            if (result.length >= 10) {
               SetLoadMore(true)
               lodeMoreData();
             }
@@ -144,7 +137,6 @@ const ProductList = (props) => {
         }
   }
   
-  console.log("cpmbin", result);
   if(loading && !result){
     return(
       <Loader/>
@@ -157,7 +149,7 @@ const ProductList = (props) => {
           <FlatList 
           key={'#'} 
           numColumns={4}
-          data={result.products} 
+          data={result} 
           keyExtractor={(item, index) => String(index)}
           // extraData={Colors, orientation}
           renderItem={({item, index}) => 
@@ -172,7 +164,7 @@ const ProductList = (props) => {
         ):(
           <FlatList  
           numColumns={2}
-          data={result.products} 
+          data={result} 
           keyExtractor={(item, index) => String(index)}
           // extraData={Colors, orientation}
           renderItem={({item, index}) => 
