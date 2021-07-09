@@ -1,11 +1,13 @@
 import React, {useState, useEffect, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
-import { ScrollView, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView, FlatList, View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import Dialog, { SlideAnimation, DialogContent } from 'react-native-popup-dialog';
 import * as services from '../services/api';
 import Loader from '../component/Loader';
+import InfiniteScrollIndicator from '../component/InfiniteScrollIndicator';
 import CkeckBoxs from '../component/CheckBoxs';
 import Colors from '../constant/Colors';
+import Items from '../component/Items';
 import FlatProduct from '../component/FlatProduct';
 import Hairline from '../component/Hairline';
 import Htext from '../component/Htext';
@@ -14,7 +16,9 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 
 const ProductList = (props) => {
   const theme = useTheme();
+  const [orientation, setOrientation] = useState("PORTRAIT");
   const [loading, setLoading] = useState(true);
+  const [loadmore, SetLoadMore] = useState(true);
   const [result, setResult] = useState();
   const [visible, setVisible] = useState(false);
   const [isAll, setAll] = useState(true);
@@ -27,8 +31,6 @@ const ProductList = (props) => {
   const hideModal = () => setVisible(false);
 
   console.log('props', props);
-
-  const id = '5c2d7a59-fa80-d03c-4987-191ef935855c'
 
   useEffect (() => {
     if(props.route.params.Producthandel.name!='All Products'){
@@ -47,8 +49,16 @@ const ProductList = (props) => {
     setLoading(false)  
     console.log('data',data);
     })  
-  },[props.route.params.Producthandel.id])
 
+    Dimensions.addEventListener('change', ({window:{width,height}})=>{
+      if (width<height) {
+        setOrientation("PORTRAIT")
+      } else {
+        setOrientation("LANDSCAPE")
+    
+      }
+    })
+  },[props.route.params.Producthandel.id])
 
   useEffect(() => {
     props.navigation.setOptions({
@@ -60,6 +70,37 @@ const ProductList = (props) => {
     });
   },);
 
+  const renderFooter = () => {
+    return(
+      <View>
+        {loadmore && (
+          <InfiniteScrollIndicator/>
+        )}
+      </View>
+    )
+  }
+
+  const renderOnScroll = (e) => {
+    let paddingToBottom = 10;
+        paddingToBottom +=
+        e.nativeEvent.layoutMeasurement.height;
+        var currentOffset = e.nativeEvent.contentOffset.y;
+
+        var direction = currentOffset > 1 ? 'down' : 'up';
+        if (direction != 'up') {
+          if ( e.nativeEvent.contentOffset.y >= e.nativeEvent.contentSize.height - paddingToBottom ) {
+            console.log("sdad");
+            if (loadmore) {
+              console.log('next page');
+              SetLoadMore(true)
+              setTimeout(() => {
+              SetLoadMore(false)
+              // this.lodeMoreData();
+              }, 1000);
+            }
+          }
+        }
+  }
 
   if(loading===true && !result){
     return(
@@ -69,8 +110,39 @@ const ProductList = (props) => {
 
     return (
       <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
-        <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} productdata={result.products}/>
-        
+        {orientation==='LANDSCAPE'?( 
+          <FlatList 
+          key={'#'} 
+          numColumns={4}
+          data={result.products} 
+          keyExtractor={(item, index) => String(index)}
+          // extraData={Colors, orientation}
+          renderItem={({item, index}) => 
+          { 
+            return(
+              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
+            )
+          }}
+          ListFooterComponent={renderFooter}
+          onScroll={e => renderOnScroll(e)}
+          />
+        ):(
+          <FlatList  
+          numColumns={2}
+          data={result.products} 
+          keyExtractor={(item, index) => String(index)}
+          // extraData={Colors, orientation}
+          renderItem={({item, index}) => 
+          { 
+            return(
+              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
+            )
+          }}
+          ListFooterComponent={renderFooter}
+          onScroll={e => renderOnScroll(e)}
+        />
+        )
+        }
         <Dialog
           height="45%"
           width='100%'

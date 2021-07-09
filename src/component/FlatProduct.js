@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import { StyleSheet, View, Image, Dimensions, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, ScrollView, View, Image, Dimensions, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useTheme } from '@ui-kitten/components';
 import Colors from '../constant/Colors';
 import Currency from '../component/Currency';
@@ -8,6 +8,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 
  const FlatProduct = (props) => { 
   const [orientation, setOrientation] = useState("PORTRAIT");
+  const [loading, onSetLoading] = useState(true);
   const theme = useTheme();
 
   useEffect(() => {
@@ -34,11 +35,30 @@ import AntDesign from "react-native-vector-icons/AntDesign";
           </View>
         </TouchableOpacity>
         <View style={styles.cover}>
-          <Currency style={{color: theme['text-basic-color'],textAlign:"center", margin:10, fontSize:15}} currencyCode={item.price.currency} amount={item.price.price}/>
+          <Currency style={{color: theme['text-basic-color'],textAlign:"center", margin:5, fontSize:15}} currencyCode={item.price.currency} amount={item.price.price}/>
           <TouchableOpacity onPress={props.onPress1}>
-            <AntDesign style={{ marginLeft:10,marginTop:12}} name='hearto'  color={theme['text-basic-color']} size={15} />
+            <AntDesign style={{ marginLeft:10,marginTop:8}} name='hearto'  color={theme['text-basic-color']} size={15} />
           </TouchableOpacity>  
         </View>
+      </View>
+    )
+  }
+
+  const renderFooter = () => {
+    return(
+      <View>
+        {loading && (
+          <View style={{
+            width: '100%',
+            height: '100%',
+            alignItems: 'center',
+            flex:1,
+            justifyContent: 'flex-end',
+            position: 'relative'
+          }}>
+                <ActivityIndicator size="large" color={'red'} />
+          </View>
+        )}
       </View>
     )
   }
@@ -71,9 +91,33 @@ import AntDesign from "react-native-vector-icons/AntDesign";
       keyExtractor={(item, index) => String(index)}
       extraData={Colors, orientation}
       renderItem={renderItem}
+      ListFooterComponent={renderFooter}
+      onScroll={e => {
+        let paddingToBottom = 10;
+        paddingToBottom +=
+        e.nativeEvent.layoutMeasurement.height;
+        var currentOffset = e.nativeEvent.contentOffset.y;
+
+        var direction = currentOffset > 1 ? 'down' : 'up';
+        if (direction != 'up') {
+          if ( e.nativeEvent.contentOffset.y >= e.nativeEvent.contentSize.height - paddingToBottom ) {
+            console.log("sdad");
+            if (loading ) 
+             {
+              console.log('next page');
+              onSetLoading(true)
+              setTimeout(() => {
+                onSetLoading(false)
+                // this.lodeMoreData();
+              }, 1000);
+            }
+          }
+        }
+      }}
     />
     )
     )}
+    
     </View>
   );
 }
