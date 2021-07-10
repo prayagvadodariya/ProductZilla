@@ -8,10 +8,8 @@ import InfiniteScrollIndicator from '../component/InfiniteScrollIndicator';
 import CkeckBoxs from '../component/CheckBoxs';
 import Colors from '../constant/Colors';
 import Items from '../component/Items';
-import FlatProduct from '../component/FlatProduct';
 import Hairline from '../component/Hairline';
 import Htext from '../component/Htext';
-import * as StaticData from '../constant/StaticData';
 import AntDesign from "react-native-vector-icons/AntDesign";
 
 const ProductList = (props) => {
@@ -21,6 +19,7 @@ const ProductList = (props) => {
   const [loadmore, SetLoadMore] = useState(false);
   const [result, setResult] = useState(null);
   const [offset, setOffset] = useState(0);
+  const [isFetching, setFetching] = useState(false);
   const [visible, setVisible] = useState(false);
   const [isAll, setAll] = useState(true);
   const [isPreWorkout, setPreWorkout] = useState(false);
@@ -31,10 +30,9 @@ const ProductList = (props) => {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
-  
-  useEffect (() => {
+  const Parameter = (offset) => {
     if(props.route.params.Producthandel.name!='All Products'){
-      var Parameter = {
+      return  {
         "query":{
           "filter":`{\"collections.id\": { \"$hasSome\": ["${props.route.params.Producthandel.id}"]} }`,
           "paging": { 
@@ -44,17 +42,18 @@ const ProductList = (props) => {
         }
       }
     }
-    else{
-      var Parameter = {
+    return {
         "query":{
-        "paging": { 
-          "limit": 10, 
-          "offset": offset
+          "paging": { 
+            "limit": 10, 
+            "offset": offset
+          }
         }
       }
-    }
-    }
-    services.onProductsApi(Parameter).then(data => {
+  }
+
+  useEffect (() => {
+    services.onProductsApi(Parameter(offset)).then(data => {
     setResult(data.products)  
     setLoading(false)  
     })  
@@ -89,34 +88,21 @@ const ProductList = (props) => {
     )
   }
 
-  const lodeMoreData = () => {
-    
-    if(props.route.params.Producthandel.name!='All Products'){
-      var Parameter = {
-        "query":{
-          "filter":`{\"collections.id\": { \"$hasSome\": ["${props.route.params.Producthandel.id}"]} }`,
-          "paging": { 
-            "limit": 10, 
-            "offset": offset + 10 
-          }
-        }
-      }
-    }
-    else{
-      var Parameter = {
-        "query":{
-          "paging": { 
-            "limit": 10, 
-            "offset": offset + 10 
-          }
-        }
-      }
-    }
-    services.onProductsApi(Parameter).then(data => {
+  const lodeMoreData = () => {    
+    services.onProductsApi(Parameter(offset+10)).then(data => {
       setResult([...result, ...data.products]); 
       SetLoadMore(false); 
       setOffset(offset+10);
-      })
+    })
+  }
+
+  const onRefresh = () => {
+    setFetching(true); 
+    services.onProductsApi(Parameter(0)).then(data => {
+      setResult(data.products); 
+      setFetching(false); 
+      setOffset(0);
+    })
   }
 
   const renderOnScroll = (e) => {
@@ -160,6 +146,8 @@ const ProductList = (props) => {
           }}
           ListFooterComponent={renderFooter}
           onScroll={e => renderOnScroll(e)}
+          onRefresh={() => onRefresh()}
+          refreshing={isFetching}
           />
         ):(
           <FlatList  
@@ -175,8 +163,10 @@ const ProductList = (props) => {
           }}
           ListFooterComponent={renderFooter}
           onScroll={e => renderOnScroll(e)}
-        />
-        )
+          onRefresh={() => onRefresh()}
+          refreshing={isFetching}
+          />
+          )
         }
         <Dialog
           height="45%"
