@@ -22,9 +22,8 @@ const ProductList = (props) => {
   const [isFetching, setFetching] = useState(false);
   const [visible, setVisible] = useState(false);
   const [isAll, setAll] = useState(true);
-  const [isPreWorkout, setPreWorkout] = useState(false);
-  const [isCapsules, setCapsules] = useState(false);
-  const [isProteinPowder, setProteinPowder] = useState(false);
+  const [isAz, setAz] = useState(false);
+  const [isZa, setZa] = useState(false);
   const [isPriceLow, setPriceLow] = useState(false);
   const [isPriceHigh, setPriceHigh] = useState(false);
   const showModal = () => setVisible(true);
@@ -122,6 +121,13 @@ const ProductList = (props) => {
           }
         }
   }
+
+  useEffect (() => {
+    services.onProductsApi().then(data => {
+    // setResult(data.products)  
+    console.log("filterdata", data);
+    })
+  },[])  
   
   if(loading && !result){
     return(
@@ -169,7 +175,7 @@ const ProductList = (props) => {
           )
         }
         <Dialog
-          height="45%"
+          height="40%"
           width='100%'
           containerStyle={{flex:1,justifyContent:'flex-end', alignItems:'flex-end', marginBottom:-10}}
           dialogStyle={{borderTopLeftRadius:15, borderTopRightRadius:15, backgroundColor: theme['background-basic-color-2']}}
@@ -197,31 +203,23 @@ const ProductList = (props) => {
               />
 
               <CkeckBoxs
-                label='Pre Workout'
-                value={isPreWorkout}
-                onValueChange={setPreWorkout}
+                label='A-Z'
+                value={isAz}
+                onValueChange={setAz}
                 tintColors={{ true: Colors.mainText }}
                 tintColor={{ true: Colors.mainText }}
                 textColor={theme['text-custome-color']}
               />
 
               <CkeckBoxs
-                label='Capsules'
-                value={isCapsules}
-                onValueChange={setCapsules}
+                label='Z-A'
+                value={isZa}
+                onValueChange={setZa}
                 tintColors={{ true: Colors.mainText }}
                 tintColor={{ true: Colors.mainText }}
                 textColor={theme['text-custome-color']}
               />
 
-              <CkeckBoxs
-                label='Protein Powder'
-                value={isProteinPowder}
-                onValueChange={setProteinPowder}
-                tintColors={{ true: Colors.mainText }}
-                tintColor={{ true: Colors.mainText }}
-                textColor={theme['text-custome-color']}
-              />
 
               <CkeckBoxs
                 label='Price - Low To High'
