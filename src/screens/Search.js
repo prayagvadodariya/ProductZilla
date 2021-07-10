@@ -6,6 +6,7 @@ import Loader from '../component/Loader';
 import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
 import Cbutton from '../component/Cbutton';
+import Items from '../component/Items';
 import FlatProduct from '../component/FlatProduct';
 import BackgroundImage from '../component/BackgroundImage';
 import Card from '../component/Card';
@@ -16,12 +17,25 @@ const Search = (props) => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [result, setResult] = useState();
+  const [product, setProduct] = useState();
   const theme = useTheme();
 
+  const Parameter = (id) => {
+      return  {
+        "query":{
+          "filter":`{\"collections.id\": { \"$hasSome\": ["${id}"]} }`,
+        }
+      }
+    }
+
   useEffect (() => {
+
     services.onCollectionsApi().then(data => {
-    setResult(data)  
-    setLoading(false)  
+      setResult(data)
+    services.onProductsApi(Parameter(data.collections[4].id)).then(data => {
+      setProduct(data.products)
+      setLoading(false)    
+      })      
     console.log('data',data);
     })  
   },[])
@@ -73,6 +87,22 @@ const Search = (props) => {
              }
            </Card>
           )}}
+        />
+
+        <View style={{ alignSelf:'center', marginTop:25, marginBottom:15 }}>
+          <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic'>{result.collections[4].name}</Htext>
+        </View>
+
+        <FlatList
+          horizontal={true}
+          data={product} 
+          keyExtractor={(item, index) => String(index)}
+          renderItem={({item, index}) => 
+          { 
+            return(
+              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
+            )
+          }}
         />
 
         <View style={{flex:1,justifyContent:'flex-end', alignItems:'flex-end', margin:20}}>

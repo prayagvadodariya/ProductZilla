@@ -1,11 +1,12 @@
 import React, {useState, useEffect, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
 import { ScrollView, FlatList, View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { CheckBox} from "react-native-elements";
 import Dialog, { SlideAnimation, DialogContent } from 'react-native-popup-dialog';
 import * as services from '../services/api';
 import Loader from '../component/Loader';
 import InfiniteScrollIndicator from '../component/InfiniteScrollIndicator';
-import CkeckBoxs from '../component/CheckBoxs';
+import * as StaticData from '../constant/StaticData';
 import Colors from '../constant/Colors';
 import Items from '../component/Items';
 import Hairline from '../component/Hairline';
@@ -21,7 +22,8 @@ const ProductList = (props) => {
   const [offset, setOffset] = useState(0);
   const [isFetching, setFetching] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [isAll, setAll] = useState(true);
+  const [isSelected, setSelection] = useState(0);
+  const [isAll, setAll] = useState(1);
   const [isAz, setAz] = useState(false);
   const [isZa, setZa] = useState(false);
   const [isPriceLow, setPriceLow] = useState(false);
@@ -127,7 +129,12 @@ const ProductList = (props) => {
     // setResult(data.products)  
     console.log("filterdata", data);
     })
-  },[])  
+  },[]) 
+
+
+  const onselect = (val) => {
+    setSelection(val.id);
+  }
   
   if(loading && !result){
     return(
@@ -193,51 +200,19 @@ const ProductList = (props) => {
 
               <Htext style={{color:Colors.gray, fontSize:30, fontFamily:'CHESTER-Basic', textAlign:'left', marginTop:10 }}>SHORT BY :</Htext>
               
-              <CkeckBoxs
-                label='All'
-                value={isAll}
-                onValueChange={setAll}
-                tintColors={{ true: Colors.mainText }}
-                tintColor={{ true: Colors.mainText }}
-                textColor={theme['text-custome-color']}
+              {StaticData.Filter.map(data => (
+                <CheckBox
+                key={data.id}
+                onPress={()=> onselect(data)}
+                title={data.label}
+                checked={isSelected===data.id}
+                iconLeft={true}
+                checkedColor={Colors.mainText}
+                // uncheckedColor='#848896'
+                textStyle={{color:theme['text-custome-color'], fontFamily:'PTSans-Regular'}}
+                containerStyle={{backgroundColor:'transparent', borderColor:'transparent', margin:-5, marginLeft:-10}}
               />
-
-              <CkeckBoxs
-                label='A-Z'
-                value={isAz}
-                onValueChange={setAz}
-                tintColors={{ true: Colors.mainText }}
-                tintColor={{ true: Colors.mainText }}
-                textColor={theme['text-custome-color']}
-              />
-
-              <CkeckBoxs
-                label='Z-A'
-                value={isZa}
-                onValueChange={setZa}
-                tintColors={{ true: Colors.mainText }}
-                tintColor={{ true: Colors.mainText }}
-                textColor={theme['text-custome-color']}
-              />
-
-
-              <CkeckBoxs
-                label='Price - Low To High'
-                value={isPriceLow}
-                onValueChange={setPriceLow}
-                tintColors={{ true: Colors.mainText }}
-                tintColor={{ true: Colors.mainText }}
-                textColor={theme['text-custome-color']}
-              />      
-
-              <CkeckBoxs
-                label='Price - High To Low'
-                value={isPriceHigh}
-                onValueChange={setPriceHigh}
-                tintColors={{ true: Colors.mainText }}
-                tintColor={{ true: Colors.mainText }}
-                textColor={theme['text-custome-color']}
-              />  
+              ))}
             </ScrollView>
           </DialogContent>
         </Dialog>  
