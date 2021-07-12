@@ -7,16 +7,15 @@ import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
 import Cbutton from '../component/Cbutton';
 import Items from '../component/Items';
-import FlatProduct from '../component/FlatProduct';
 import BackgroundImage from '../component/BackgroundImage';
 import Card from '../component/Card';
 import * as services from '../services/api';
-import * as StaticData from '../constant/StaticData';
 
 const Search = (props) => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [result, setResult] = useState();
+  const [mainproduct, setMainProduct] = useState();
   const [product, setProduct] = useState();
   const theme = useTheme();
 
@@ -32,11 +31,13 @@ const Search = (props) => {
 
     services.onCollectionsApi().then(data => {
       setResult(data)
-    services.onProductsApi(Parameter(data.collections[4].id)).then(data => {
+      let val = data.collections.find(item => item.name === 'Protein Powder');
+      setMainProduct(val)
+    services.onProductsApi(Parameter(val.id)).then(data => {
       setProduct(data.products)
       setLoading(false)    
       })      
-    console.log('data',data);
+    // console.log('data',data);
     })  
   },[])
 
@@ -44,7 +45,7 @@ const Search = (props) => {
     setSearch(search);
   }
   
-  if(loading===true && !result){
+  if(loading===true && !result && !mainproduct){
     return(
       <Loader/>
     )
@@ -90,7 +91,7 @@ const Search = (props) => {
         />
 
         <View style={{ alignSelf:'center', marginTop:25, marginBottom:15 }}>
-          <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic'>{result.collections[4].name}</Htext>
+          <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic'>{mainproduct.name}</Htext>
         </View>
 
         <FlatList
@@ -106,7 +107,7 @@ const Search = (props) => {
         />
 
         <View style={{flex:1,justifyContent:'flex-end', alignItems:'flex-end', margin:20}}>
-         <Cbutton textcolor={Colors.mainText} bcolor="transparent" bwidth={120} bheight={42} bordercolor={Colors.mainText}>SEE ALL</Cbutton>
+         <Cbutton onPress={() => props.navigation.navigate("ProductList",{ Producthandel: mainproduct })} textcolor={Colors.mainText} bcolor="transparent" bwidth={120} bheight={42} bordercolor={Colors.mainText}>SEE ALL</Cbutton>
         </View>
 
       </ScrollView>

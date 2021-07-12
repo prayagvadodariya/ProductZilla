@@ -57,6 +57,7 @@ const ProductList = (props) => {
     services.onProductsApi(Parameter(offset)).then(data => {
     setResult(data.products)  
     setLoading(false)  
+    console.log('check', data.products);
     })  
 
     Dimensions.addEventListener('change', ({window:{width,height}})=>{
