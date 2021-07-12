@@ -139,9 +139,9 @@ const ProductList = (props) => {
     }else if(val.label==='Z-A'){
       var param = {"query": Object.assign({}, Parameter(0).query, {"sort":"[{\"name\": \"desc\"}]"})}
     }else if(val.label==='Price - Low To High'){
-      var param = {"query": Object.assign({}, Parameter(0).query, {"sort":"[{\"price\": \"desc\"}]"})}
-    }else if(val.label==='Price - High To Low'){
       var param = {"query": Object.assign({}, Parameter(0).query, {"sort":"[{\"price\": \"asc\"}]"})}
+    }else if(val.label==='Price - High To Low'){
+      var param = {"query": Object.assign({}, Parameter(0).query, {"sort":"[{\"price\": \"desc\"}]"})}
     }
     console.log('param', param);
     services.onProductsApi(param).then(data => {
