@@ -44,8 +44,10 @@ const Search = (props) => {
   const updateSearch = (search) => {
     setSearch(search);
   }
+
+  console.log('data1',mainproduct);
   
-  if(loading===true && !result && !mainproduct){
+  if(loading===true  && !product){
     return(
       <Loader/>
     )

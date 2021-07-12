@@ -23,11 +23,6 @@ const ProductList = (props) => {
   const [isFetching, setFetching] = useState(false);
   const [visible, setVisible] = useState(false);
   const [isSelected, setSelection] = useState(0);
-  const [isAll, setAll] = useState(1);
-  const [isAz, setAz] = useState(false);
-  const [isZa, setZa] = useState(false);
-  const [isPriceLow, setPriceLow] = useState(false);
-  const [isPriceHigh, setPriceHigh] = useState(false);
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
@@ -39,7 +34,8 @@ const ProductList = (props) => {
           "paging": { 
             "limit": 10, 
             "offset": offset
-          }
+          },
+
         }
       }
     }
@@ -132,9 +128,25 @@ const ProductList = (props) => {
     })
   },[]) 
 
-
   const onselect = (val) => {
-    setSelection(val.id);
+    setSelection(val.id); 
+    setOffset(0);
+    console.log("filterapplay", val);
+    if(val.label==='All'){
+    var param = Parameter(0);
+    }else if(val.label==='A-Z'){
+    var param = {"query": Object.assign({}, Parameter(0).query, {"sort":"[{\"name\": \"asc\"}]"})} 
+    }else if(val.label==='Z-A'){
+      var param = {"query": Object.assign({}, Parameter(0).query, {"sort":"[{\"name\": \"desc\"}]"})}
+    }else if(val.label==='Price - Low To High'){
+      var param = {"query": Object.assign({}, Parameter(0).query, {"sort":"[{\"price\": \"desc\"}]"})}
+    }else if(val.label==='Price - High To Low'){
+      var param = {"query": Object.assign({}, Parameter(0).query, {"sort":"[{\"price\": \"asc\"}]"})}
+    }
+    console.log('param', param);
+    services.onProductsApi(param).then(data => {
+      setResult(data.products)
+    });
   }
   
   if(loading && !result){
