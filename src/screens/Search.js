@@ -15,9 +15,12 @@ const Search = (props) => {
   const [orientation, setOrientation] = useState("PORTRAIT");
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
+  const [searchProduct, setSearchProduct] = useState();
   const [result, setResult] = useState();
   const [mainproduct, setMainProduct] = useState();
   const [product, setProduct] = useState();
+  const [offset, setOffset] = useState(0);
+  const [isFetching, setFetching] = useState(false);
   const theme = useTheme();
 
   const Parameter = (id) => {
@@ -28,6 +31,18 @@ const Search = (props) => {
       }
     }
 
+   const newParam = (offset, search) =>{
+    return {
+      "query":{
+        "filter":`{\"name\": { \"$contains\": ["${search}"]} }`,
+        "paging": { 
+          "limit": 10, 
+          "offset": offset
+        }
+      }
+    }
+   } 
+
   useEffect (() => {
     services.onCollectionsApi().then(data => {
       setResult(data)
@@ -37,7 +52,6 @@ const Search = (props) => {
       setProduct(data.products)
       setLoading(false)    
       })      
-    // console.log('data',data);
     })  
     Dimensions.addEventListener('change', ({window:{width,height}})=>{
       if (width<height) {
@@ -51,6 +65,11 @@ const Search = (props) => {
 
   const updateSearch = (search) => {
     setSearch(search);
+    services.onProductsApi(newParam(0, search)).then(data => {
+      setSearchProduct(data.products)
+      setLoading(false)    
+    })  
+
   }
 
   console.log('data1',search);
@@ -77,7 +96,7 @@ const Search = (props) => {
           <FlatList 
           key={'#'} 
           numColumns={4}
-          data={product} 
+          data={searchProduct} 
           keyExtractor={(item, index) => String(index)}
           // extraData={Colors, orientation}
           renderItem={({item, index}) => 
@@ -94,7 +113,7 @@ const Search = (props) => {
         ):(
           <FlatList  
           numColumns={2}
-          data={product} 
+          data={searchProduct} 
           keyExtractor={(item, index) => String(index)}
           renderItem={({item, index}) => 
           { 
@@ -119,9 +138,7 @@ const Search = (props) => {
 
           <View style={{ alignSelf:'flex-start',marginTop:20, marginLeft:10, marginRight:10 }}>
             <Htext color={theme['text-basic-color']} fontsize={20} >SHOP BY</Htext>
-          </View>
-
-          
+          </View>    
 
           <FlatList
             horizontal={true}
