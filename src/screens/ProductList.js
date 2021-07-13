@@ -147,13 +147,6 @@ const ProductList = (props) => {
         }
   }
 
-  useEffect (() => {
-    services.onProductsApi().then(data => {
-    // setResult(data.products)  
-    console.log("filterdata", data);
-    })
-  },[]) 
-
   const onselect = (val) => {
     setSelection(val.label); 
     setOffset(0);

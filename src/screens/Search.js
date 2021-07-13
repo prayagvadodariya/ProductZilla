@@ -1,6 +1,7 @@
 import React, {useState, useEffect, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
 import { View, StyleSheet, FlatList, ScrollView, Dimensions } from 'react-native';
+import InfiniteScrollIndicator from '../component/InfiniteScrollIndicator';
 import { SearchBar } from 'react-native-elements';
 import Loader from '../component/Loader';
 import Colors from '../constant/Colors';
@@ -14,6 +15,7 @@ import * as services from '../services/api';
 const Search = (props) => {
   const [orientation, setOrientation] = useState("PORTRAIT");
   const [loading, setLoading] = useState(true);
+  const [loadmore, SetLoadMore] = useState(false);
   const [search, setSearch] = useState('');
   const [searchProduct, setSearchProduct] = useState();
   const [result, setResult] = useState();
@@ -63,7 +65,7 @@ const Search = (props) => {
     })
   },[])
 
-  const updateSearch = (search) => {
+  const onSearch = (search) => {
     setSearch(search);
     services.onProductsApi(newParam(0, search)).then(data => {
       setSearchProduct(data.products)
@@ -72,7 +74,50 @@ const Search = (props) => {
 
   }
 
-  console.log('data1',search);
+  const renderFooter = () => {
+    return(
+      <View>
+        {loadmore && (
+          <InfiniteScrollIndicator/>
+        )}
+      </View>
+    )
+  }
+
+  const lodeMoreData = () => { 
+    services.onProductsApi(newParam(offset+10, search)).then(data => {
+      setSearchProduct([...searchProduct, ...data.products]); 
+      SetLoadMore(false); 
+      setOffset(offset+10);
+    })
+  }
+
+  const onRefresh = () => {
+    setFetching(true); 
+    services.onProductsApi(newParam(0, search)).then(data => {
+      setSearchProduct(data.products); 
+      setFetching(false); 
+      setOffset(0);
+    })
+  }
+
+  const renderOnScroll = (e) => {
+    let paddingToBottom = 10;
+        paddingToBottom +=
+        e.nativeEvent.layoutMeasurement.height;
+        var currentOffset = e.nativeEvent.contentOffset.y;
+
+        var direction = currentOffset > offset ? 'down' : 'up';
+
+        if (direction === 'down') {
+          if ( e.nativeEvent.contentOffset.y >= e.nativeEvent.contentSize.height - paddingToBottom ) {
+            if (searchProduct.length >= 10) {
+              SetLoadMore(true)
+              lodeMoreData();
+            }
+          }
+        }
+  }
   
   if(loading===true  && !product){
     return(
@@ -87,7 +132,7 @@ const Search = (props) => {
           inputContainerStyle= {{backgroundColor:"white", borderRadius:6, margin:4, height:40}}
           inputStyle={{backgroundColor: 'white', fontSize:15}}
           placeholder="Type Here..."
-          onChangeText={updateSearch}
+          onChangeText={onSearch}
           value={search}
         />
         {search!=''?
@@ -105,10 +150,10 @@ const Search = (props) => {
               <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
             )
           }}
-          // ListFooterComponent={renderFooter}
-          // onScroll={e => renderOnScroll(e)}
-          // onRefresh={() => onRefresh()}
-          // refreshing={isFetching}
+          ListFooterComponent={renderFooter}
+          onScroll={e => renderOnScroll(e)}
+          onRefresh={() => onRefresh()}
+          refreshing={isFetching}
           />
         ):(
           <FlatList  
@@ -121,10 +166,10 @@ const Search = (props) => {
               <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
             )
           }}
-          // ListFooterComponent={renderFooter}
-          // onScroll={e => renderOnScroll(e)}
-          // onRefresh={() => onRefresh()}
-          // refreshing={isFetching}
+          ListFooterComponent={renderFooter}
+          onScroll={e => renderOnScroll(e)}
+          onRefresh={() => onRefresh()}
+          refreshing={isFetching}
           />
           )
         }

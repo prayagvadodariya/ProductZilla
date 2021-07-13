@@ -12,7 +12,6 @@ import Hairline from '../component/Hairline';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import ActionButton from '../component/ActionButton';
 import ImageSlider from 'react-native-image-slider';
-import FlatProduct from '../component/FlatProduct';
 import * as StaticData from '../constant/StaticData';
 
 const ProductDetails = (props) => {
