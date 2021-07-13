@@ -22,7 +22,7 @@ const ProductList = (props) => {
   const [offset, setOffset] = useState(0);
   const [isFetching, setFetching] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [isSelected, setSelection] = useState(0);
+  const [isSelected, setSelection] = useState('All');
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
@@ -47,6 +47,20 @@ const ProductList = (props) => {
           }
         }
       }
+  }
+
+  const UpdateParam = (val,offset) => {
+    if(val==='All'){
+      return Parameter(offset);
+    }else if(val==='A-Z'){
+      return {"query": Object.assign({}, Parameter(offset).query, {"sort":"[{\"name\": \"asc\"}]"})} 
+    }else if(val==='Z-A'){
+      return {"query": Object.assign({}, Parameter(offset).query, {"sort":"[{\"name\": \"desc\"}]"})}
+    }else if(val==='Price - Low To High'){
+      return {"query": Object.assign({}, Parameter(offset).query, {"sort":"[{\"price\": \"asc\"}]"})}
+    }else if(val==='Price - High To Low'){
+      return {"query": Object.assign({}, Parameter(offset).query, {"sort":"[{\"price\": \"desc\"}]"})}
+    }
   }
 
   useEffect (() => {
@@ -86,8 +100,14 @@ const ProductList = (props) => {
     )
   }
 
-  const lodeMoreData = () => {    
-    services.onProductsApi(Parameter(offset+10)).then(data => {
+  const lodeMoreData = () => { 
+    var param = ''
+    if(isSelected==='All'){
+     param = Parameter(offset+10)
+    }else{
+     param = UpdateParam(isSelected, offset+10)  
+    }
+    services.onProductsApi(param).then(data => {
       setResult([...result, ...data.products]); 
       SetLoadMore(false); 
       setOffset(offset+10);
@@ -96,7 +116,13 @@ const ProductList = (props) => {
 
   const onRefresh = () => {
     setFetching(true); 
-    services.onProductsApi(Parameter(0)).then(data => {
+    var param = ''
+    if(isSelected==='All'){
+     param = Parameter(0)
+    }else{
+     param = UpdateParam(isSelected, 0)  
+    }
+    services.onProductsApi(param).then(data => {
       setResult(data.products); 
       setFetching(false); 
       setOffset(0);
@@ -129,22 +155,10 @@ const ProductList = (props) => {
   },[]) 
 
   const onselect = (val) => {
-    setSelection(val.id); 
+    setSelection(val.label); 
     setOffset(0);
     console.log("filterapplay", val);
-    if(val.label==='All'){
-    var param = Parameter(0);
-    }else if(val.label==='A-Z'){
-    var param = {"query": Object.assign({}, Parameter(0).query, {"sort":"[{\"name\": \"asc\"}]"})} 
-    }else if(val.label==='Z-A'){
-      var param = {"query": Object.assign({}, Parameter(0).query, {"sort":"[{\"name\": \"desc\"}]"})}
-    }else if(val.label==='Price - Low To High'){
-      var param = {"query": Object.assign({}, Parameter(0).query, {"sort":"[{\"price\": \"asc\"}]"})}
-    }else if(val.label==='Price - High To Low'){
-      var param = {"query": Object.assign({}, Parameter(0).query, {"sort":"[{\"price\": \"desc\"}]"})}
-    }
-    console.log('param', param);
-    services.onProductsApi(param).then(data => {
+    services.onProductsApi(UpdateParam(val.label, 0)).then(data => {
       setResult(data.products)
     });
   }
@@ -215,10 +229,10 @@ const ProductList = (props) => {
               
               {StaticData.Filter.map(data => (
                 <CheckBox
-                key={data.id}
+                key={data.label}
                 onPress={()=> onselect(data)}
                 title={data.label}
-                checked={isSelected===data.id}
+                checked={isSelected===data.label}
                 iconLeft={true}
                 checkedColor={Colors.mainText}
                 // uncheckedColor='#848896'
