@@ -1,6 +1,7 @@
 import React, {useState, useEffect, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
-import { Text, ScrollView, View, StyleSheet, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
+import { Text, ScrollView, View, StyleSheet, ImageBackground, Dimensions, TouchableOpacity, Modal } from 'react-native';
+import ImageViewer from 'react-native-image-zoom-viewer';
 import * as services from '../services/api';
 import Loader from '../component/Loader';
 import Colors from '../constant/Colors';
@@ -21,7 +22,6 @@ const ProductDetails = (props) => {
   const theme = useTheme();
 
   useEffect (() => {
-  
     services.onProductsDetailsApi(props.route.params.Producthandel).then(data => {
     setResult(data.product)  
     setLoading(false)  
