@@ -1,6 +1,6 @@
 import React, {useState, useEffect, Component} from 'react';
-import { useTheme } from '@ui-kitten/components';
-import { Text, ScrollView, View, StyleSheet, ImageBackground, Dimensions, TouchableOpacity, Modal } from 'react-native';
+import { useTheme, Button, Card, Layout, Modal } from '@ui-kitten/components';
+import { Text, ScrollView, View, StyleSheet, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import * as services from '../services/api';
 import Loader from '../component/Loader';
@@ -13,9 +13,11 @@ import Hairline from '../component/Hairline';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import ActionButton from '../component/ActionButton';
 import ImageSlider from 'react-native-image-slider';
+import ModalBox from '../component/ModalBox';
 import * as StaticData from '../constant/StaticData';
 
 const ProductDetails = (props) => {
+  const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState();
   const [isVisible, setIsVisible] = useState(false);
@@ -32,6 +34,13 @@ const ProductDetails = (props) => {
   const toggleFunction = () => {
     setIsVisible(!isVisible);
   }; 
+
+  const images = [{
+    url: 'https://static8.depositphotos.com/1020341/896/i/950/depositphotos_8969502-stock-photo-human-face-with-cracked-texture.jpg',
+    // width:200,
+    // height:200,
+    // backgroundColor:'white'
+  }]
 
   if(loading===true && !result){
     return(
@@ -50,12 +59,28 @@ const ProductDetails = (props) => {
               images={result.media.items}
               customSlide={({ index, item, style, width }) => {
               return(
-                <TouchableOpacity key={index} style={styles.top}>  
+                <TouchableOpacity onPress={() => setVisible(true)} key={index} style={styles.top}>  
                   <ImageBackground source={{uri: item.image.url}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>    
                 </TouchableOpacity>
               )}}
           />
         </View>  
+        
+        <Modal visible={visible} style={{width:"100%", height:"100%", backgroundColor: theme['background-basic-color-2']}}>
+          
+         {/* <AntDesign style={{ flex:1,alignSelf:'flex-end', marginTop:15, marginRight:15 }} name='close' color={theme['text-custome-color']} size={30} onPress={() => setVisible(false)} /> */}
+          <ImageViewer imageUrls={images} backgroundColor={theme['background-basic-color-2']} renderIndicator={() => null} renderArrowRight={() => {
+            return(
+              <AntDesign style={{ marginRight:15}} name='close' color={theme['text-custome-color']} size={30} onPress={() => setVisible(false)} />
+            )
+          }} />
+        </Modal>
+
+        {/* <ModalBox margin={0} padding={0} borderRadius={0} onBackdropPress={() => setVisible(false)} visible={visible}>
+         {<ImageViewer backgroundColor="#fff" 
+          imageUrls={images}/>}
+         
+        </ModalBox> */}
 
         <Htext style={{ alignSelf:'flex-start', color:theme['text-basic-color'], fontSize:35, fontFamily:'DustWest', marginLeft:15, marginTop:25, marginBottom:5 }}>{result.name}</Htext>  
 
