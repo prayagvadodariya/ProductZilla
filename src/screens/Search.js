@@ -225,7 +225,7 @@ const Search = (props) => {
           />
 
           <View style={{flex:1,justifyContent:'flex-end', alignItems:'flex-end', margin:20}}>
-          <Cbutton onPress={() => props.navigation.navigate("ProductList",{ Producthandel: mainproduct })} textcolor={Colors.mainText} bcolor="transparent" bwidth={120} bheight={42} bordercolor={Colors.mainText}>SEE ALL</Cbutton>
+           <Cbutton onPress={() => props.navigation.navigate("ProductList",{ Producthandel: mainproduct })} textcolor={Colors.mainText} bcolor="transparent" bwidth={120} bheight={42} bordercolor={Colors.mainText}>SEE ALL</Cbutton>
           </View>
 
         </ScrollView>

@@ -1,10 +1,12 @@
 import React, {useState, useEffect, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
-import { Text, ScrollView, View, StyleSheet, ImageBackground, Dimensions, TouchableOpacity } from 'react-native';
+import { ScrollView, View, StyleSheet, ImageBackground, Dimensions, FlatList, TouchableOpacity } from 'react-native';
 import ImageView from 'react-native-image-view';
 import * as services from '../services/api';
 import Loader from '../component/Loader';
 import Colors from '../constant/Colors';
+import Cbutton from '../component/Cbutton';
+import Items from '../component/Items';
 import Htext from '../component/Htext';
 import Ntext from '../component/Ntext';
 import Currency from '../component/Currency';
@@ -13,21 +15,36 @@ import Hairline from '../component/Hairline';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import ActionButton from '../component/ActionButton';
 import ImageSlider from 'react-native-image-slider';
-import * as StaticData from '../constant/StaticData';
 
 const ProductDetails = (props) => {
   const [visible, setVisible] = React.useState(false);
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState();
+  const [product, setProduct] = useState();
   const [zoomimage, setZoomImage] = useState('');
   const [isVisible, setIsVisible] = useState(false);
   const theme = useTheme();
 
+  const Parameter = (id) => {
+    return  {
+      "query":{
+        "filter":`{\"collections.id\": { \"$hasSome\": ["${id}"]} }`,
+        "paging": { 
+          "limit": 10, 
+          "offset": 0
+        }
+      }
+    }
+  }
+
   useEffect (() => {
-    services.onProductsDetailsApi(props.route.params.Producthandel).then(data => {
-    setResult(data.product)  
-    setLoading(false)  
-    console.log('data',data);
+    services.onProductsDetailsApi(props.route.params.Producthandel).then(result => {
+    setResult(result.product) 
+    services.onProductsApi(Parameter(result.product.collectionIds[0])).then(data => {
+      setProduct(data.products)
+      console.log('data',data);
+      setLoading(false)    
+      })  
     })  
   },[props.route.params.Producthandel])
 
@@ -40,7 +57,7 @@ const ProductDetails = (props) => {
     setVisible(true) 
   }
 
-  if(loading===true && !result){
+  if(loading===true && !product){
     return(
       <Loader/>
     )
@@ -115,9 +132,27 @@ const ProductDetails = (props) => {
           <View style={styles.shar}><ActionButton icon='instagram'/></View>
         </View>
 
-        <Htext style={{ color:theme['text-basic-color'], fontSize:30, fontFamily:'CHESTER-Basic', marginBottom:10, text:'center', textAlign:'center' }}>RECENTLY VIEWED</Htext>
-        
-        {/* <FlatProduct onPress={(item) => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} showlayout={true} productdata={StaticData.Product_List}/> */}
+        <Htext style={{ color:theme['text-basic-color'], fontSize:31, fontFamily:'CHESTER-Basic', marginBottom:10, text:'center', textAlign:'center' }}>MORE IN THIS COLLECTION</Htext>
+
+
+          <FlatList
+            horizontal={true}
+            data={product} 
+            keyExtractor={(item, index) => String(index)}
+            renderItem={({item, index}) => 
+            { 
+              return(
+                <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
+              )
+            }}
+          />
+
+          <View style={{flex:1,justifyContent:'flex-end', alignItems:'flex-end', margin:20}}>
+           <Cbutton onPress={() => props.navigation.navigate("ProductList",{ Producthandel: {id: result.collectionIds[0]} })} textcolor={Colors.mainText} bcolor="transparent" bwidth={120} bheight={42} bordercolor={Colors.mainText}>SEE ALL</Cbutton>
+          </View>
+
+        <Htext style={{ color:theme['text-basic-color'], fontSize:31, fontFamily:'CHESTER-Basic', marginBottom:10, text:'center', textAlign:'center' }}>RECENTLY VIEWED</Htext>
+      
       </ScrollView>
     );
   }
