@@ -68,7 +68,6 @@ const ProductDetails = (props) => {
           glideAlways
           images={[{ source: { uri: zoomimage }}]}
           animationType='none'
-          useNativeDriver={true}
           isVisible={visible}
           onClose={() => setVisible(false)}
         />
