@@ -29,6 +29,10 @@ const Search = (props) => {
       return  {
         "query":{
           "filter":`{\"collections.id\": { \"$hasSome\": ["${id}"]} }`,
+          "paging": { 
+            "limit": 10, 
+            "offset": 0
+          }
         }
       }
     }
