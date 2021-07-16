@@ -3,10 +3,15 @@ import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { ThemeContext } from './src/constant/ThemeContext';
 import InitialLoadData from './src/component/InitialLoadData';
+import { Provider } from 'react-redux';
+import configureStore from './src/store/configureStore';
 import Router from './Router';
 import { default as lightTheme  } from './src/constant/light_theme.json';
 import { default as darkTheme } from './src/constant/dark_theme.json';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
+
+const initialState = {};
+const store = configureStore(initialState)
 
 const App = () => {
 
@@ -27,8 +32,10 @@ const App = () => {
       <ThemeContext.Provider value={{ theme, toggleTheme }}>
         <ApplicationProvider {...eva} theme={{ ...eva[theme], ...iscustomTheme }}>
           <IconRegistry icons={EvaIconsPack} />
+          <Provider store={store}>
           <InitialLoadData/>
           <Router/>
+          </Provider>
         </ApplicationProvider>
       </ThemeContext.Provider>  
   );

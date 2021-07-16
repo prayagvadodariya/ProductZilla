@@ -174,7 +174,7 @@ const ProductList = (props) => {
           renderItem={({item, index}) => 
           { 
             return(
-              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
+              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item })} item={item}/>
             )
           }}
           ListFooterComponent={renderFooter}
@@ -191,7 +191,7 @@ const ProductList = (props) => {
           renderItem={({item, index}) => 
           { 
             return(
-              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
+              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item })} item={item}/>
             )
           }}
           ListFooterComponent={renderFooter}

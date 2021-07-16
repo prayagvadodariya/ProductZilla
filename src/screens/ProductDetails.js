@@ -15,6 +15,7 @@ import Hairline from '../component/Hairline';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import ActionButton from '../component/ActionButton';
 import ImageSlider from 'react-native-image-slider';
+import * as StaticData from '../constant/StaticData';
 
 const ProductDetails = (props) => {
   const [visible, setVisible] = React.useState(false);
@@ -23,7 +24,15 @@ const ProductDetails = (props) => {
   const [product, setProduct] = useState();
   const [zoomimage, setZoomImage] = useState('');
   const [isVisible, setIsVisible] = useState(false);
-  const theme = useTheme();
+  const [resently, setResently] = useState([]);
+  const theme = useTheme(); 
+
+  // const add = setResently([...resently, ...props.route.params.Producthandel])
+  // let OK  = [props.route.params.Producthandel]
+  // useEffect (() => {
+  //   console.log('recentelyviewproduct',[...resently, ...OK]);
+  // })
+ 
 
   const Parameter = (id) => {
     return  {
@@ -38,7 +47,7 @@ const ProductDetails = (props) => {
   }
 
   useEffect (() => {
-    services.onProductsDetailsApi(props.route.params.Producthandel).then(result => {
+    services.onProductsDetailsApi(props.route.params.Producthandel.id).then(result => {
     setResult(result.product) 
     services.onProductsApi(Parameter(result.product.collectionIds[0])).then(data => {
       setProduct(data.products)
