@@ -8,4 +8,14 @@ const INITIAL_STATE =  {
 
 const RecentlyItemReducer =  (state = INITIAL_STATE, action) => {
 
+  switch (action.type) {
+    case Types.ADD_ITEM: {
+      // AsyncStorage.setItem(StorageKeys.WISHLIST_DATA, JSON.stringify([...state.data, action.item]));
+      return  {
+        data: [...state.data, action.item]
+      }
+    } 
+    default:
+      return state
+  }
 }

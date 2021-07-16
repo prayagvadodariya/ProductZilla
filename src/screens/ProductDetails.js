@@ -1,6 +1,8 @@
 import React, {useState, useEffect, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
 import { ScrollView, View, StyleSheet, ImageBackground, Dimensions, FlatList, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { addItemAction } from '../actions/RecentlyItemAction';
 import ImageView from 'react-native-image-view';
 import * as services from '../services/api';
 import Loader from '../component/Loader';
@@ -24,7 +26,7 @@ const ProductDetails = (props) => {
   const [product, setProduct] = useState();
   const [zoomimage, setZoomImage] = useState('');
   const [isVisible, setIsVisible] = useState(false);
-  const [resently, setResently] = useState([]);
+  const [resently, setResently] = useState(props.route.params.Producthandel);
   const theme = useTheme(); 
 
   // const add = setResently([...resently, ...props.route.params.Producthandel])

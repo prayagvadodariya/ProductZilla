@@ -1,1 +1,2 @@
 export const AUTH_TOKEN = 'AUTH_TOKEN';
+export const RECENTLY_VIEW_ITEMS = 'RECENTLY_VIEW_ITEMS';

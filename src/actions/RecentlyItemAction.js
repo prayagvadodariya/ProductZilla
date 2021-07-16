@@ -5,7 +5,11 @@ import * as StorageKeys from '../constant/StorageKeys';
 export const RecentlyItemStorageAction = () => {
 
 }
-
-export const addItemAction = () => {
-
-}
+export const addItemAction = (productitem) => {
+    return async (dispatch) => {
+      dispatch({
+        type: Types.ADD_ITEM,
+        item: productitem
+      });
+    }
+  }
