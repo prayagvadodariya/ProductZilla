@@ -14,8 +14,18 @@ const RecentlyItemReducer =  (state = INITIAL_STATE, action) => {
       return  {
         data: [...state.data, action.item]
       }
-    } 
+    }
+    case Types.REMOVE_ITEM: {
+      state.data.splice(action.index, 1);
+      // let setdatastore = state.data
+      // AsyncStorage.setItem(StorageKeys.USER_DATA, JSON.stringify(setdatastore))
+      return  {
+        data:  state.data
+      }
+    }  
     default:
       return state
   }
 }
+
+export default RecentlyItemReducer;

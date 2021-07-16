@@ -5,11 +5,22 @@ import * as StorageKeys from '../constant/StorageKeys';
 export const RecentlyItemStorageAction = () => {
 
 }
+
 export const addItemAction = (productitem) => {
-    return async (dispatch) => {
-      dispatch({
-        type: Types.ADD_ITEM,
-        item: productitem
-      });
-    }
+  return async (dispatch) => {
+    dispatch({
+      type: Types.ADD_ITEM,
+      item: productitem
+    });
   }
+}
+
+
+export const removeItemAction = (index) => {
+  return async (dispatch) => {
+    dispatch({
+      type: Types.REMOVE_ITEM,
+      index: index
+    });
+  }
+}

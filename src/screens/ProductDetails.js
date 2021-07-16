@@ -2,7 +2,7 @@ import React, {useState, useEffect, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
 import { ScrollView, View, StyleSheet, ImageBackground, Dimensions, FlatList, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { addItemAction } from '../actions/RecentlyItemAction';
+import { addItemAction, removeItemAction } from '../actions/RecentlyItemAction';
 import ImageView from 'react-native-image-view';
 import * as services from '../services/api';
 import Loader from '../component/Loader';
@@ -35,6 +35,34 @@ const ProductDetails = (props) => {
   //   console.log('recentelyviewproduct',[...resently, ...OK]);
   // })
  
+  useEffect (() => {
+   
+    if(props.recentlyViewItem.length===4){
+      var idchecker = props.recentlyViewItem.findIndex((em) => em.id===props.route.params.Producthandel.id);
+      if(idchecker!=-1){
+      console.log('4 and not last', idchecker);
+      props.removeItemAction(props.recentlyViewItem[idchecker])
+      props.addItemAction(props.route.params.Producthandel)
+      }else {
+        console.log('4 and last', idchecker);
+      props.removeItemAction(props.recentlyViewItem[3])
+      props.addItemAction(props.route.params.Producthandel)
+      }
+    }else {
+      var idchecker = props.recentlyViewItem.findIndex((em) => em.id===props.route.params.Producthandel.id);
+      if(idchecker!=-1){
+      props.removeItemAction(props.recentlyViewItem[idchecker])
+      props.addItemAction(props.route.params.Producthandel) 
+      console.log('semiddata', idchecker);
+      }
+      else{
+      props.addItemAction(props.route.params.Producthandel)
+      console.log('notfulldata');
+      }
+    }
+  },[])
+
+  console.log('redux', props);
 
   const Parameter = (id) => {
     return  {
@@ -194,4 +222,14 @@ const styles = StyleSheet.create({
  }
 });
 
-export default ProductDetails;
+const mapStateToProps = (state) => ({
+  recentlyViewItem: state.RecentlyItemReducer.data,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addItemAction: (Item) => dispatch(addItemAction(Item)),
+  removeItemAction: (index) => dispatch(removeItemAction(index)),
+  // StorageAction: () => dispatch(StorageAction()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps) (ProductDetails);
