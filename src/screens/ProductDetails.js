@@ -29,40 +29,29 @@ const ProductDetails = (props) => {
   const [resently, setResently] = useState(props.route.params.Producthandel);
   const theme = useTheme(); 
 
-  // const add = setResently([...resently, ...props.route.params.Producthandel])
-  // let OK  = [props.route.params.Producthandel]
-  // useEffect (() => {
-  //   console.log('recentelyviewproduct',[...resently, ...OK]);
-  // })
- 
   useEffect (() => {
-   
     if(props.recentlyViewItem.length===4){
+      if(props.recentlyViewItem.findIndex((em) => em.id===props.route.params.Producthandel.id)!=-1){
       var idchecker = props.recentlyViewItem.findIndex((em) => em.id===props.route.params.Producthandel.id);
-      if(idchecker!=-1){
-      console.log('4 and not last', idchecker);
-      props.removeItemAction(props.recentlyViewItem[idchecker])
+      props.removeItemAction(idchecker)
       props.addItemAction(props.route.params.Producthandel)
       }else {
-        console.log('4 and last', idchecker);
-      props.removeItemAction(props.recentlyViewItem[3])
+      props.removeItemAction(0)
       props.addItemAction(props.route.params.Producthandel)
       }
     }else {
+      if(props.recentlyViewItem.findIndex((em) => em.id===props.route.params.Producthandel.id)!=-1){
       var idchecker = props.recentlyViewItem.findIndex((em) => em.id===props.route.params.Producthandel.id);
-      if(idchecker!=-1){
-      props.removeItemAction(props.recentlyViewItem[idchecker])
+      props.removeItemAction(idchecker)
       props.addItemAction(props.route.params.Producthandel) 
-      console.log('semiddata', idchecker);
       }
       else{
       props.addItemAction(props.route.params.Producthandel)
-      console.log('notfulldata');
       }
     }
   },[])
 
-  console.log('redux', props);
+  console.log('reduxdata', props);
 
   const Parameter = (id) => {
     return  {
