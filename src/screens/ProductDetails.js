@@ -162,25 +162,38 @@ const ProductDetails = (props) => {
 
         <Htext style={{ color:theme['text-basic-color'], fontSize:31, fontFamily:'CHESTER-Basic', marginBottom:10, text:'center', textAlign:'center' }}>MORE IN THIS COLLECTION</Htext>
 
+        <FlatList
+          horizontal={true}
+          data={product} 
+          keyExtractor={(item, index) => String(index)}
+          renderItem={({item, index}) => { 
+            return(
+              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
+            )
+          }}
+        />
 
-          <FlatList
-            horizontal={true}
-            data={product} 
-            keyExtractor={(item, index) => String(index)}
-            renderItem={({item, index}) => 
-            { 
-              return(
-                <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
-              )
-            }}
-          />
+        <View style={{flex:1,justifyContent:'flex-end', alignItems:'flex-end', margin:20}}>
+          <Cbutton onPress={() => props.navigation.navigate("ProductList",{ Producthandel: {id: result.collectionIds[0]} })} textcolor={Colors.mainText} bcolor="transparent" bwidth={120} bheight={42} bordercolor={Colors.mainText}>SEE ALL</Cbutton>
+        </View>
 
-          <View style={{flex:1,justifyContent:'flex-end', alignItems:'flex-end', margin:20}}>
-           <Cbutton onPress={() => props.navigation.navigate("ProductList",{ Producthandel: {id: result.collectionIds[0]} })} textcolor={Colors.mainText} bcolor="transparent" bwidth={120} bheight={42} bordercolor={Colors.mainText}>SEE ALL</Cbutton>
-          </View>
-
+        {props.recentlyViewItem.length!=0 ?
+        <>
         <Htext style={{ color:theme['text-basic-color'], fontSize:31, fontFamily:'CHESTER-Basic', marginBottom:10, text:'center', textAlign:'center' }}>RECENTLY VIEWED</Htext>
-      
+        <FlatList
+          horizontal={true}
+          inverted={true}
+          initialScrollIndex={0}
+          data={props.recentlyViewItem} 
+          keyExtractor={(item, index) => String(index)}
+          renderItem={({item, index}) => { 
+            return(
+              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
+            )
+          }}
+        />
+        </>
+        :null}
       </ScrollView>
     );
   }
