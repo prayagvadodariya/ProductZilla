@@ -30,7 +30,7 @@ const ProductDetails = (props) => {
   const theme = useTheme(); 
 
   useEffect (() => {
-    if(props.recentlyViewItem.length===4){
+    if(props.recentlyViewItem.length===10){
       if(props.recentlyViewItem.findIndex((em) => em.id===props.route.params.Producthandel.id)!=-1){
       var idchecker = props.recentlyViewItem.findIndex((em) => em.id===props.route.params.Producthandel.id);
       props.removeItemAction(idchecker)
@@ -51,7 +51,14 @@ const ProductDetails = (props) => {
     }
   },[])
 
-  console.log('reduxdata', props);
+  const reverseArray = () => {
+  var newArray = [];
+  for (var i = props.recentlyViewItem.length - 1; i >= 0; i--) {
+    newArray.push(props.recentlyViewItem[i]);
+  }
+  return newArray;
+}
+  console.log('reduxdata', props.recentlyViewItem);
 
   const Parameter = (id) => {
     return  {
@@ -182,9 +189,7 @@ const ProductDetails = (props) => {
         <Htext style={{ color:theme['text-basic-color'], fontSize:31, fontFamily:'CHESTER-Basic', marginBottom:10, text:'center', textAlign:'center' }}>RECENTLY VIEWED</Htext>
         <FlatList
           horizontal={true}
-          inverted={true}
-          initialScrollIndex={0}
-          data={props.recentlyViewItem} 
+          data={reverseArray()} 
           keyExtractor={(item, index) => String(index)}
           renderItem={({item, index}) => { 
             return(
