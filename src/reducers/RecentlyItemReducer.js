@@ -9,16 +9,21 @@ const INITIAL_STATE =  {
 const RecentlyItemReducer =  (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
+    case Types.STORE_ITEM: {
+      return {
+        data: [...state.data, ...action.item]
+      }
+    }
     case Types.ADD_ITEM: {
-      // AsyncStorage.setItem(StorageKeys.WISHLIST_DATA, JSON.stringify([...state.data, action.item]));
+      AsyncStorage.setItem(StorageKeys.RECENTLY_VIEW_ITEMS, JSON.stringify([...state.data, action.item]));
       return  {
         data: [...state.data, action.item]
       }
     }
     case Types.REMOVE_ITEM: {
       state.data.splice(action.index, 1);
-      // let setdatastore = state.data
-      // AsyncStorage.setItem(StorageKeys.USER_DATA, JSON.stringify(setdatastore))
+      let setdatastore = state.data
+      AsyncStorage.setItem(StorageKeys.RECENTLY_VIEW_ITEMS, JSON.stringify(setdatastore))
       return  {
         data:  state.data
       }
