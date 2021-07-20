@@ -3,7 +3,7 @@ import { InteractionManager } from 'react-native';
 import * as Types from '../constant/ActionKeys';
 import * as StorageKeys from '../constant/StorageKeys';
 
-export const WishlistStorageAction = () => {
+export const wishlistStorageAction = () => {
 
   return async (dispatch) => {
     var itemget = await AsyncStorage.getItem(StorageKeys.WISHLIST_ITEMS);
