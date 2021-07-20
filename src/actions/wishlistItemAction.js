@@ -19,11 +19,11 @@ export const WishlistStorageAction = () => {
   
 }
 
-  export const addToWishlist = (cardItem) => {
+  export const addToWishlist = (id) => {
     return async (dispatch) => {
       dispatch({
         type: Types.ADD_TO_WISHLIST,
-        item: cardItem
+        item: id
       });
     }
   }
