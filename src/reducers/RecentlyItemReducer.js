@@ -1,12 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as Types from '../constant/RecentlyItemKeys';
+import * as Types from '../constant/ActionKeys';
 import * as StorageKeys from '../constant/StorageKeys';
 
 const INITIAL_STATE =  {
   data: [],
 };
 
-const RecentlyItemReducer =  (state = INITIAL_STATE, action) => {
+const recentlyItemReducer =  (state = INITIAL_STATE, action) => {
 
   switch (action.type) {
     case Types.STORE_ITEM: {
@@ -33,4 +33,4 @@ const RecentlyItemReducer =  (state = INITIAL_STATE, action) => {
   }
 }
 
-export default RecentlyItemReducer;
+export default recentlyItemReducer;

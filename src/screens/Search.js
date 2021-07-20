@@ -4,7 +4,7 @@ import { View, StyleSheet, FlatList, ScrollView, Dimensions } from 'react-native
 import InfiniteScrollIndicator from '../component/InfiniteScrollIndicator';
 import { SearchBar } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { addItemAction, removeItemAction } from '../actions/RecentlyItemAction';
+import { addItemAction, removeItemAction } from '../actions/recentlyItemAction';
 import Loader from '../component/Loader';
 import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  recentlyViewItem: state.RecentlyItemReducer.data,
+  recentlyViewItem: state.recentlyItemReducer.data,
 });
 
 const mapDispatchToProps = (dispatch) => ({

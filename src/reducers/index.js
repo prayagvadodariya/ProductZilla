@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
-import RecentlyItemReducer from './RecentlyItemReducer'
+import recentlyItemReducer from './recentlyItemReducer';
+import wishlistItemReducer from './wishlistItemReducer';
 
 const rootReducer = combineReducers({
-  RecentlyItemReducer,
+  recentlyItemReducer,
+  wishlistItemReducer,
 });
 
-export default rootReducer
+export default rootReducer;
 

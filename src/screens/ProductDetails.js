@@ -2,7 +2,8 @@ import React, {useState, useEffect, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
 import { ScrollView, View, StyleSheet, ImageBackground, Dimensions, FlatList, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { addItemAction, removeItemAction } from '../actions/RecentlyItemAction';
+import { addItemAction, removeItemAction } from '../actions/recentlyItemAction';
+import { addToWishlist, removeFromWishlist } from '../actions/wishlistItemAction'
 import ImageView from 'react-native-image-view';
 import * as services from '../services/api';
 import Loader from '../component/Loader';
@@ -20,6 +21,7 @@ import ImageSlider from 'react-native-image-slider';
 // import * as StaticData from '../constant/StaticData';
 
 const ProductDetails = (props) => {
+  const [isfavorite, setIsFavorite] = useState([]);
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState();
@@ -27,6 +29,14 @@ const ProductDetails = (props) => {
   const [zoomimage, setZoomImage] = useState('');
   const [isVisible, setIsVisible] = useState(false);
   const theme = useTheme(); 
+
+  useEffect(() => {
+    if(props.wishlist.data.length!=0){
+      setIsFavorite(props.wishlist.data.map((item) => {return item.id}))
+    }else{
+      setIsFavorite([])
+    }
+  }, [props.wishlist]);
 
   useEffect (() => {
     if(props.recentlyViewItem.length===10){
@@ -90,6 +100,26 @@ const ProductDetails = (props) => {
     setVisible(true) 
   }
 
+  const addWishlistItem = (item) => {
+    let id = props.wishlist.data.findIndex((em) => em.id=== item.id);
+    if(isfavorite.indexOf(item.id)>-1){    
+      props.removeFromWishlist(id);
+      console.log('inactivenot', id);
+    }else{
+      setIsFavorite([...isfavorite, item.id])
+      const wishlistItem = {
+        id: item.id,
+        Image: item.media.items[0].image.url,
+        title: item.name,
+        currencyCode: item.price.currency,
+        amount: item.price.price,
+       }
+      props.addToWishlist(wishlistItem);
+      console.log('checkactive',wishlistItem);
+    }
+   }
+
+
   const onReload = (item) => {
     props.navigation.push("ProductDetails",{ Producthandel: item })
   }
@@ -130,8 +160,8 @@ const ProductDetails = (props) => {
 
         <View style={{flexDirection:'row'}}>
           <Currency style={{ flex:1,alignSelf:'flex-start', color:theme['text-custome-color'], fontSize:20, marginLeft:15 }} currencyCode={result.price.currency} amount={result.price.price}/>
-          <TouchableOpacity style={{ alignSelf:'flex-end', marginRight:15 }}>
-            <AntDesign name='hearto' color={theme['text-custome-color']} size={25} />
+          <TouchableOpacity onPress={() => addWishlistItem(result)} style={{ alignSelf:'flex-end', marginRight:15 }}>
+            <AntDesign name={isfavorite.indexOf(result.id)>-1  ? 'heart' : 'hearto'} color={theme['text-custome-color']} size={25} />
           </TouchableOpacity>
         </View> 
 
@@ -232,13 +262,15 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => ({
-  recentlyViewItem: state.RecentlyItemReducer.data,
+  recentlyViewItem: state.recentlyItemReducer.data,
+  wishlist: state.wishlistItemReducer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   addItemAction: (Item) => dispatch(addItemAction(Item)),
   removeItemAction: (index) => dispatch(removeItemAction(index)),
-  // StorageAction: () => dispatch(StorageAction()),
+  addToWishlist: (wishlistItem) => dispatch(addToWishlist(wishlistItem)),
+  removeFromWishlist: (Id) => dispatch(removeFromWishlist(Id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (ProductDetails);
