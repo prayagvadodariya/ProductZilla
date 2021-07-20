@@ -17,10 +17,10 @@ import Hairline from '../component/Hairline';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import ActionButton from '../component/ActionButton';
 import ImageSlider from 'react-native-image-slider';
-import * as StaticData from '../constant/StaticData';
+// import * as StaticData from '../constant/StaticData';
 
 const ProductDetails = (props) => {
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [result, setResult] = useState();
   const [product, setProduct] = useState();
@@ -79,7 +79,7 @@ const ProductDetails = (props) => {
       setLoading(false)    
       })  
     })  
-  },[props.route.params.Producthandel])
+  },[props.route.params.Producthandel.id])
 
   const toggleFunction = () => {
     setIsVisible(!isVisible);
@@ -88,6 +88,10 @@ const ProductDetails = (props) => {
   const onImageZoom = (val) => {
     setZoomImage(val)
     setVisible(true) 
+  }
+
+  const onReload = (item) => {
+    props.navigation.push("ProductDetails",{ Producthandel: item })
   }
 
   if(loading===true && !product){
@@ -173,7 +177,7 @@ const ProductDetails = (props) => {
           keyExtractor={(item, index) => String(index)}
           renderItem={({item, index}) => { 
             return(
-              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item })} item={item}/>
+              <Items onPress={() => onReload(item)} item={item}/>
             )
           }}
         />
@@ -191,7 +195,7 @@ const ProductDetails = (props) => {
           keyExtractor={(item, index) => String(index)}
           renderItem={({item, index}) => { 
             return(
-              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item })} item={item}/>
+              <Items onPress={() => onReload(item)} item={item}/>
             )
           }}
         />
@@ -220,7 +224,7 @@ const styles = StyleSheet.create({
   justifyContent:'center',
   alignItems:'center',
   flexDirection:"row",
-   marginBottom:15
+  marginBottom:15
  },
  shar: {
   marginLeft:10,
