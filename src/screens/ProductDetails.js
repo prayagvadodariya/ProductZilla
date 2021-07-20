@@ -26,7 +26,6 @@ const ProductDetails = (props) => {
   const [product, setProduct] = useState();
   const [zoomimage, setZoomImage] = useState('');
   const [isVisible, setIsVisible] = useState(false);
-  const [resently, setResently] = useState(props.route.params.Producthandel);
   const theme = useTheme(); 
 
   useEffect (() => {
@@ -56,10 +55,9 @@ const ProductDetails = (props) => {
   for (var i = props.recentlyViewItem.length - 1; i >= 0; i--) {
     newArray.push(props.recentlyViewItem[i]);
   }
-  return newArray;
-}
-  console.log('reduxdata', props.recentlyViewItem);
-
+  return newArray; 
+  }
+  
   const Parameter = (id) => {
     return  {
       "query":{
@@ -175,7 +173,7 @@ const ProductDetails = (props) => {
           keyExtractor={(item, index) => String(index)}
           renderItem={({item, index}) => { 
             return(
-              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
+              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item })} item={item}/>
             )
           }}
         />
@@ -193,7 +191,7 @@ const ProductDetails = (props) => {
           keyExtractor={(item, index) => String(index)}
           renderItem={({item, index}) => { 
             return(
-              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
+              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item })} item={item}/>
             )
           }}
         />

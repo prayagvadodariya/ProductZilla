@@ -3,6 +3,8 @@ import { useTheme } from '@ui-kitten/components';
 import { View, StyleSheet, FlatList, ScrollView, Dimensions } from 'react-native';
 import InfiniteScrollIndicator from '../component/InfiniteScrollIndicator';
 import { SearchBar } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { addItemAction, removeItemAction } from '../actions/RecentlyItemAction';
 import Loader from '../component/Loader';
 import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
@@ -75,7 +77,14 @@ const Search = (props) => {
       setSearchProduct(data.products)
       setLoading(false)    
     })  
+  }
 
+  const reverseArray = () => {
+    var newArray = [];
+    for (var i = props.recentlyViewItem.length - 1; i >= 0; i--) {
+      newArray.push(props.recentlyViewItem[i]);
+    }
+    return newArray; 
   }
 
   const renderFooter = () => {
@@ -121,6 +130,29 @@ const Search = (props) => {
             }
           }
         }
+  }
+
+  const onProductsDetails = (item) => {
+    if(props.recentlyViewItem.length===10){
+      if(props.recentlyViewItem.findIndex((em) => em.id===item.id)!=-1){
+      var idchecker = props.recentlyViewItem.findIndex((em) => em.id===item.id);
+      props.removeItemAction(idchecker)
+      props.addItemAction(item)
+      }else {
+      props.removeItemAction(0)
+      props.addItemAction(item)
+      }
+    }else {
+      if(props.recentlyViewItem.findIndex((em) => em.id===item.id)!=-1){
+      var idchecker = props.recentlyViewItem.findIndex((em) => em.id===item.id);
+      props.removeItemAction(idchecker)
+      props.addItemAction(item) 
+      }
+      else{
+      props.addItemAction(item)
+      }
+    }
+    props.navigation.navigate("ProductDetails",{ Producthandel: item })
   }
   
   if(loading===true  && !product){
@@ -208,6 +240,22 @@ const Search = (props) => {
             )}}
           />
 
+          {props.recentlyViewItem.length!=0 ?
+          <>
+          <Htext style={{ color:theme['text-basic-color'], fontSize:31, fontFamily:'CHESTER-Basic', marginBottom:10, text:'center', textAlign:'center', marginTop:10 }}>RECENTLY VIEWED</Htext>
+          <FlatList
+            horizontal={true}
+            data={reverseArray()} 
+            keyExtractor={(item, index) => String(index)}
+            renderItem={({item, index}) => { 
+              return(
+                <Items onPress={() => onProductsDetails(item)} item={item}/>
+              )
+            }}
+          />
+          </>
+          :null}
+
           <View style={{ alignSelf:'center', marginTop:25, marginBottom:15 }}>
             <Htext color={theme['text-basic-color']} fontsize={35} fontfamily='CHESTER-Basic'>{mainproduct.name}</Htext>
           </View>
@@ -219,7 +267,7 @@ const Search = (props) => {
             renderItem={({item, index}) => 
             { 
               return(
-                <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
+                <Items onPress={() => onProductsDetails(item)} item={item}/>
               )
             }}
           />
@@ -244,4 +292,14 @@ const styles = StyleSheet.create({
 },
 });
 
-export default Search;
+const mapStateToProps = (state) => ({
+  recentlyViewItem: state.RecentlyItemReducer.data,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addItemAction: (Item) => dispatch(addItemAction(Item)),
+  removeItemAction: (index) => dispatch(removeItemAction(index)),
+  // StorageAction: () => dispatch(StorageAction()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps) (Search);
