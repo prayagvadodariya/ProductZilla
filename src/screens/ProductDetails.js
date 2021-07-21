@@ -3,7 +3,8 @@ import { useTheme } from '@ui-kitten/components';
 import { ScrollView, View, StyleSheet, ImageBackground, Dimensions, FlatList, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { addItemAction, removeItemAction } from '../actions/recentlyItemAction';
-import { addToWishlist, removeFromWishlist } from '../actions/wishlistItemAction'
+import { addToWishlist, removeFromWishlist } from '../actions/wishlistItemAction';
+import { addToCart, editFromCart } from '../actions/cartItemAction';
 import ImageView from 'react-native-image-view';
 import * as services from '../services/api';
 import Loader from '../component/Loader';
@@ -85,9 +86,9 @@ const ProductDetails = (props) => {
   useEffect (() => {
     services.onProductsDetailsApi(props.route.params.Producthandel.id).then(result => {
     setResult(result.product) 
+    console.log('data',result.product);
     services.onProductsApi(Parameter(result.product.collectionIds[0])).then(data => {
       setProduct(data.products)
-      console.log('data',data);
       setLoading(false)    
       })  
     })  
@@ -120,6 +121,38 @@ const ProductDetails = (props) => {
       console.log('checkactive',wishlistItem);
     }
    }
+
+  const addCartItem = (item) => {
+    let check = props.cartlist.findIndex((em) => em.id=== item.id)
+
+    if(check!=-1){
+      var id = check
+      var quantityget = props.cartlist[check]
+      var count = parseInt(quantityget.quantity) + 1;
+      const updateItem = {
+        id: item.id,
+        Image: item.media.items[0].image.url,
+        title: item.name,
+        currencyCode: item.price.currency,
+        amount: item.price.price,
+        quantity: count.toString()
+      }
+      console.log('inneradd', updateItem);
+      // props.editItemAction(updateItem,id);
+    }
+    else{
+      const cardItem = {
+        id: item.id,
+        Image: item.media.items[0].image.url,
+        title: item.name,
+        currencyCode: item.price.currency,
+        amount: item.price.price,
+        quantity: "1"
+      }
+      // props.addItemAction(cardItem);
+      console.log('check',cardItem);
+   }
+  }
 
 
   const onReload = (item) => {
@@ -168,7 +201,7 @@ const ProductDetails = (props) => {
         </View> 
 
         <View style={{margin:20}}>
-          <CartButton bwidth={"100%"}/>
+          <CartButton bwidth={"100%"} onPress={() => addCartItem(result)}/>
         </View>
 
         <View style={{ margin:15 }}>
@@ -266,6 +299,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => ({
   recentlyViewItem: state.recentlyItemReducer.data,
   wishlist: state.wishlistItemReducer,
+  cartlist: state.cartItemReducer.data,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -273,6 +307,8 @@ const mapDispatchToProps = (dispatch) => ({
   removeItemAction: (index) => dispatch(removeItemAction(index)),
   addToWishlist: (wishlistItem) => dispatch(addToWishlist(wishlistItem)),
   removeFromWishlist: (Id) => dispatch(removeFromWishlist(Id)),
+  addToCart: (cardItem) => dispatch(addToCart(cardItem)),
+  editFromCart: (updateItem,id) => dispatch(editFromCart(updateItem,id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (ProductDetails);
