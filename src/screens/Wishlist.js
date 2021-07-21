@@ -1,21 +1,29 @@
 import React, {useState, Component} from 'react';
 import { useTheme } from '@ui-kitten/components';
 import { TouchableOpacity, View, StyleSheet, FlatList } from 'react-native';
+import { connect } from 'react-redux';
+import { removeFromWishlist } from '../actions/wishlistItemAction'
 import Card from '../component/Card';
 import Ntext from '../component/Ntext';
 import Colors from '../constant/Colors';
 import Currency from '../component/Currency';
+import Empty_Show from '../component/Empty_Show';
 import BackgroundImage from '../component/BackgroundImage';
 import * as StaticData from '../constant/StaticData';
 import AntDesign from "react-native-vector-icons/AntDesign";
 
-const Wishlist = () => {
+const Wishlist = (props) => {
   const theme = useTheme();
-   
+
+  const onRemoveItem = (index) =>{
+    props.removeFromWishlist(index);
+  }
+  
     return (
       <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
+        {props.wishlist.data.length!=0 ? 
         <FlatList  horizontal={false}
-          data={StaticData.Product_List}  
+          data={props.wishlist.data}  
           keyExtractor={(item, index) => String(index)}
           renderItem={({item ,index}) =>   {
             return( 
@@ -24,7 +32,7 @@ const Wishlist = () => {
                 <View style={{flexDirection:'row'}}>
                   <Card cardwidth={80} cardheight={100}>
                   {
-                    <BackgroundImage url={item.url} bradius={10}/>
+                    <BackgroundImage url={item.Image} bradius={10}/>
                   }
                   </Card>
 
@@ -33,18 +41,24 @@ const Wishlist = () => {
                     <Currency color={Colors.gray} fontsize={15} currencyCode={item.currencyCode} amount={item.amount}/>
                   </View>
 
-                  <TouchableOpacity style={{justifyContent:'center', marginRight:20}}>
+                  <TouchableOpacity onPress={() => onRemoveItem(index)} style={{justifyContent:'center', marginRight:20}}>
                     <AntDesign  name="delete" color='red' size={21}/>
                   </TouchableOpacity>
                 </View>
               }
               </Card>
             )}}
-        />
+        /> : null
+        }
+
+        <View style={{flex:1}}>
+          {props.wishlist.data.length===0 ?
+            <Empty_Show>YOUR WISHLIST IS EMPTY !!!</Empty_Show>: null
+          }
+        </View>
       </View>
     );
   }
-
 
 const styles = StyleSheet.create({
  contenar: {
@@ -54,4 +68,12 @@ const styles = StyleSheet.create({
  }
 });
 
-export default Wishlist;
+const mapStateToProps = (state) => ({
+  wishlist: state.wishlistItemReducer,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  removeFromWishlist: (Id) => dispatch(removeFromWishlist(Id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps) (Wishlist);
