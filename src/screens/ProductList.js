@@ -227,7 +227,6 @@ const ProductList = (props) => {
                 checked={isSelected===data.label}
                 iconLeft={true}
                 checkedColor={Colors.mainText}
-                // uncheckedColor='#848896'
                 textStyle={{color:theme['text-custome-color'], fontFamily:'PTSans-Regular'}}
                 containerStyle={{backgroundColor:'transparent', borderColor:'transparent', margin:-5, marginLeft:-10}}
               />
@@ -241,7 +240,7 @@ const ProductList = (props) => {
 
         <View style={{flex:1}}>
           {result.length===0 ?
-            <Empty_Show>YOUR WISHLIST IS EMPTY !!!</Empty_Show>: null
+            <Empty_Show>NO PRODUCT FOUND !!!</Empty_Show>: null
           }
         </View>  
       </View>

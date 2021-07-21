@@ -219,7 +219,7 @@ const Search = (props) => {
         :null}
         <View style={{flex:1}}>
           {searchProduct.length===0 ?
-            <Empty_Show>YOUR WISHLIST IS EMPTY !!!</Empty_Show>: null
+            <Empty_Show>NO PRODUCT FOUND !!!</Empty_Show>: null
           }
         </View>
         </>
