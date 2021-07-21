@@ -179,7 +179,6 @@ const ProductList = (props) => {
           numColumns={4}
           data={result} 
           keyExtractor={(item, index) => String(index)}
-          // extraData={Colors, orientation}
           renderItem={renderItem}
           ListFooterComponent={renderFooter}
           onScroll={e => renderOnScroll(e)}
@@ -191,7 +190,6 @@ const ProductList = (props) => {
           numColumns={2}
           data={result} 
           keyExtractor={(item, index) => String(index)}
-          // extraData={Colors, orientation}
           renderItem={renderItem}
           ListFooterComponent={renderFooter}
           onScroll={e => renderOnScroll(e)}
@@ -246,7 +244,6 @@ const ProductList = (props) => {
       </View>
     );
   }
-
 
 const styles = StyleSheet.create({
  contenar: {

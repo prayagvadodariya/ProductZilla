@@ -31,7 +31,7 @@ const ProductDetails = (props) => {
   const [isVisible, setIsVisible] = useState(false);
   const theme = useTheme(); 
 
-  console.log('product', props.recentlyViewItem);
+  console.log('product', props);
 
   useEffect(() => {
     if(props.wishlist.data.length!=0){
@@ -107,7 +107,6 @@ const ProductDetails = (props) => {
     let id = props.wishlist.data.findIndex((em) => em.id=== item.id);
     if(isfavorite.indexOf(item.id)>-1){    
       props.removeFromWishlist(id);
-      console.log('inactivenot', id);
     }else{
       setIsFavorite([...isfavorite, item.id])
       const wishlistItem = {
@@ -118,7 +117,6 @@ const ProductDetails = (props) => {
         amount: item.price.price,
        }
       props.addToWishlist(wishlistItem);
-      console.log('checkactive',wishlistItem);
     }
    }
 
@@ -137,8 +135,7 @@ const ProductDetails = (props) => {
         amount: item.price.price,
         quantity: count.toString()
       }
-      console.log('inneradd', updateItem);
-      // props.editItemAction(updateItem,id);
+      props.editFromCart(updateItem,id);
     }
     else{
       const cardItem = {
@@ -149,8 +146,7 @@ const ProductDetails = (props) => {
         amount: item.price.price,
         quantity: "1"
       }
-      // props.addItemAction(cardItem);
-      console.log('check',cardItem);
+      props.addToCart(cardItem);
    }
   }
 
@@ -275,7 +271,7 @@ const styles = StyleSheet.create({
  contenar: {
   flex:1, 
   justifyContent:'center',
-   alignItems:'center',
+  alignItems:'center',
  },
  imgslider: {
   marginLeft:15,

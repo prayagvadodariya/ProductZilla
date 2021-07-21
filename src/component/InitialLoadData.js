@@ -4,7 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as StorageKeys from '../constant/StorageKeys';
 import { connect } from 'react-redux';
 import {recentlyItemStorageAction} from '../actions/recentlyItemAction';
-import {wishlistStorageAction} from '../actions/wishlistItemAction'
+import {wishlistStorageAction} from '../actions/wishlistItemAction';
+import {cartStorageAction} from '../actions/cartItemAction';
 
 const InitialLoadData = (props) => {
     
@@ -14,6 +15,7 @@ const InitialLoadData = (props) => {
     })
     props.recentlyItemStorageAction();
     props.wishlistStorageAction();
+    props.cartStorageAction();
   },[])
   return null
  }
@@ -21,6 +23,7 @@ const InitialLoadData = (props) => {
 const mapDispatchToProps = (dispatch) => ({
   recentlyItemStorageAction: () => dispatch(recentlyItemStorageAction()),
   wishlistStorageAction: () => dispatch(wishlistStorageAction()),
+  cartStorageAction: () => dispatch(cartStorageAction()),
 });
 
 export default connect(null, mapDispatchToProps) (InitialLoadData);
