@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { objectOf } from 'prop-types';
-import * as Types from '../constant/CartlistKeys';
+import * as Types from '../constant/ActionKeys';
 import * as StorageKeys from '../constant/StorageKeys';
 
 const INITIAL_STATE =  {
