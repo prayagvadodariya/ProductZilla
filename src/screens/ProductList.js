@@ -5,6 +5,7 @@ import { CheckBox} from "react-native-elements";
 import Dialog, { SlideAnimation, DialogContent } from 'react-native-popup-dialog';
 import * as services from '../services/api';
 import Loader from '../component/Loader';
+import Empty_Show from '../component/Empty_Show';
 import InfiniteScrollIndicator from '../component/InfiniteScrollIndicator';
 import * as StaticData from '../constant/StaticData';
 import Colors from '../constant/Colors';
@@ -90,6 +91,12 @@ const ProductList = (props) => {
     });
   },);
 
+  const renderItem = ({ item,index }) => {
+    return(
+      <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item })} item={item}/>
+    )
+  }
+
   const renderFooter = () => {
     return(
       <View>
@@ -164,6 +171,8 @@ const ProductList = (props) => {
 
     return (
       <View style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
+        {result.length!=0 ?
+        <>
         {orientation==='LANDSCAPE'?( 
           <FlatList 
           key={'#'} 
@@ -171,12 +180,7 @@ const ProductList = (props) => {
           data={result} 
           keyExtractor={(item, index) => String(index)}
           // extraData={Colors, orientation}
-          renderItem={({item, index}) => 
-          { 
-            return(
-              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item })} item={item}/>
-            )
-          }}
+          renderItem={renderItem}
           ListFooterComponent={renderFooter}
           onScroll={e => renderOnScroll(e)}
           onRefresh={() => onRefresh()}
@@ -188,12 +192,7 @@ const ProductList = (props) => {
           data={result} 
           keyExtractor={(item, index) => String(index)}
           // extraData={Colors, orientation}
-          renderItem={({item, index}) => 
-          { 
-            return(
-              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item })} item={item}/>
-            )
-          }}
+          renderItem={renderItem}
           ListFooterComponent={renderFooter}
           onScroll={e => renderOnScroll(e)}
           onRefresh={() => onRefresh()}
@@ -235,7 +234,16 @@ const ProductList = (props) => {
               ))}
             </ScrollView>
           </DialogContent>
-        </Dialog>  
+        </Dialog>
+        </>
+        : null
+        }
+
+        <View style={{flex:1}}>
+          {result.length===0 ?
+            <Empty_Show>YOUR WISHLIST IS EMPTY !!!</Empty_Show>: null
+          }
+        </View>  
       </View>
     );
   }

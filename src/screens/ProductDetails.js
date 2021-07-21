@@ -30,6 +30,8 @@ const ProductDetails = (props) => {
   const [isVisible, setIsVisible] = useState(false);
   const theme = useTheme(); 
 
+  console.log('product', props.recentlyViewItem);
+
   useEffect(() => {
     if(props.wishlist.data.length!=0){
       setIsFavorite(props.wishlist.data.map((item) => {return item.id}))

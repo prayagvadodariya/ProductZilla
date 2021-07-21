@@ -10,6 +10,7 @@ import Colors from '../constant/Colors';
 import Htext from '../component/Htext';
 import Cbutton from '../component/Cbutton';
 import Items from '../component/Items';
+import Empty_Show from '../component/Empty_Show';
 import BackgroundImage from '../component/BackgroundImage';
 import Card from '../component/Card';
 import * as services from '../services/api';
@@ -19,13 +20,15 @@ const Search = (props) => {
   const [loading, setLoading] = useState(true);
   const [loadmore, SetLoadMore] = useState(false);
   const [search, setSearch] = useState('');
-  const [searchProduct, setSearchProduct] = useState();
+  const [searchProduct, setSearchProduct] = useState([]);
   const [result, setResult] = useState();
   const [mainproduct, setMainProduct] = useState();
   const [product, setProduct] = useState();
   const [offset, setOffset] = useState(0);
   const [isFetching, setFetching] = useState(false);
   const theme = useTheme();
+
+  console.log("search empty", searchProduct);
 
   const Parameter = (id) => {
       return  {
@@ -72,11 +75,17 @@ const Search = (props) => {
   },[])
 
   const onSearch = (search) => {
-    setSearch(search);
+    if(search!=''){
+      setSearch(search); 
+    }else{
+      setSearch(''); 
+      setSearchProduct([])
+    }
     services.onProductsApi(newParam(0, search)).then(data => {
       setSearchProduct(data.products)
       setLoading(false)    
-    })  
+    }) 
+    console.log("clearcor can",search);
   }
 
   const reverseArray = () => {
@@ -85,6 +94,12 @@ const Search = (props) => {
       newArray.push(props.recentlyViewItem[i]);
     }
     return newArray; 
+  }
+
+  const renderItem = ({ item,index }) => {
+    return(
+      <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item })} item={item}/>
+    )
   }
 
   const renderFooter = () => {
@@ -173,19 +188,15 @@ const Search = (props) => {
         />
         {search!=''?
         <>
+        {searchProduct.length!=0 ? 
+        <>
         {orientation==='LANDSCAPE'?( 
           <FlatList 
           key={'#'} 
           numColumns={4}
           data={searchProduct} 
           keyExtractor={(item, index) => String(index)}
-          // extraData={Colors, orientation}
-          renderItem={({item, index}) => 
-          { 
-            return(
-              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
-            )
-          }}
+          renderItem={renderItem}
           ListFooterComponent={renderFooter}
           onScroll={e => renderOnScroll(e)}
           onRefresh={() => onRefresh()}
@@ -196,12 +207,7 @@ const Search = (props) => {
           numColumns={2}
           data={searchProduct} 
           keyExtractor={(item, index) => String(index)}
-          renderItem={({item, index}) => 
-          { 
-            return(
-              <Items onPress={() => props.navigation.navigate("ProductDetails",{ Producthandel: item.id })} item={item}/>
-            )
-          }}
+          renderItem={renderItem}
           ListFooterComponent={renderFooter}
           onScroll={e => renderOnScroll(e)}
           onRefresh={() => onRefresh()}
@@ -210,7 +216,16 @@ const Search = (props) => {
           )
         }
         </>
-      :null}
+        :null}
+        <View style={{flex:1}}>
+          {searchProduct.length===0 ?
+            <Empty_Show>YOUR WISHLIST IS EMPTY !!!</Empty_Show>: null
+          }
+        </View>
+        </>
+
+        :null}
+
         {search==='' ?
         <ScrollView>
           <View style={{ alignSelf:'center', marginTop:25, marginBottom:15 }}>
