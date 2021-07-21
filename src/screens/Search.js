@@ -28,7 +28,7 @@ const Search = (props) => {
   const [isFetching, setFetching] = useState(false);
   const theme = useTheme();
 
-  console.log("search empty", searchProduct);
+  console.log("search empty", result);
 
   const Parameter = (id) => {
       return  {
