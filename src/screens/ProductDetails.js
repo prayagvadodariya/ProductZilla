@@ -167,6 +167,7 @@ const ProductDetails = (props) => {
         </View>
 
         <View style={styles.imgslider}>
+          {result.media.items.length!=0 ? (
           <ImageSlider
               loopBothSides={false}
               images={result.media.items}
@@ -177,11 +178,16 @@ const ProductDetails = (props) => {
                 </TouchableOpacity>
               )}}
           />
+          ):(
+          <TouchableOpacity style={styles.top}>  
+            <ImageBackground source={require('../assets/images/default_image.png')} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>    
+          </TouchableOpacity>
+          )}
         </View>  
         
         <ImageView
           glideAlways
-          images={[{ source: { uri: zoomimage }}]}
+          images={[{ source: {uri: zoomimage }}]}
           animationType='none'
           isVisible={visible}
           onClose={() => setVisible(false)}
@@ -230,6 +236,8 @@ const ProductDetails = (props) => {
           <View style={styles.shar}><ActionButton icon='instagram'/></View>
         </View>
 
+        {product.length!=0 ?
+        <>
         <Htext style={{ color:theme['text-basic-color'], fontSize:31, fontFamily:'CHESTER-Basic', marginBottom:10, text:'center', textAlign:'center' }}>MORE IN THIS COLLECTION</Htext>
 
         <FlatList
@@ -246,6 +254,8 @@ const ProductDetails = (props) => {
         <View style={{flex:1,justifyContent:'flex-end', alignItems:'flex-end', margin:20}}>
           <Cbutton onPress={() => props.navigation.navigate("ProductList",{ Producthandel: {id: result.collectionIds[0]} })} textcolor={Colors.mainText} bcolor="transparent" bwidth={120} bheight={42} bordercolor={Colors.mainText}>SEE ALL</Cbutton>
         </View>
+        </>
+        :null}
 
         {props.recentlyViewItem.length!=0 ?
         <>

@@ -245,7 +245,7 @@ const Search = (props) => {
             return (
             <Card key={index} cardwidth={140} cardheight={140} onPress={() => props.navigation.navigate("ProductList",{ Producthandel: item })}>
               {
-                <BackgroundImage height={"100%"} url={item.media.mainMedia.image.url} bradius={10}>
+                <BackgroundImage height={"100%"} url={item.media?.mainMedia?.image?.url} bradius={10}>
                   <View style={styles.textcontent}>
                     <Htext style={{ fontSize:18, fontWeight:"bold", color:Colors.normaltext}}>{item.name}</Htext>  
                   </View>

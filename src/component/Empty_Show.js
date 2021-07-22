@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import Htext from '../component/Htext';
 import { useTheme } from '@ui-kitten/components';
 
@@ -8,7 +8,8 @@ import { useTheme } from '@ui-kitten/components';
 
   return (
     <View style={{flex:1, justifyContent: "center", alignItems: "center" }}>
-      <Htext style={{ color:theme['text-basic-color'], fontSize:31, fontFamily:'CHESTER-Basic', textAlign:'center' }}>{props.children}</Htext>
+      <Image source={require('../assets/images/No_Product_Found.png')} style={{width: 200,height: 200}}/>
+      <Htext style={{ color:theme['text-basic-color'], fontSize:31, fontFamily:'CHESTER-Basic', textAlign:'center', marginTop:40 }}>{props.children}</Htext>
     </View>
   )
 }

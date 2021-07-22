@@ -48,7 +48,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
       <View>
         <TouchableOpacity onPress={props.onPress}> 
           <View style={styles.top}>
-            <Image source={{ uri: props.item.media.items[0].image.url}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>
+            <Image source={props.item.media?.items[0]?.image?.url!=null ? {uri: props.item.media?.items[0]?.image?.url } : require('../assets/images/default_image.png')} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>
           </View>
           <View style={{width: 160, margin:10}}>
             <Htext style={{textAlign:"center", paddingLeft:10, paddingRight:10, color: theme['text-basic-color'], fontFamily:'PTSans-Regular', fontSize:15, fontWeight:'800' }}>{props.item.name}</Htext>
