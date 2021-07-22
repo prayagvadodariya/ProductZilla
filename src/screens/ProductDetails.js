@@ -19,7 +19,6 @@ import Hairline from '../component/Hairline';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import ActionButton from '../component/ActionButton';
 import ImageSlider from 'react-native-image-slider';
-// import * as StaticData from '../constant/StaticData';
 
 const ProductDetails = (props) => {
   const [isfavorite, setIsFavorite] = useState([]);
@@ -30,8 +29,6 @@ const ProductDetails = (props) => {
   const [zoomimage, setZoomImage] = useState('');
   const [isVisible, setIsVisible] = useState(false);
   const theme = useTheme(); 
-
-  console.log('product', props);
 
   useEffect(() => {
     if(props.wishlist.data.length!=0){
@@ -86,7 +83,6 @@ const ProductDetails = (props) => {
   useEffect (() => {
     services.onProductsDetailsApi(props.route.params.Producthandel.id).then(result => {
     setResult(result.product) 
-    console.log('data',result.product);
     services.onProductsApi(Parameter(result.product.collectionIds[0])).then(data => {
       setProduct(data.products)
       setLoading(false)    
@@ -150,6 +146,11 @@ const ProductDetails = (props) => {
    }
   }
 
+  const renderItem = ({ item,index }) => {
+    return(
+      <Items onPress={() => onReload(item)} item={item}/>
+    )
+  }
 
   const onReload = (item) => {
     props.navigation.push("ProductDetails",{ Producthandel: item })
@@ -244,11 +245,7 @@ const ProductDetails = (props) => {
           horizontal={true}
           data={product} 
           keyExtractor={(item, index) => String(index)}
-          renderItem={({item, index}) => { 
-            return(
-              <Items onPress={() => onReload(item)} item={item}/>
-            )
-          }}
+          renderItem={renderItem}
         />
 
         <View style={{flex:1,justifyContent:'flex-end', alignItems:'flex-end', margin:20}}>
@@ -264,11 +261,7 @@ const ProductDetails = (props) => {
           horizontal={true}
           data={reverseArray()} 
           keyExtractor={(item, index) => String(index)}
-          renderItem={({item, index}) => { 
-            return(
-              <Items onPress={() => onReload(item)} item={item}/>
-            )
-          }}
+          renderItem={renderItem}
         />
         </>
         :null}

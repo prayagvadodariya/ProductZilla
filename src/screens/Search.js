@@ -28,8 +28,6 @@ const Search = (props) => {
   const [isFetching, setFetching] = useState(false);
   const theme = useTheme();
 
-  console.log("search empty", result);
-
   const Parameter = (id) => {
       return  {
         "query":{
@@ -69,7 +67,6 @@ const Search = (props) => {
         setOrientation("PORTRAIT")
       } else {
         setOrientation("LANDSCAPE")
-    
       }
     })
   },[])
@@ -85,7 +82,6 @@ const Search = (props) => {
       setSearchProduct(data.products)
       setLoading(false)    
     }) 
-    console.log("clearcor can",search);
   }
 
   const reverseArray = () => {
@@ -297,7 +293,6 @@ const Search = (props) => {
     );
   }
 
-
 const styles = StyleSheet.create({
  textcontent:{
   flex: 1,
@@ -314,7 +309,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   addItemAction: (Item) => dispatch(addItemAction(Item)),
   removeItemAction: (index) => dispatch(removeItemAction(index)),
-  // StorageAction: () => dispatch(StorageAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps) (Search);

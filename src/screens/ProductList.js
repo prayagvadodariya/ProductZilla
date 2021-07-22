@@ -68,7 +68,6 @@ const ProductList = (props) => {
     services.onProductsApi(Parameter(offset)).then(data => {
     setResult(data.products)  
     setLoading(false)  
-    console.log('check', data.products);
     })  
 
     Dimensions.addEventListener('change', ({window:{width,height}})=>{
@@ -157,7 +156,6 @@ const ProductList = (props) => {
   const onselect = (val) => {
     setSelection(val.label); 
     setOffset(0);
-    console.log("filterapplay", val);
     services.onProductsApi(UpdateParam(val.label, 0)).then(data => {
       setResult(data.products)
     });
