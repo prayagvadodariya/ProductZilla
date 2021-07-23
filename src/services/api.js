@@ -2,7 +2,19 @@ import * as servicesHandler from './services_hendler';
 
 const NEW_BASE_URL = 'https://prayagnetworld301.wixsite.com/productzilla/_api/';
 const BASE_URL = 'https://www.wixapis.com/stores/v1/';
+const VELO_REFERENCE_URL = 'https://prayagnetworld301.wixsite.com/productzilla/_functions/';
 
+
+export const getCollections = () => {
+  let URL = VELO_REFERENCE_URL + 'storeCollections';
+     return servicesHandler.Get(URL)
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        return error
+      });
+}
 
 export const getdynamicmodelApi = () => {
     let URL = NEW_BASE_URL + 'v2/dynamicmodel';

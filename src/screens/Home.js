@@ -10,9 +10,16 @@ import Cbutton from '../component/Cbutton';
 import ShowImage from '../component/ShowImage';
 import BackgroundImage from '../component/BackgroundImage';
 import * as StaticData from '../constant/StaticData';
+import * as services from '../services/api';
 
 const Home = (props) => {
-  const theme = useTheme()
+  const theme = useTheme();
+
+  useEffect (() => {
+    services.getCollections().then(data => {
+      console.log('datavelo', data);
+    })
+  },[])
 
     return (
       <ScrollView style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
