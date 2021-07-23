@@ -12,7 +12,7 @@ import BackgroundImage from '../component/BackgroundImage';
 import * as StaticData from '../constant/StaticData';
 
 const Home = (props) => {
-  const theme = useTheme();
+  const theme = useTheme()
 
     return (
       <ScrollView style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
