@@ -50,14 +50,14 @@ const Search = (props) => {
         }
       }
     }
-   } 
+   }  
 
   useEffect (() => {
-    services.onCollectionsApi().then(data => {
+    services.getCollections().then(data => {
       setResult(data)
-      let val = data.collections.find(item => item.name === 'Protein Powder');
+      let val = data.items.find(item => item.name === 'Protein Powder');
       setMainProduct(val)
-    services.onProductsApi(Parameter(val.id)).then(data => {
+    services.onProductsApi(Parameter(val._id)).then(data => {
       setProduct(data.products)
       setLoading(false)    
       })      
@@ -165,7 +165,12 @@ const Search = (props) => {
     }
     props.navigation.navigate("ProductDetails",{ Producthandel: item })
   }
-  
+
+  const onimageUrlGenerator = (val) => {
+    var replaced = val.split('/');
+    var datajoin = 'https://static.wixstatic.com/media/' + replaced[3];
+    return datajoin;
+  }
   if(loading===true  && !product){
     return(
       <Loader/>
@@ -234,14 +239,14 @@ const Search = (props) => {
 
           <FlatList
             horizontal={true}
-            data={result.collections} 
+            data={result.items} 
             keyExtractor={(item, index) => String(index)}
             renderItem={({item, index}) => 
             { 
             return (
             <Card key={index} cardwidth={140} cardheight={140} onPress={() => props.navigation.navigate("ProductList",{ Producthandel: item })}>
               {
-                <BackgroundImage height={"100%"} url={item.media?.mainMedia?.image?.url} bradius={10}>
+                <BackgroundImage height={"100%"} url={onimageUrlGenerator(item.mainMedia)} bradius={10}>
                   <View style={styles.textcontent}>
                     <Htext style={{ fontSize:18, fontWeight:"bold", color:Colors.normaltext}}>{item.name}</Htext>  
                   </View>

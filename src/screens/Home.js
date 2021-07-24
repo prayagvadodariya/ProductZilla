@@ -15,12 +15,6 @@ import * as services from '../services/api';
 const Home = (props) => {
   const theme = useTheme();
 
-  useEffect (() => {
-    services.getCollections().then(data => {
-      console.log('datavelo', data);
-    })
-  },[])
-
     return (
       <ScrollView style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
         <Maincontent onPress={() => props.navigation.navigate("ProductList",{ Producthandel: {id:'0001', name:'All Products'}})}/>
