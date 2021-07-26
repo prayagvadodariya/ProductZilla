@@ -87,10 +87,11 @@ const ProductDetails = (props) => {
     services.getProductDetails(parameter).then(result => {console.log('newvelopdetails', result);})
     services.getProductDetails(parameter).then(result => {
     setResult(result) 
-    services.onProductsApi(Parameter(result.product.collectionIds[0])).then(data => {
-      setProduct(data.products)
-      setLoading(false)    
-      })  
+    setLoading(false)
+    // services.onProductsApi(Parameter(result.product.collectionIds[0])).then(data => {
+    //   setProduct(data.products)
+          
+    //   })  
     })  
   },[props.route.params.Producthandel.id])
 
@@ -160,7 +161,7 @@ const ProductDetails = (props) => {
     props.navigation.push("ProductDetails",{ Producthandel: item })
   }
 
-  if(loading===true && !product){
+  if(loading===true && !result){
     return(
       <Loader/>
     )
@@ -168,10 +169,11 @@ const ProductDetails = (props) => {
     return (
       <ScrollView style={{flex:1,backgroundColor: theme['background-basic-color-2']}}>
         <View style={{ alignSelf:'flex-start', margin:15 }}>
-          <Htext color={theme['text-custome-color']} fontsize={20}>SKU: {result.sku}</Htext>
+          <Htext color={theme['text-custome-color']} fontsize={20}>SKU: {result.items.sku}</Htext>
         </View>
 
         <View style={styles.imgslider}>
+        {result.items.mediaItems.length!=0 ? (
           <ImageSlider
               loopBothSides={false}
               images={result.items.mediaItems}
@@ -182,6 +184,11 @@ const ProductDetails = (props) => {
                 </TouchableOpacity>
               )}}
           />
+          ):(
+            <TouchableOpacity style={styles.top}>  
+              <ImageBackground source={require('../assets/images/default_image.png')} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>    
+            </TouchableOpacity>
+            )}
         </View>  
         
         <ImageView
@@ -192,10 +199,10 @@ const ProductDetails = (props) => {
           onClose={() => setVisible(false)}
         />
 
-        <Htext style={{ alignSelf:'flex-start', color:theme['text-basic-color'], fontSize:35, fontFamily:'DustWest', marginLeft:15, marginTop:25, marginBottom:5 }}>{result.name}</Htext>  
+        <Htext style={{ alignSelf:'flex-start', color:theme['text-basic-color'], fontSize:35, fontFamily:'DustWest', marginLeft:15, marginTop:25, marginBottom:5 }}>{result.items.name}</Htext>  
 
         <View style={{flexDirection:'row'}}>
-          <Currency style={{ flex:1,alignSelf:'flex-start', color:theme['text-custome-color'], fontSize:20, marginLeft:15 }} currencyCode={result.price.currency} amount={result.price.price}/>
+          <Currency style={{ flex:1,alignSelf:'flex-start', color:theme['text-custome-color'], fontSize:20, marginLeft:15 }} currencyCode={result.items.currency} amount={result.items.price}/>
           <TouchableOpacity onPress={() => addWishlistItem(result)} style={{ alignSelf:'flex-end', marginRight:15 }}>
             <AntDesign name={isfavorite.indexOf(result.id)>-1  ? 'heart' : 'hearto'} color={theme['text-custome-color']} size={25} />
           </TouchableOpacity>
@@ -216,7 +223,7 @@ const ProductDetails = (props) => {
 
         {isVisible ? 
           <View style={{ marginLeft:15, marginRight:15}}>
-           <Ntext color={Colors.gray} fontsize={18} fontfamily='PTSans-Regular'>{result.description}</Ntext>
+           <Ntext color={Colors.gray} fontsize={18} fontfamily='PTSans-Regular'>{result.items.description}</Ntext>
           </View>
         : null}
 
@@ -235,7 +242,7 @@ const ProductDetails = (props) => {
           <View style={styles.shar}><ActionButton icon='instagram'/></View>
         </View>
 
-        {product.length!=0 ?
+        {/* {product.length!=0 ?
         <>
         <Htext style={{ color:theme['text-basic-color'], fontSize:31, fontFamily:'CHESTER-Basic', marginBottom:10, text:'center', textAlign:'center' }}>MORE IN THIS COLLECTION</Htext>
 
@@ -250,7 +257,7 @@ const ProductDetails = (props) => {
           <Cbutton onPress={() => props.navigation.navigate("ProductList",{ Producthandel: {id: result.collectionIds[0]} })} textcolor={Colors.mainText} bcolor="transparent" bwidth={120} bheight={42} bordercolor={Colors.mainText}>SEE ALL</Cbutton>
         </View>
         </>
-        :null}
+        :null} */}
 
         {props.recentlyViewItem.length!=0 ?
         <>
