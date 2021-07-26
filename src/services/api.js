@@ -1,3 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as StorageKeys from '../constant/StorageKeys';
+import axios from 'axios';
 import * as servicesHandler from './services_hendler';
 
 const NEW_BASE_URL = 'https://prayagnetworld301.wixsite.com/productzilla/_api/';
@@ -7,13 +10,35 @@ const VELO_REFERENCE_URL = 'https://prayagnetworld301.wixsite.com/productzilla/_
 
 export const getCollections = () => {
   let URL = VELO_REFERENCE_URL + 'storeCollections';
-     return servicesHandler.Get(URL)
-      .then(response => {
-        return response;
-      })
-      .catch(error => {
-        return error
-      });
+  return axios.get(URL)
+  .then(response => {
+    return response.data;
+  })
+  .catch(error => {
+    return error.response.data;
+  });
+}
+
+// export const getProductList = () => {
+//   let URL = VELO_REFERENCE_URL + 'storeProducts';
+//   return axios.get(URL)
+//   .then(response => {
+//     return response.data;
+//   })
+//   .catch(error => {
+//     return error.response
+//   });
+// }
+
+export const getProductDetails = (parameter) => {
+  let URL = VELO_REFERENCE_URL + 'storeProductsDetails';
+  return axios.get(URL, { params: parameter })
+  .then(response => {
+    return response.data;
+  })
+  .catch(error => {
+    return error.response.data;
+  });
 }
 
 export const getdynamicmodelApi = () => {

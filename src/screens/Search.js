@@ -166,11 +166,6 @@ const Search = (props) => {
     props.navigation.navigate("ProductDetails",{ Producthandel: item })
   }
 
-  const onimageUrlGenerator = (val) => {
-    var replaced = val.split('/');
-    var datajoin = 'https://static.wixstatic.com/media/' + replaced[3];
-    return datajoin;
-  }
   if(loading===true  && !product){
     return(
       <Loader/>
@@ -246,7 +241,7 @@ const Search = (props) => {
             return (
             <Card key={index} cardwidth={140} cardheight={140} onPress={() => props.navigation.navigate("ProductList",{ Producthandel: item })}>
               {
-                <BackgroundImage height={"100%"} url={onimageUrlGenerator(item.mainMedia)} bradius={10}>
+                <BackgroundImage height={"100%"} url={"https://static.wixstatic.com/media/" + item.mainMedia.split("/")[3]} bradius={10}>
                   <View style={styles.textcontent}>
                     <Htext style={{ fontSize:18, fontWeight:"bold", color:Colors.normaltext}}>{item.name}</Htext>  
                   </View>

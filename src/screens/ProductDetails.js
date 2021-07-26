@@ -81,8 +81,12 @@ const ProductDetails = (props) => {
   }
 
   useEffect (() => {
-    services.onProductsDetailsApi(props.route.params.Producthandel.id).then(result => {
-    setResult(result.product) 
+    let parameter = {
+      q: props.route.params.Producthandel.id
+    }
+    services.getProductDetails(parameter).then(result => {console.log('newvelopdetails', result);})
+    services.getProductDetails(parameter).then(result => {
+    setResult(result) 
     services.onProductsApi(Parameter(result.product.collectionIds[0])).then(data => {
       setProduct(data.products)
       setLoading(false)    
@@ -168,22 +172,16 @@ const ProductDetails = (props) => {
         </View>
 
         <View style={styles.imgslider}>
-          {result.media.items.length!=0 ? (
           <ImageSlider
               loopBothSides={false}
-              images={result.media.items}
+              images={result.items.mediaItems}
               customSlide={({ index, item, style, width }) => {
               return(
-                <TouchableOpacity onPress={() => onImageZoom(item.image.url)} key={index} style={styles.top}>  
-                  <ImageBackground source={{uri: item.image.url}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>    
+                <TouchableOpacity onPress={() => onImageZoom("https://static.wixstatic.com/media/" + item.src.split("/")[3])} key={index} style={styles.top}>  
+                  <ImageBackground source={{uri: "https://static.wixstatic.com/media/" + item.src.split("/")[3]}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>    
                 </TouchableOpacity>
               )}}
           />
-          ):(
-          <TouchableOpacity style={styles.top}>  
-            <ImageBackground source={require('../assets/images/default_image.png')} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>    
-          </TouchableOpacity>
-          )}
         </View>  
         
         <ImageView
