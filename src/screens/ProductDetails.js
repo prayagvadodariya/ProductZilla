@@ -84,7 +84,6 @@ const ProductDetails = (props) => {
     let parameter = {
       q: props.route.params.Producthandel.id
     }
-    services.getProductDetails(parameter).then(result => {console.log('newvelopdetails', result);})
     services.getProductDetails(parameter).then(result => {
     setResult(result) 
     setLoading(false)

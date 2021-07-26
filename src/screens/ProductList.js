@@ -31,12 +31,11 @@ const ProductList = (props) => {
     if(props.route.params.Producthandel.name!='All Products'){
       return  {
         "query":{
-          "filter":`{\"collections.id\": { \"$hasSome\": ["${props.route.params.Producthandel.id}"]} }`,
+          "filter":`{\"collections.id\": { \"$hasSome\": ["${props.route.params.Producthandel._id}"]} }`,
           "paging": { 
             "limit": 10, 
             "offset": offset
           },
-
         }
       }
     }
@@ -49,6 +48,8 @@ const ProductList = (props) => {
         }
       }
   }
+
+  console.log("checkprops",props.route.params.Producthandel);
 
   const UpdateParam = (val,offset) => {
     if(val==='All'){
@@ -75,16 +76,15 @@ const ProductList = (props) => {
         setOrientation("PORTRAIT")
       } else {
         setOrientation("LANDSCAPE")
-    
       }
     })
-  },[props.route.params.Producthandel.id])
+  },[props.route.params.Producthandel._id])
 
   useEffect(() => {
     props.navigation.setOptions({
       headerRight: () => (
         <TouchableOpacity onPress={showModal} style={{paddingRight:10}}>
-             <AntDesign name="menu-unfold" color={theme['text-basic-color']} size={22}/>
+          <AntDesign name="menu-unfold" color={theme['text-basic-color']} size={22}/>
         </TouchableOpacity>
       ),
     });
