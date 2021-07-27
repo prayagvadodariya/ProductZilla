@@ -49,7 +49,7 @@ const ProductList = (props) => {
       }
   }
 
-  console.log("checkprops",props.route.params.Producthandel);
+  // console.log("checkprops",props.route.params.Producthandel);
 
   const UpdateParam = (val,offset) => {
     if(val==='All'){
@@ -66,9 +66,15 @@ const ProductList = (props) => {
   }
 
   useEffect (() => {
+    let parameter = {
+      q: {}
+    }
     services.onProductsApi(Parameter(offset)).then(data => {
     setResult(data.products)  
     setLoading(false)  
+    services.getProductList(parameter).then(data => {
+    console.log("productlist",data)
+    })
     })  
 
     Dimensions.addEventListener('change', ({window:{width,height}})=>{

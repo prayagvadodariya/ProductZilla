@@ -1,0 +1,132 @@
+import {ok, notFound, serverError} from 'wix-http-functions';
+import wixData from 'wix-data';
+
+// URL looks like:
+// https://prayagnetworld301.wixsite.com/productzilla/_functions/
+
+
+export function get_storeCollections(request) {
+  let options = {
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  };
+
+  let pagesize=100;
+
+  // query a collection to find matching items
+  return wixData.query("Stores/Collections") 
+    // If you replace the "Stores/Products" with a custom collection name it works
+    .limit(pagesize)
+    .find()
+    .then( (results) => {
+      // matching items were found
+      if(results.items.length > 0) {
+        options.body = {
+          "items": results.items
+        };
+        return ok(options);
+      }
+      // no matching items found
+      options.body = {
+        "error": `'${request.path[0]}' was not found`
+      };
+      return notFound(options);
+    } )
+    // something went wrong
+    .catch( (error) => {
+      options.body = {
+        "error": error
+      };
+      return serverError(options);
+    } );
+}
+
+export function get_storeProducts(request) {
+  let options = {
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  };
+
+  let pagesize=10;
+  
+   let id= request.query.q
+   let ascendingorder= request.query.asc
+   let descendingorder= request.query.dec 
+  
+
+  const Filter = wixData.query("Stores/Products")
+  .hasSome('collections.id', [id])
+  // .descending(descendingorder)
+  // .ascending(ascendingorder)
+  
+  return wixData.query("Stores/Products") 
+  .not(Filter)
+    // .hasSome('collections.id', [id])
+    // .descending("name")
+    // .ascending("price")
+    .limit(pagesize)
+    .find()
+    .then( (results) => {
+      // matching items were found
+      if(results.items.length > 0) {
+        options.body = {
+          "items": results.items
+        };
+        return ok(options);
+      }
+      // no matching items found
+      options.body = {
+        "error": `'${request.path[0]}' was not found`
+      };
+      return notFound(options);
+    } )
+    // something went wrong
+    .catch( (error) => {
+      options.body = {
+        "error": error
+      };
+      return serverError(options);
+    } );
+}
+
+export function get_storeProductsDetails(request) {
+  let options = {
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  };
+  
+  let id = request.query.q
+  let pagesize=100;
+
+  return wixData.query("Stores/Products") 
+    // If you replace the "Stores/Products" with a custom collection name it works
+    .hasSome("_id", id)
+    .limit(pagesize)
+    .find()
+    .then( (results) => {
+      // matching items were found
+      if(results.items.length > 0) {
+        options.body = {
+          "items": results.items[0]
+        };
+        return ok(options);
+      }
+      // no matching items found
+      options.body = {
+        "error": `'${request.path[0]}' was not found`
+      };
+      return notFound(options);
+    } )
+    // something went wrong
+    .catch( (error) => {
+      options.body = {
+        "error": error
+      };
+      return serverError(options);
+    });
+
+}
+

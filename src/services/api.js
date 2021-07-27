@@ -19,16 +19,16 @@ export const getCollections = () => {
   });
 }
 
-// export const getProductList = () => {
-//   let URL = VELO_REFERENCE_URL + 'storeProducts';
-//   return axios.get(URL)
-//   .then(response => {
-//     return response.data;
-//   })
-//   .catch(error => {
-//     return error.response
-//   });
-// }
+export const getProductList = (parameter) => {
+  let URL = VELO_REFERENCE_URL + 'storeProducts';
+  return axios.get(URL, { params: parameter })
+  .then(response => {
+    return response.data;
+  })
+  .catch(error => {
+    return error.response
+  });
+}
 
 export const getProductDetails = (parameter) => {
   let URL = VELO_REFERENCE_URL + 'storeProductsDetails';

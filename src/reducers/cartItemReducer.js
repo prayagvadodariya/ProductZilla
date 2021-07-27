@@ -36,7 +36,6 @@ const cartItemReducer =  (state = INITIAL_STATE, action) => {
       }
     } 
     case Types.EDIT_FROM_CART: {
-      console.log("updateok",action.index);
       {
         var temp = state.data
          let  index = action.index

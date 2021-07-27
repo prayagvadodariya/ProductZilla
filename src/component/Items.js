@@ -39,7 +39,6 @@ import AntDesign from "react-native-vector-icons/AntDesign";
     }
    }
 
-  console.log('checkondexof', props.wishlist);
   if(!props.item){
     <Text>loading</Text>
   }
