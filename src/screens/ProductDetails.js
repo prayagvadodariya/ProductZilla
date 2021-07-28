@@ -32,7 +32,7 @@ const ProductDetails = (props) => {
 
   useEffect(() => {
     if(props.wishlist.data.length!=0){
-      setIsFavorite(props.wishlist.data.map((item) => {return item.id}))
+      setIsFavorite(props.wishlist.data.map((item) => {return item._id}))
     }else{
       setIsFavorite([])
     }
@@ -40,8 +40,8 @@ const ProductDetails = (props) => {
 
   useEffect (() => {
     if(props.recentlyViewItem.length===10){
-      if(props.recentlyViewItem.findIndex((em) => em.id===props.route.params.Producthandel.id)!=-1){
-      var idchecker = props.recentlyViewItem.findIndex((em) => em.id===props.route.params.Producthandel.id);
+      if(props.recentlyViewItem.findIndex((em) => em._id===props.route.params.Producthandel._id)!=-1){
+      var idchecker = props.recentlyViewItem.findIndex((em) => em._id===props.route.params.Producthandel._id);
       props.removeItemAction(idchecker)
       props.addItemAction(props.route.params.Producthandel)
       }else {
@@ -49,8 +49,8 @@ const ProductDetails = (props) => {
       props.addItemAction(props.route.params.Producthandel)
       }
     }else {
-      if(props.recentlyViewItem.findIndex((em) => em.id===props.route.params.Producthandel.id)!=-1){
-      var idchecker = props.recentlyViewItem.findIndex((em) => em.id===props.route.params.Producthandel.id);
+      if(props.recentlyViewItem.findIndex((em) => em._id===props.route.params.Producthandel._id)!=-1){
+      var idchecker = props.recentlyViewItem.findIndex((em) => em._id===props.route.params.Producthandel._id);
       props.removeItemAction(idchecker)
       props.addItemAction(props.route.params.Producthandel) 
       }
@@ -68,21 +68,21 @@ const ProductDetails = (props) => {
   return newArray; 
   }
   
-  const Parameter = (id) => {
-    return  {
-      "query":{
-        "filter":`{\"collections.id\": { \"$hasSome\": ["${id}"]} }`,
-        "paging": { 
-          "limit": 10, 
-          "offset": 0
-        }
-      }
-    }
-  }
+  // const Parameter = (id) => {
+  //   return  {
+  //     "query":{
+  //       "filter":`{\"collections.id\": { \"$hasSome\": ["${id}"]} }`,
+  //       "paging": { 
+  //         "limit": 10, 
+  //         "offset": 0
+  //       }
+  //     }
+  //   }
+  // }
 
   useEffect (() => {
     let parameter = {
-      q: props.route.params.Producthandel.id
+      q: props.route.params.Producthandel._id
     }
     services.getProductDetails(parameter).then(result => {
     setResult(result) 
@@ -92,7 +92,7 @@ const ProductDetails = (props) => {
           
     //   })  
     })  
-  },[props.route.params.Producthandel.id])
+  },[props.route.params.Producthandel._id])
 
   const toggleFunction = () => {
     setIsVisible(!isVisible);
@@ -104,46 +104,46 @@ const ProductDetails = (props) => {
   }
 
   const addWishlistItem = (item) => {
-    let id = props.wishlist.data.findIndex((em) => em.id=== item.id);
-    if(isfavorite.indexOf(item.id)>-1){    
+    let id = props.wishlist.data.findIndex((em) => em.id=== item._id);
+    if(isfavorite.indexOf(item._id)>-1){    
       props.removeFromWishlist(id);
     }else{
-      setIsFavorite([...isfavorite, item.id])
+      setIsFavorite([...isfavorite, item._id])
       const wishlistItem = {
-        id: item.id,
-        Image: item.media.items[0].image.url,
+        id: item._id,
+        Image: "https://static.wixstatic.com/media/" + item.mainMedia.split("/")[3],
         title: item.name,
-        currencyCode: item.price.currency,
-        amount: item.price.price,
+        currencyCode: item.currency,
+        amount: item.price,
        }
       props.addToWishlist(wishlistItem);
     }
    }
 
   const addCartItem = (item) => {
-    let check = props.cartlist.findIndex((em) => em.id=== item.id)
+    let check = props.cartlist.findIndex((em) => em.id=== item._id)
 
     if(check!=-1){
       var id = check
       var quantityget = props.cartlist[check]
       var count = parseInt(quantityget.quantity) + 1;
       const updateItem = {
-        id: item.id,
-        Image: item.media.items[0].image.url,
+        id: item._id,
+        Image: "https://static.wixstatic.com/media/" + item.mainMedia.split("/")[3],
         title: item.name,
-        currencyCode: item.price.currency,
-        amount: item.price.price,
+        currencyCode: item.currency,
+        amount: item.price,
         quantity: count.toString()
       }
       props.editFromCart(updateItem,id);
     }
     else{
       const cardItem = {
-        id: item.id,
-        Image: item.media.items[0].image.url,
+        id: item._id,
+        Image: "https://static.wixstatic.com/media/" + item.mainMedia.split("/")[3],
         title: item.name,
-        currencyCode: item.price.currency,
-        amount: item.price.price,
+        currencyCode: item.currency,
+        amount: item.price,
         quantity: "1"
       }
       props.addToCart(cardItem);

@@ -12,8 +12,6 @@ import AntDesign from "react-native-vector-icons/AntDesign";
   const theme = useTheme();
   const [isfavorite, setIsFavorite] = useState([]);
 
-  console.log("productcompoenent", props.item);
-
   useEffect(() => {
     if(props.wishlist.data.length!=0){
       setIsFavorite(props.wishlist.data.map((item) => {return item.id}))
@@ -23,18 +21,18 @@ import AntDesign from "react-native-vector-icons/AntDesign";
   }, [props.wishlist]);
 
   const addWishlistItem = (item) => {
-    let id = props.wishlist.data.findIndex((em) => em.id=== item.id);
+    let id = props.wishlist.data.findIndex((em) => em.id=== item._id);
     if(isfavorite.indexOf(item.id)>-1){    
       props.removeFromWishlist(id);
       console.log('inactivenot', id);
     }else{
       setIsFavorite([...isfavorite, item.id])
       const wishlistItem = {
-        id: item.id,
-        Image: item.media.items[0].image.url,
+        id: item._id,
+        Image: "https://static.wixstatic.com/media/" + item.mainMedia.split("/")[3],
         title: item.name,
-        currencyCode: item.price.currency,
-        amount: item.price.price,
+        currencyCode: item.currency,
+        amount: item.price,
        }
       props.addToWishlist(wishlistItem);
       console.log('checkactive',wishlistItem);
@@ -49,14 +47,14 @@ import AntDesign from "react-native-vector-icons/AntDesign";
       <View>
         <TouchableOpacity onPress={props.onPress}> 
           <View style={styles.top}>
-            <Image source={props.item.media?.items[0]?.image?.url!=null ? {uri: props.item.media?.items[0]?.image?.url } : require('../assets/images/default_image.png')} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>
+            <Image source={{uri: "https://static.wixstatic.com/media/" + props.item.mainMedia.split("/")[3]}} resizeMode='stretch' style={{height: "100%", width:'100%'}}/>
           </View>
           <View style={{width: 160, margin:10}}>
             <Htext style={{textAlign:"center", paddingLeft:10, paddingRight:10, color: theme['text-basic-color'], fontFamily:'PTSans-Regular', fontSize:15, fontWeight:'800' }}>{props.item.name}</Htext>
           </View>
         </TouchableOpacity>
         <View style={styles.cover}>
-          <Currency style={{color: theme['text-basic-color'],textAlign:"center", margin:5, fontSize:15}} currencyCode={props.item.price.currency} amount={props.item.price.price}/>
+          <Currency style={{color: theme['text-basic-color'],textAlign:"center", margin:5, fontSize:15}} currencyCode={props.item.currency} amount={props.item.price}/>
           <TouchableOpacity onPress={() => addWishlistItem(props.item)}>
             <AntDesign style={{ marginLeft:10,marginTop:8}} name={isfavorite.indexOf(props.item.id)>-1  ? 'heart' : 'hearto'} color={theme['text-basic-color']} size={15} />
           </TouchableOpacity>  
