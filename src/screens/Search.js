@@ -28,17 +28,11 @@ const Search = (props) => {
   const [isFetching, setFetching] = useState(false);
   const theme = useTheme();
 
-  const Parameter = (id) => {
-      return  {
-        "query":{
-          "filter":`{\"collections.id\": { \"$hasSome\": ["${id}"]} }`,
-          "paging": { 
-            "limit": 10, 
-            "offset": 0
-          }
-        }
-      }
+  const Parameter = (_id) => {
+    return {
+      id: _id,
     }
+  }
 
    const newParam = (offset, search) =>{
     return {
@@ -57,8 +51,8 @@ const Search = (props) => {
       setResult(data)
       let val = data.items.find(item => item.name === 'Protein Powder');
       setMainProduct(val)
-    services.onProductsApi(Parameter(val._id)).then(data => {
-      setProduct(data.products)
+    services.getProductList(Parameter(val._id)).then(data => {
+      setProduct(data.items)
       setLoading(false)    
       })      
     })  

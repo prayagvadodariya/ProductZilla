@@ -52,33 +52,33 @@ const ProductList = (props) => {
   const Parameter = (_id) => {
     if(props.route.params.Producthandel.name!='All Products'){
       return {
-        id: _id
+        id: props.route.params.Producthandel._id,
       }
     }else{
       return {
-        "query":{}
+        "query":{},
       }
+    }
+  }
+
+  const UpdateParam = (val) => {
+    if(val.label==='All'){
+      return Parameter();
+    }else if(val.label==='A-Z'){
+      return Object.assign({}, Parameter(), {asc: "name"})
+    }else if(val.label==='Z-A'){
+      return Object.assign({}, Parameter(), {dec: "name"})
+    }else if(val.label==='Price - Low To High'){
+      return Object.assign({}, Parameter(), {asc: "price"})
+    }else if(val.label==='Price - High To Low'){
+      return Object.assign({}, Parameter(), {dec: "price"})
     }
   }
 
   console.log("checkprops",props.route.params.Producthandel);
 
-  const UpdateParam = (val,offset) => {
-    if(val==='All'){
-      return Parameter(offset);
-    }else if(val==='A-Z'){
-      return {"query": Object.assign({}, Parameter(offset).query, {"sort":"[{\"name\": \"asc\"}]"})} 
-    }else if(val==='Z-A'){
-      return {"query": Object.assign({}, Parameter(offset).query, {"sort":"[{\"name\": \"desc\"}]"})}
-    }else if(val==='Price - Low To High'){
-      return {"query": Object.assign({}, Parameter(offset).query, {"sort":"[{\"price\": \"asc\"}]"})}
-    }else if(val==='Price - High To Low'){
-      return {"query": Object.assign({}, Parameter(offset).query, {"sort":"[{\"price\": \"desc\"}]"})}
-    }
-  }
-
   useEffect (() => { 
-    services.getProductList(Parameter(props.route.params.Producthandel._id)).then(data => {
+    services.getProductList(Parameter()).then(data => {
     setResult(data.items)  
     setLoading(false) 
     console.log("productlist",data.items)
@@ -169,8 +169,9 @@ const ProductList = (props) => {
   const onselect = (val) => {
     setSelection(val.label); 
     setOffset(0);
-    services.onProductsApi(UpdateParam(val.label, 0)).then(data => {
-      setResult(data.products)
+    services.getProductList(UpdateParam(val)).then(data => {
+      setResult(data.items)
+      console.log('update',data);
     });
   }
   
@@ -191,10 +192,10 @@ const ProductList = (props) => {
           data={result} 
           keyExtractor={(item, index) => String(index)}
           renderItem={renderItem}
-          ListFooterComponent={renderFooter}
-          onScroll={e => renderOnScroll(e)}
-          onRefresh={() => onRefresh()}
-          refreshing={isFetching}
+          // ListFooterComponent={renderFooter}
+          // onScroll={e => renderOnScroll(e)}
+          // onRefresh={() => onRefresh()}
+          // refreshing={isFetching}
           />
         ):(
           <FlatList  
@@ -202,10 +203,10 @@ const ProductList = (props) => {
           data={result} 
           keyExtractor={(item, index) => String(index)}
           renderItem={renderItem}
-          ListFooterComponent={renderFooter}
-          onScroll={e => renderOnScroll(e)}
-          onRefresh={() => onRefresh()}
-          refreshing={isFetching}
+          // ListFooterComponent={renderFooter}
+          // onScroll={e => renderOnScroll(e)}
+          // onRefresh={() => onRefresh()}
+          // refreshing={isFetching}
           />
           )
         }
