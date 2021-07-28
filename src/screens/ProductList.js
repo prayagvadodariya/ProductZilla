@@ -27,29 +27,41 @@ const ProductList = (props) => {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
-  const Parameter = (offset) => {
+  // const Parameter = (offset) => {
+  //   if(props.route.params.Producthandel.name!='All Products'){
+  //     return  {
+  //       "query":{
+  //         "filter":`{\"collections.id\": { \"$hasSome\": ["${props.route.params.Producthandel._id}"]} }`,
+  //         "paging": { 
+  //           "limit": 10, 
+  //           "offset": offset
+  //         },
+  //       }
+  //     }
+  //   }
+  //   return {
+  //       "query":{
+  //         "paging": { 
+  //           "limit": 10, 
+  //           "offset": offset
+  //         }
+  //       }
+  //     }
+  // }
+
+  const Parameter = (_id) => {
     if(props.route.params.Producthandel.name!='All Products'){
-      return  {
-        "query":{
-          "filter":`{\"collections.id\": { \"$hasSome\": ["${props.route.params.Producthandel._id}"]} }`,
-          "paging": { 
-            "limit": 10, 
-            "offset": offset
-          },
-        }
+      return {
+        id: _id
+      }
+    }else{
+      return {
+        "query":{}
       }
     }
-    return {
-        "query":{
-          "paging": { 
-            "limit": 10, 
-            "offset": offset
-          }
-        }
-      }
   }
 
-  // console.log("checkprops",props.route.params.Producthandel);
+  console.log("checkprops",props.route.params.Producthandel);
 
   const UpdateParam = (val,offset) => {
     if(val==='All'){
@@ -65,17 +77,12 @@ const ProductList = (props) => {
     }
   }
 
-  useEffect (() => {
-    let parameter = {
-      q: {}
-    }
-    services.onProductsApi(Parameter(offset)).then(data => {
-    setResult(data.products)  
-    setLoading(false)  
-    services.getProductList(parameter).then(data => {
-    console.log("productlist",data)
+  useEffect (() => { 
+    services.getProductList(Parameter(props.route.params.Producthandel._id)).then(data => {
+    setResult(data.items)  
+    setLoading(false) 
+    console.log("productlist",data.items)
     })
-    })  
 
     Dimensions.addEventListener('change', ({window:{width,height}})=>{
       if (width<height) {

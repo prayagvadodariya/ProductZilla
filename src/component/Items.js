@@ -12,6 +12,8 @@ import AntDesign from "react-native-vector-icons/AntDesign";
   const theme = useTheme();
   const [isfavorite, setIsFavorite] = useState([]);
 
+  console.log("productcompoenent", props.item);
+
   useEffect(() => {
     if(props.wishlist.data.length!=0){
       setIsFavorite(props.wishlist.data.map((item) => {return item.id}))

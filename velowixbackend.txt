@@ -51,21 +51,20 @@ export function get_storeProducts(request) {
 
   let pagesize=10;
   
-   let id= request.query.q
+   let id= request.query.id
    let ascendingorder= request.query.asc
    let descendingorder= request.query.dec 
   
 
-  const Filter = wixData.query("Stores/Products")
-  .hasSome('collections.id', [id])
+  const Filter = wixData.query("Stores/Products").hasSome('collections.id', [id])
+  // .hasSome('collections.id', [id])
   // .descending(descendingorder)
   // .ascending(ascendingorder)
-  
-  return wixData.query("Stores/Products") 
-  .not(Filter)
-    // .hasSome('collections.id', [id])
-    // .descending("name")
-    // .ascending("price")
+  if(id!=null){
+    if(ascendingorder!=null){
+    return wixData.query("Stores/Products") 
+    .hasSome('collections.id', [id])
+    .ascending(ascendingorder)
     .limit(pagesize)
     .find()
     .then( (results) => {
@@ -89,6 +88,144 @@ export function get_storeProducts(request) {
       };
       return serverError(options);
     } );
+
+    }else if(descendingorder!=null){
+    return wixData.query("Stores/Products") 
+    .hasSome('collections.id', [id])
+    .descending(descendingorder)
+    .limit(pagesize)
+    .find()
+    .then( (results) => {
+      // matching items were found
+      if(results.items.length > 0) {
+        options.body = {
+          "items": results.items
+        };
+        return ok(options);
+      }
+      // no matching items found
+      options.body = {
+        "error": `'${request.path[0]}' was not found`
+      };
+      return notFound(options);
+    } )
+    // something went wrong
+    .catch( (error) => {
+      options.body = {
+        "error": error
+      };
+      return serverError(options);
+    } );
+
+    }else if(ascendingorder==null && descendingorder==null){
+    return wixData.query("Stores/Products") 
+    .hasSome('collections.id', [id])
+    .limit(pagesize)
+    .find()
+    .then( (results) => {
+      // matching items were found
+      if(results.items.length > 0) {
+        options.body = {
+          "items": results.items
+        };
+        return ok(options);
+      }
+      // no matching items found
+      options.body = {
+        "error": `'${request.path[0]}' was not found`
+      };
+      return notFound(options);
+    } )
+    // something went wrong
+    .catch( (error) => {
+      options.body = {
+        "error": error
+      };
+      return serverError(options);
+    } );
+    }
+  }else{
+    if(ascendingorder!=null){
+    return wixData.query("Stores/Products") 
+    .ascending(ascendingorder)  
+    .limit(pagesize)
+    .find()
+    .then( (results) => {
+      // matching items were found
+      if(results.items.length > 0) {
+        options.body = {
+          "items": results.items
+        };
+        return ok(options);
+      }
+      // no matching items found
+      options.body = {
+        "error": `'${request.path[0]}' was not found`
+      };
+      return notFound(options);
+    } )
+    // something went wrong
+    .catch( (error) => {
+      options.body = {
+        "error": error
+      };
+      return serverError(options);
+    } );
+
+    }else if(descendingorder!=null){
+    return wixData.query("Stores/Products") 
+    .descending(descendingorder)  
+    .limit(pagesize)
+    .find()
+    .then( (results) => {
+      // matching items were found
+      if(results.items.length > 0) {
+        options.body = {
+          "items": results.items
+        };
+        return ok(options);
+      }
+      // no matching items found
+      options.body = {
+        "error": `'${request.path[0]}' was not found`
+      };
+      return notFound(options);
+    } )
+    // something went wrong
+    .catch( (error) => {
+      options.body = {
+        "error": error
+      };
+      return serverError(options);
+    } );
+
+    }else if(ascendingorder==null && descendingorder==null){
+    return wixData.query("Stores/Products")     
+    .limit(pagesize)
+    .find()
+    .then( (results) => {
+      // matching items were found
+      if(results.items.length > 0) {
+        options.body = {
+          "items": results.items
+        };
+        return ok(options);
+      }
+      // no matching items found
+      options.body = {
+        "error": `'${request.path[0]}' was not found`
+      };
+      return notFound(options);
+    } )
+    // something went wrong
+    .catch( (error) => {
+      options.body = {
+        "error": error
+      };
+      return serverError(options);
+    } );
+   }
+  }
 }
 
 export function get_storeProductsDetails(request) {
