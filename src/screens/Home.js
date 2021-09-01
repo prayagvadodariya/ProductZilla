@@ -52,7 +52,7 @@ const Home = (props) => {
         </View>
 
         <View style={{ marginLeft:20, marginRight:20, marginBottom:20}}>
-          <Ntext color={theme['text-custome-color']} fontsize={18} fontfamily='PTSans-Regular'>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click me to add your own content and make changes to the font.</Ntext>
+          <Ntext color={theme['text-custome-color']} fontsize={18} fontfamily='PTSans-Regular'>I'm a paragraphs. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click me to add your own content and make changes to the font.</Ntext>
         </View>
 
         <View style={{alignSelf:'flex-start', marginLeft:20, marginBottom:15}}>
